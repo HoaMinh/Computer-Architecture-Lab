@@ -59,12 +59,12 @@
 
 <div class="container">
 
-    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính, bao gồm mô phỏng mạch số, mô phỏng MIPS, cache, trình biên dịch và SPIM.</p>
+    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính, bao gồm mô phỏng mạch số, mô phỏng các bộ phận chức năng trong CPU, mô phỏng bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo, trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS, hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác, cho phép viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan.  </p>
 
     <!-- CircuitVerse -->
     <div class="tool-card">
         <h2>CircuitVerse – Mô phỏng mạch số</h2>
-        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến, hỗ trợ xây dựng các mạch: Half Adder, Full Adder, Ripple Carry Adder, ALU…</p>
+        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến, hỗ trợ xây dựng các cỗng logic, mạch  flip flop, các mạch làm toán, thanh ghi, mạch tổ hợp, mã hóa và giải mã, mạch đa hợp và giải đa hợp, ALU, bộ giải mã lệnh và bus dữ liệu, phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
         <div class="button-group">
             <a href="https://circuitverse.org/" target="_blank">Vào trình</a>
             <a href="#">Hướng dẫn</a>
@@ -75,7 +75,7 @@
     <!-- MIPS Visualizer -->
     <div class="tool-card">
         <h2>MIPS Visualizer – Mô phỏng lệnh MIPS</h2>
-        <p>Công cụ giúp quan sát thanh ghi, bộ nhớ, pipeline và quá trình thực thi từng lệnh MIPS.</p>
+        <p>Trình mô phỏng MIPS Visualizer hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS trên sơ đồ mạch logic. Người học có thể quan sát cách các thành phần như ALU, thanh ghi, bộ giải mã lệnh và bus dữ liệu phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
         <div class="button-group">
             <a href="https://mips-visualizer.com/" target="_blank">Vào trình</a>
             <a href="#">Hướng dẫn</a>
@@ -86,7 +86,7 @@
     <!-- ParaCache -->
     <div class="tool-card">
         <h2>ParaCache – Mô phỏng Cache</h2>
-        <p>Trình mô phỏng cache giúp phân tích các chính sách ánh xạ, thay thế, hit–miss, block size…</p>
+        <p>Mô phỏng ParaCache giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác. Sinh viên có thể chọn các chiến lược ánh xạ (trực tiếp, toàn phần, theo tập hợp) và thuật toán thay thế khối (LRU, FIFO, Random), quan sát cách dữ liệu được lưu trữ, truy xuất, và bị thay thế khi có cache miss </p>
         <div class="button-group">
             <a href="https://paracache.com/" target="_blank">Vào trình</a>
             <a href="#">Hướng dẫn</a>
@@ -97,7 +97,7 @@
     <!-- Compiler Explorer -->
     <div class="tool-card">
         <h2>Compiler Explorer – Quan sát mã Assembly</h2>
-        <p>Cho phép xem mã Assembly được tạo ra bởi nhiều trình biên dịch khác nhau khi nhập code C/C++.</p>
+        <p>Trình biên dịch Compiler Explorer hổ trợ biên dịch trình C qua hợp ngữ MIPS. trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
         <div class="button-group">
             <a href="https://godbolt.org/" target="_blank">Vào trình</a>
             <a href="#">Hướng dẫn</a>
@@ -108,7 +108,7 @@
     <!-- JsSPIM -->
     <div class="tool-card">
         <h2>JsSPIM – Mô phỏng SPIM trực tuyến</h2>
-        <p>Một phiên bản SPIM chạy trên trình duyệt, hỗ trợ viết và chạy chương trình MIPS Assembly.</p>
+        <p>Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
         <div class="button-group">
             <a href="https://spimsimulator.github.io/" target="_blank">Vào trình</a>
             <a href="#">Hướng dẫn</a>

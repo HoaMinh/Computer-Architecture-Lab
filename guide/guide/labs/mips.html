@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><title>Bài thực hành MIPS</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto}</style></head>
+<body>
+<header><h1>Bài thực hành MIPS Visualizer</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
+
+<section>
+  <h2>Mục tiêu</h2>
+  <p>Luyện kỹ năng viết, chạy, debug chương trình MIPS: vòng lặp, hàm con, thao tác trên stack và array.</p>
+</section>
+
+<section>
+  <h2>Bài 1: Cộng hai số</h2>
+  <p>Viết chương trình MIPS đọc hai số nguyên, tính tổng, in kết quả.</p>
+  <pre>
+.data
+a: .word 5
+b: .word 7
+.text
+main:
+  lw $t0, a
+  lw $t1, b
+  add $t2, $t0, $t1
+  li $v0,1
+  move $a0,$t2
+  syscall
+  li $v0,10
+  syscall
+  </pre>
+  <p>Kết quả mong đợi: in "12"</p>
+</section>
+
+<section>
+  <h2>Bài 2: Hàm tính giai thừa (đệ qui hoặc vòng lặp)</h2>
+  <p>Mô tả yêu cầu, hint dùng stack để lưu return address và tham số.</p>
+</section>
+
+<section>
+  <h2>Nộp bài</h2>
+  <p>Nộp file .asm và ảnh màn hình chạy trên MIPS Visualizer, kèm giải thích ngắn.</p>
+</section>
+</body>
+</html>

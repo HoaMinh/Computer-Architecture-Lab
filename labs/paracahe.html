@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Hướng dẫn ParaCache</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto} header h1{color:#003366}</style></head>
+<body>
+<header><h1>Hướng dẫn ParaCache</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
+
+<section>
+  <h2>Giới thiệu</h2>
+  <p>ParaCache là trình mô phỏng cache để phân tích hit/miss theo các cấu hình: block size, associativity, replacement policy.</p>
+</section>
+
+<section>
+  <h2>Hướng dẫn nhanh</h2>
+  <ol>
+    <li>Chọn kích thước cache, block size, số dòng, mức liên kết (associativity).</li>
+    <li>Nhập trace hoặc chương trình mẫu (địa chỉ truy cập).</li>
+    <li>Run và quan sát thống kê hit, miss, miss rate.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Gợi ý phân tích</h2>
+  <p>So sánh direct-mapped vs set-associative, quan sát ảnh hưởng block size lên spatial locality.</p>
+</section>
+</body>
+</html>
+________________________________________
+File: labs/paracache.html
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Bài thực hành ParaCache</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto}</style></head>
+<body>
+<header><h1>Bài thực hành ParaCache</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
+
+<section>
+  <h2>Mục tiêu</h2>
+  <p>Hiểu tác động của cấu hình cache lên hit/miss và thời gian truy xuất trung bình (AMAT).</p>
+</section>
+
+<section>
+  <h2>Bài 1</h2>
+  <p>Cho trace sau (địa chỉ hex): 0x00,0x04,0x08,0x0C,0x00,0x04,0x10,... Thử cấu hình:</p>
+  <ul>
+    <li>Cache size = 16 bytes; block size = 4 bytes; direct-mapped</li>
+    <li>Ghi lại hit/miss</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Bài 2</h2>
+  <p>Thay associativity = 2-way; so sánh miss rate; phân tích nguyên nhân.</p>
+</section>
+
+<section>
+  <h2>Báo cáo</h2>
+  <p>Nộp bảng kết quả, biểu đồ so sánh, và kết luận ngắn.</p>
+</section>
+</body>
+</html>

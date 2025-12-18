@@ -51,7 +51,7 @@
             margin: 0 auto;
         }
 
-        /* Main Navigation Menu - Thanh menu chính */
+        /* Main Navigation Menu */
         .main-nav {
             display: flex;
             justify-content: center;
@@ -96,7 +96,7 @@
             font-size: 1.2rem;
         }
 
-        /* Các màu sắc khác nhau cho từng tab */
+        /* Màu sắc cho các tab */
         .nav-tab.lab {
             background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.05) 100%);
             border: 1px solid rgba(14, 165, 233, 0.3);
@@ -145,28 +145,33 @@
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
-        /* Sub Tabs - Các tab bài thực hành con */
+        /* Sub Navigation */
         .sub-nav {
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
         }
 
         .sub-tab {
-            padding: 12px 24px;
+            padding: 10px 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(148, 163, 184, 0.1);
             border-radius: 8px;
             color: #cbd5e1;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            min-width: 150px;
+            justify-content: center;
         }
 
         .sub-tab:hover {
@@ -209,49 +214,131 @@
         .lab-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(148, 163, 184, 0.2);
         }
 
         .lab-icon {
             background: #0ea5e9;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            font-size: 1.5rem;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .lab-title-container {
+            flex-grow: 1;
         }
 
         .lab-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #0ea5e9;
+            margin-bottom: 5px;
         }
 
         .lab-subtitle {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
             margin-top: 5px;
         }
 
+        /* Lab Content Sections */
         .lab-content {
-            padding: 20px 0;
+            padding: 10px 0;
         }
 
-        .lab-objective, .lab-task, .lab-instruction {
-            margin-bottom: 25px;
+        .content-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .content-section.objective {
+            border-left-color: #10b981;
+        }
+
+        .content-section.tools {
+            border-left-color: #f59e0b;
+        }
+
+        .content-section.instructions {
+            border-left-color: #8b5cf6;
+        }
+
+        .content-section.requirements {
+            border-left-color: #ef4444;
+        }
+
+        .content-section.questions {
+            border-left-color: #0ea5e9;
         }
 
         .content-title {
-            color: #10b981;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-title i {
+            font-size: 1.6rem;
+        }
+
+        .content-title .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .objective .content-title .section-icon {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .tools .content-title .section-icon {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .instructions .content-title .section-icon {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .requirements .content-title .section-icon {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .questions .content-title .section-icon {
+            background: rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
         }
 
         .lab-content ul, .lab-content ol {
@@ -260,13 +347,62 @@
         }
 
         .lab-content li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: #cbd5e1;
+            line-height: 1.7;
+            padding-left: 5px;
         }
 
         .lab-content p {
             margin-bottom: 15px;
             color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .important-note {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important-note i {
+            color: #f59e0b;
+            margin-right: 10px;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        th {
+            background: rgba(14, 165, 233, 0.3);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #0ea5e9;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            color: #cbd5e1;
+        }
+
+        tr:hover {
+            background: rgba(14, 165, 233, 0.05);
         }
 
         /* Circuit Frames */
@@ -274,13 +410,14 @@
             width: 100%;
             height: 600px;
             border: 2px solid #0ea5e9;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 25px 0;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: #000;
         }
 
-        /* Practice Content (Trình mô phỏng chính) */
+        /* Practice Content */
         .practice-content {
             text-align: center;
             padding: 40px 20px;
@@ -298,9 +435,10 @@
             width: 100%;
             height: 700px;
             border: 2px solid #8b5cf6;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 20px 0;
             overflow: hidden;
+            background: #000;
         }
 
         /* Footer */
@@ -313,12 +451,29 @@
             font-size: 0.9rem;
         }
 
+        .footer a {
+            color: #0ea5e9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #38bdf8;
+            text-decoration: underline;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .nav-tab {
                 min-width: 160px;
                 padding: 12px 20px;
                 font-size: 1rem;
+            }
+            
+            .sub-tab {
+                min-width: 130px;
+                padding: 8px 15px;
+                font-size: 0.85rem;
             }
         }
 
@@ -358,12 +513,26 @@
                 padding: 20px;
             }
             
+            .lab-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .lab-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
             .circuit-frame {
                 height: 400px;
             }
             
             .simulator-frame {
                 height: 500px;
+            }
+            
+            .content-section {
+                padding: 15px;
             }
         }
     </style>
@@ -376,7 +545,7 @@
             <p>Phòng thí nghiệm Kiến trúc Máy tính - Mô phỏng và thiết kế mạch số</p>
         </header>
 
-        <!-- Main Navigation Menu - Thanh menu chính -->
+        <!-- Main Navigation Menu -->
         <nav class="main-nav">
             <div class="nav-tabs">
                 <a href="#" class="nav-tab lab active" data-tab="labs">
@@ -391,7 +560,7 @@
             </div>
         </nav>
 
-        <!-- Sub Navigation - Các bài thực hành con (chỉ hiện khi chọn BÀI THỰC HÀNH) -->
+        <!-- Sub Navigation - Các bài thực hành con -->
         <div id="labs-subnav" class="sub-nav">
             <button class="sub-tab active" data-subtab="lab1">
                 <i class="fas fa-project-diagram"></i> Bài 1: Cổng Logic
@@ -405,167 +574,672 @@
             <button class="sub-tab" data-subtab="lab4">
                 <i class="fas fa-brain"></i> Bài 4: ALU Đơn Giản
             </button>
+            <button class="sub-tab" data-subtab="lab5">
+                <i class="fas fa-cogs"></i> Bài 5: CPU Mini
+            </button>
         </div>
 
-        <!-- Lab 1 Content -->
+        <!-- ========== BÀI 1: CỔNG LOGIC ========== -->
         <div id="lab1" class="content active">
             <div class="lab-section">
                 <div class="lab-header">
                     <div class="lab-icon">
                         <i class="fas fa-project-diagram"></i>
                     </div>
-                    <div>
+                    <div class="lab-title-container">
                         <h2 class="lab-title">BÀI 1: THIẾT KẾ VÀ MÔ PHỎNG CỔNG LOGIC CƠ BẢN</h2>
-                        <p class="lab-subtitle">Thời gian: 2 giờ • Độ khó: ★☆☆☆☆</p>
+                        <p class="lab-subtitle">Nền tảng của mạch số • Hiểu bản chất của các cổng logic</p>
+                        <span class="difficulty">★☆☆☆☆ Dễ • Thời gian: 2 giờ</span>
                     </div>
                 </div>
 
                 <div class="lab-content">
-                    <div class="lab-objective">
-                        <h3 class="content-title"><i class="fas fa-bullseye"></i> MỤC TIÊU</h3>
+                    <!-- Mục tiêu -->
+                    <div class="content-section objective">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-bullseye"></i></span>
+                            MỤC TIÊU
+                        </h3>
                         <p>Sau khi hoàn thành bài thực hành này, sinh viên có khả năng:</p>
                         <ul>
-                            <li>Hiểu rõ nguyên lý hoạt động của các cổng logic cơ bản: AND, OR, NOT, NAND, NOR, XOR</li>
+                            <li>Hiểu rõ nguyên lý hoạt động của các cổng logic cơ bản: AND, OR, NOT, NAND, NOR, XOR, XNOR</li>
                             <li>Sử dụng thành thạo phần mềm CircuitVerse để thiết kế mạch số</li>
                             <li>Kiểm tra và xác minh bảng chân trị của các cổng logic</li>
                             <li>Thiết kế mạch kết hợp đơn giản từ các cổng cơ bản</li>
+                            <li>Phân tích mạch logic từ biểu thức Boolean</li>
                         </ul>
                     </div>
 
-                    <div class="lab-task">
-                        <h3 class="content-title"><i class="fas fa-tasks"></i> NHIỆM VỤ</h3>
-                        <ol>
-                            <li>Thiết kế và mô phỏng 6 cổng logic cơ bản</li>
-                            <li>Tạo bảng chân trị cho từng cổng</li>
-                            <li>Thiết kế mạch thực hiện hàm logic: F = AB + C'D</li>
-                            <li>Kiểm tra mạch với tất cả tổ hợp input có thể</li>
-                        </ol>
+                    <!-- Công cụ và chuẩn bị -->
+                    <div class="content-section tools">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-tools"></i></span>
+                            CÔNG CỤ VÀ CHUẨN BỊ
+                        </h3>
+                        <ul>
+                            <li><strong>Phần mềm:</strong> CircuitVerse (trực tuyến hoặc offline)</li>
+                            <li><strong>Tài liệu tham khảo:</strong> Slide bài giảng chương 2 - Đại số Boolean</li>
+                            <li><strong>Linh kiện cần dùng:</strong> Cổng AND, OR, NOT, NAND, NOR, XOR, XNOR</li>
+                            <li><strong>Công cụ hỗ trợ:</strong> Input switches, output LEDs, wire connections</li>
+                            <li><strong>Kiến thức nền:</strong> Hệ nhị phân, bảng chân trị, biểu thức Boolean</li>
+                        </ul>
                     </div>
 
-                    <!-- Circuit Frame for Lab 1 -->
-                    <h3 class="content-title"><i class="fas fa-play-circle"></i> MÔ PHỎNG TRỰC TUYẾN</h3>
-                    <div class="circuit-frame">
-                        <iframe 
-                            src="https://circuitverse.org/simulator/embed/logic-gates-demo" 
-                            width="100%" 
-                            height="100%"
-                            style="border:none;">
-                        </iframe>
+                    <!-- Hướng dẫn thực hiện -->
+                    <div class="content-section instructions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-book-open"></i></span>
+                            HƯỚNG DẪN THỰC HIỆN
+                        </h3>
+                        <p><strong>Bước 1:</strong> Truy cập CircuitVerse và tạo workspace mới</p>
+                        <p><strong>Bước 2:</strong> Kéo thả các cổng logic từ thư viện (tìm trong mục "Gates")</p>
+                        <p><strong>Bước 3:</strong> Thêm input switches (Input/Output → Input)</p>
+                        <p><strong>Bước 4:</strong> Thêm output LEDs để quan sát kết quả</p>
+                        <p><strong>Bước 5:</strong> Kết nối các thành phần bằng dây dẫn (click và kéo)</p>
+                        <p><strong>Bước 6:</strong> Nhấn nút "Simulate" để chạy mô phỏng</p>
+                        <p><strong>Bước 7:</strong> Thay đổi trạng thái input và quan sát output</p>
+                        
+                        <div class="important-note">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>Lưu ý quan trọng:</strong> Ghi lại bảng chân trị cho từng cổng và so sánh với lý thuyết.
+                        </div>
+                    </div>
+
+                    <!-- Mô phỏng trực tuyến -->
+                    <div class="content-section">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
+                            MÔ PHỎNG TRỰC TUYẾN
+                        </h3>
+                        <div class="circuit-frame">
+                            <iframe 
+                                src="https://circuitverse.org/simulator/embed/logic-gates-tutorial" 
+                                width="100%" 
+                                height="100%"
+                                style="border:none;"
+                                title="Mô phỏng cổng logic">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu nộp -->
+                    <div class="content-section requirements">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-file-export"></i></span>
+                            YÊU CẦU NỘP
+                        </h3>
+                        <ul>
+                            <li>File CircuitVerse (.cv) chứa đầy đủ 7 loại cổng logic</li>
+                            <li>Bảng chân trị đã kiểm chứng cho từng cổng</li>
+                            <li>Mạch thiết kế thực hiện hàm: F = AB + C'D</li>
+                            <li>Báo cáo ngắn (PDF) giải thích hoạt động mạch</li>
+                            <li>Link chia sẻ công khai từ CircuitVerse</li>
+                            <li><strong>Hạn nộp:</strong> 1 tuần sau buổi thực hành</li>
+                        </ul>
+                    </div>
+
+                    <!-- Câu hỏi ôn tập -->
+                    <div class="content-section questions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-question-circle"></i></span>
+                            CÂU HỎI ÔN TẬP
+                        </h3>
+                        <ol>
+                            <li>Sự khác nhau giữa cổng NAND và AND là gì? Ứng dụng của cổng NAND?</li>
+                            <li>Tại sao cổng NAND được gọi là "universal gate"? Chứng minh bằng cách dùng NAND để tạo ra NOT, AND, OR.</li>
+                            <li>Thiết kế mạch kiểm tra parity chẵn cho 3 bit input dùng cổng XOR.</li>
+                            <li>Cho hàm F(A,B,C) = Σ(0,2,4,6). Thiết kế mạch thực hiện hàm này.</li>
+                            <li>Phân biệt cổng XOR và XNOR. Ứng dụng thực tế của mỗi loại?</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Lab 2 Content -->
+        <!-- ========== BÀI 2: BỘ CỘNG/TRỪ ========== -->
         <div id="lab2" class="content">
             <div class="lab-section">
                 <div class="lab-header">
                     <div class="lab-icon">
                         <i class="fas fa-calculator"></i>
                     </div>
-                    <div>
-                        <h2 class="lab-title">BÀI 2: THIẾT KẾ BỘ CỘNG VÀ BỘ TRỊ NHỊ PHÂN</h2>
-                        <p class="lab-subtitle">Thời gian: 3 giờ • Độ khó: ★★☆☆☆</p>
+                    <div class="lab-title-container">
+                        <h2 class="lab-title">BÀI 2: THIẾT KẾ BỘ CỘNG VÀ BỘ TRỪ NHỊ PHÂN</h2>
+                        <p class="lab-subtitle">Nền tảng số học máy tính • Thiết kế mạch số học cơ bản</p>
+                        <span class="difficulty">★★☆☆☆ Trung bình • Thời gian: 3 giờ</span>
                     </div>
                 </div>
 
                 <div class="lab-content">
-                    <div class="lab-objective">
-                        <h3 class="content-title"><i class="fas fa-bullseye"></i> MỤC TIÊU</h3>
+                    <!-- Mục tiêu -->
+                    <div class="content-section objective">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-bullseye"></i></span>
+                            MỤC TIÊU
+                        </h3>
                         <ul>
                             <li>Hiểu nguyên lý hoạt động của bộ cộng bán phần (Half Adder) và bộ cộng toàn phần (Full Adder)</li>
                             <li>Thiết kế bộ cộng 4-bit bằng cách kết nối nhiều bộ cộng toàn phần</li>
-                            <li>Thiết kế bộ trừ nhị phân sử dụng phương pháp bù 2</li>
+                            <li>Thiết kế bộ trừ nhị phân sử dụng phương pháp bù 2 (Two's Complement)</li>
                             <li>Mô phỏng và kiểm tra bộ cộng/trừ với các giá trị nhị phân khác nhau</li>
+                            <li>Thiết kế bộ cộng/trừ kết hợp có chân chọn chức năng (Add/Sub)</li>
                         </ul>
                     </div>
 
-                    <div class="circuit-frame">
-                        <iframe 
-                            src="https://circuitverse.org/simulator/embed/4-bit-adder" 
-                            width="100%" 
-                            height="100%"
-                            style="border:none;">
-                        </iframe>
+                    <!-- Công cụ và chuẩn bị -->
+                    <div class="content-section tools">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-tools"></i></span>
+                            CÔNG CỤ VÀ CHUẨN BỊ
+                        </h3>
+                        <ul>
+                            <li><strong>Phần mềm:</strong> CircuitVerse với thư viện đầy đủ</li>
+                            <li><strong>Tài liệu:</strong> Slide chương 3 - Mạch số học</li>
+                            <li><strong>Linh kiện:</strong> Cổng XOR, AND, OR, NOT; Multiplexer 2:1</li>
+                            <li><strong>Hiển thị:</strong> 7-segment display, output pins</li>
+                            <li><strong>Kiến thức:</strong> Phép toán nhị phân, bù 1, bù 2, cờ nhớ (Carry Flag)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hướng dẫn thực hiện -->
+                    <div class="content-section instructions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-book-open"></i></span>
+                            HƯỚNG DẪN THỰC HIỆN
+                        </h3>
+                        <p><strong>Phần A: Bộ cộng bán phần (Half Adder)</strong></p>
+                        <ol>
+                            <li>Thiết kế mạch có 2 input A, B</li>
+                            <li>Output Sum = A ⊕ B (XOR)</li>
+                            <li>Output Carry = A • B (AND)</li>
+                            <li>Kiểm tra với tất cả tổ hợp input</li>
+                        </ol>
+                        
+                        <p><strong>Phần B: Bộ cộng toàn phần (Full Adder)</strong></p>
+                        <ol>
+                            <li>Thiết kế từ 2 half adder và 1 cổng OR</li>
+                            <li>Có 3 input: A, B, Carry-in</li>
+                            <li>Output: Sum, Carry-out</li>
+                            <li>Kiểm tra bảng chân trị đầy đủ</li>
+                        </ol>
+                        
+                        <p><strong>Phần C: Bộ cộng 4-bit</strong></p>
+                        <ol>
+                            <li>Kết nối 4 full adder nối tiếp</li>
+                            <li>Carry-out của bit trước là Carry-in của bit sau</li>
+                            <li>Thêm input/output 4-bit cho A, B, Result</li>
+                        </ol>
+                    </div>
+
+                    <!-- Mô phỏng -->
+                    <div class="content-section">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
+                            MÔ PHỎNG TRỰC TUYẾN
+                        </h3>
+                        <div class="circuit-frame">
+                            <iframe 
+                                src="https://circuitverse.org/simulator/embed/4-bit-adder-subtractor" 
+                                width="100%" 
+                                height="100%"
+                                style="border:none;"
+                                title="Mô phỏng bộ cộng/trừ 4-bit">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu nộp -->
+                    <div class="content-section requirements">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-file-export"></i></span>
+                            YÊU CẦU NỘP
+                        </h3>
+                        <ul>
+                            <li>File CircuitVerse chứa: Half Adder, Full Adder, 4-bit Adder</li>
+                            <li>Bộ cộng/trừ 4-bit có chân chọn Add/Sub</li>
+                            <li>Test cases: 7+5, 12+3, 15-8 (số không dấu)</li>
+                            <li>Phát hiện overflow và hiển thị cờ Carry</li>
+                            <li>Báo cáo giải thích thiết kế và kết quả test</li>
+                            <li><strong>Hạn nộp:</strong> 1 tuần sau buổi thực hành</li>
+                        </ul>
+                    </div>
+
+                    <!-- Câu hỏi ôn tập -->
+                    <div class="content-section questions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-question-circle"></i></span>
+                            CÂU HỎI ÔN TẬP
+                        </h3>
+                        <ol>
+                            <li>Tại sao cần Full Adder thay vì chỉ dùng Half Adder?</li>
+                            <li>Giải thích phương pháp bù 2 trong phép trừ nhị phân.</li>
+                            <li>Thiết kế bộ cộng 8-bit từ các module 4-bit.</li>
+                            <li>Làm thế nào phát hiện overflow trong phép cộng số có dấu?</li>
+                            <li>Cải tiến bộ cộng để hỗ trợ số BCD (Binary Coded Decimal).</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Lab 3 Content -->
+        <!-- ========== BÀI 3: MẠCH TUẦN TỰ ========== -->
         <div id="lab3" class="content">
             <div class="lab-section">
                 <div class="lab-header">
                     <div class="lab-icon">
                         <i class="fas fa-memory"></i>
                     </div>
-                    <div>
+                    <div class="lab-title-container">
                         <h2 class="lab-title">BÀI 3: THIẾT KẾ MẠCH TUẦN TỰ VÀ FLIP-FLOP</h2>
-                        <p class="lab-subtitle">Thời gian: 4 giờ • Độ khó: ★★★☆☆</p>
+                        <p class="lab-subtitle">Bộ nhớ số • Trạng thái và xung clock trong mạch số</p>
+                        <span class="difficulty">★★★☆☆ Khó • Thời gian: 4 giờ</span>
                     </div>
                 </div>
 
                 <div class="lab-content">
-                    <div class="lab-objective">
-                        <h3 class="content-title"><i class="fas fa-bullseye"></i> MỤC TIÊU</h3>
+                    <!-- Mục tiêu -->
+                    <div class="content-section objective">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-bullseye"></i></span>
+                            MỤC TIÊU
+                        </h3>
                         <ul>
                             <li>Hiểu nguyên lý hoạt động của các loại Flip-Flop: SR, D, JK, T</li>
+                            <li>Phân biệt flip-flop và latch, trigger theo cạnh lên/xuống</li>
                             <li>Thiết kế thanh ghi dịch (Shift Register) sử dụng D Flip-Flop</li>
                             <li>Thiết kế bộ đếm (Counter) đồng bộ và không đồng bộ</li>
                             <li>Mô phỏng hoạt động của mạch tuần tự với tín hiệu xung clock</li>
+                            <li>Ứng dụng mạch tuần tự trong thiết kế FSM đơn giản</li>
                         </ul>
                     </div>
 
-                    <div class="circuit-frame">
-                        <iframe 
-                            src="https://circuitverse.org/simulator/embed/flip-flops-demo" 
-                            width="100%" 
-                            height="100%"
-                            style="border:none;">
-                        </iframe>
+                    <!-- Công cụ và chuẩn bị -->
+                    <div class="content-section tools">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-tools"></i></span>
+                            CÔNG CỤ VÀ CHUẨN BỊ
+                        </h3>
+                        <ul>
+                            <li><strong>Phần mềm:</strong> CircuitVerse với module Sequential</li>
+                            <li><strong>Tài liệu:</strong> Slide chương 4 - Mạch tuần tự</li>
+                            <li><strong>Linh kiện:</strong> Các loại flip-flop, clock generator</li>
+                            <li><strong>Hiển thị:</strong> 7-segment, output probes, binary display</li>
+                            <li><strong>Kiến thức:</strong> State diagram, timing diagram, setup/hold time</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hướng dẫn thực hiện -->
+                    <div class="content-section instructions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-book-open"></i></span>
+                            HƯỚNG DẪN THỰC HIỆN
+                        </h3>
+                        <p><strong>Phần A: Các loại Flip-Flop cơ bản</strong></p>
+                        <ol>
+                            <li>Tạo SR Flip-Flop từ cổng NAND</li>
+                            <li>Thiết kế D Flip-Flop từ SR Flip-Flop</li>
+                            <li>Chuyển đổi D Flip-Flop thành JK Flip-Flop</li>
+                            <li>Tạo T Flip-Flop từ JK Flip-Flop</li>
+                            <li>So sánh hoạt động với các loại trigger khác nhau</li>
+                        </ol>
+                        
+                        <p><strong>Phần B: Thanh ghi dịch (Shift Register)</strong></p>
+                        <ol>
+                            <li>Thiết kế thanh ghi dịch 4-bit SISO (Serial In Serial Out)</li>
+                            <li>Phát triển thành thanh ghi SIPO (Serial In Parallel Out)</li>
+                            <li>Thêm chức năng shift left/shift right</li>
+                            <li>Kiểm tra với các pattern dữ liệu khác nhau</li>
+                        </ol>
+                        
+                        <p><strong>Phần C: Bộ đếm (Counter)</strong></p>
+                        <ol>
+                            <li>Thiết kế bộ đếm 4-bit không đồng bộ (ripple counter)</li>
+                            <li>Thiết kế bộ đếm 4-bit đồng bộ</li>
+                            <li>Thêm chức năng đếm lên/đếm xuống</li>
+                            <li>Thiết kế bộ đếm module-N (đếm 0-9)</li>
+                        </ol>
+                    </div>
+
+                    <!-- Mô phỏng -->
+                    <div class="content-section">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
+                            MÔ PHỎNG TRỰC TUYẾN
+                        </h3>
+                        <div class="circuit-frame">
+                            <iframe 
+                                src="https://circuitverse.org/simulator/embed/sequential-circuits-lab" 
+                                width="100%" 
+                                height="100%"
+                                style="border:none;"
+                                title="Mô phỏng mạch tuần tự">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu nộp -->
+                    <div class="content-section requirements">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-file-export"></i></span>
+                            YÊU CẦU NỘP
+                        </h3>
+                        <ul>
+                            <li>File CircuitVerse chứa đủ 4 loại flip-flop cơ bản</li>
+                            <li>Thanh ghi dịch 4-bit với chức năng shift left/right</li>
+                            <li>Bộ đếm đồng bộ 4-bit đếm lên/xuống</li>
+                            <li>Bộ đếm module-10 hiển thị trên 7-segment</li>
+                            <li>Timing diagram cho các mạch trên</li>
+                            <li>Báo cáo phân tích hoạt động và ứng dụng</li>
+                            <li><strong>Hạn nộp:</strong> 2 tuần sau buổi thực hành</li>
+                        </ul>
+                    </div>
+
+                    <!-- Câu hỏi ôn tập -->
+                    <div class="content-section questions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-question-circle"></i></span>
+                            CÂU HỎI ÔN TẬP
+                        </h3>
+                        <ol>
+                            <li>Phân biệt flip-flop và latch. Ưu nhược điểm của mỗi loại?</li>
+                            <li>Tại sao cần setup time và hold time trong flip-flop?</li>
+                            <li>Thiết kế bộ đếm 0-99 dùng 2 bộ đếm decade nối tiếp.</li>
+                            <li>Ứng dụng của shift register trong truyền thông nối tiếp?</li>
+                            <li>Thiết kế FSM đơn giản cho máy bán hàng tự động.</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Lab 4 Content -->
+        <!-- ========== BÀI 4: ALU ĐƠN GIẢN ========== -->
         <div id="lab4" class="content">
             <div class="lab-section">
                 <div class="lab-header">
                     <div class="lab-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <div>
-                        <h2 class="lab-title">BÀI 4: THIẾT KẾ ĐƠN VỊ XỬ LÝ SỐ HỌC (ALU) ĐƠN GIẢN</h2>
-                        <p class="lab-subtitle">Thời gian: 5 giờ • Độ khó: ★★★★☆</p>
+                    <div class="lab-title-container">
+                        <h2 class="lab-title">BÀI 4: THIẾT KẾ ĐƠN VỊ XỬ LÝ SỐ HỌC VÀ LOGIC (ALU)</h2>
+                        <p class="lab-subtitle">Trái tim của CPU • Kết hợp mạch số học và logic</p>
+                        <span class="difficulty">★★★★☆ Rất khó • Thời gian: 5 giờ</span>
                     </div>
                 </div>
 
                 <div class="lab-content">
-                    <div class="lab-objective">
-                        <h3 class="content-title"><i class="fas fa-bullseye"></i> MỤC TIÊU</h3>
+                    <!-- Mục tiêu -->
+                    <div class="content-section objective">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-bullseye"></i></span>
+                            MỤC TIÊU
+                        </h3>
                         <ul>
                             <li>Hiểu kiến trúc và nguyên lý hoạt động của ALU cơ bản</li>
-                            <li>Thiết kế ALU 4-bit thực hiện các phép toán: AND, OR, ADD, SUBTRACT</li>
+                            <li>Thiết kế ALU 4-bit thực hiện các phép toán: AND, OR, XOR, ADD, SUBTRACT</li>
                             <li>Tích hợp bộ cộng/trừ đã thiết kế ở bài trước vào ALU</li>
                             <li>Thiết kế bộ chọn chức năng (Function Selector) cho ALU</li>
+                            <li>Thiết kế cờ trạng thái (Status Flags): Zero, Carry, Overflow, Sign</li>
                             <li>Kiểm tra ALU với các phép toán trên số có dấu và không dấu</li>
                         </ul>
                     </div>
 
-                    <div class="circuit-frame">
-                        <iframe 
-                            src="https://circuitverse.org/simulator/embed/simple-alu" 
-                            width="100%" 
-                            height="100%"
-                            style="border:none;">
-                        </iframe>
+                    <!-- Công cụ và chuẩn bị -->
+                    <div class="content-section tools">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-tools"></i></span>
+                            CÔNG CỤ VÀ CHUẨN BỊ
+                        </h3>
+                        <ul>
+                            <li><strong>Phần mềm:</strong> CircuitVerse với module Arithmetic</li>
+                            <li><strong>Tài liệu:</strong> Slide chương 5 - Kiến trúc CPU cơ bản</li>
+                            <li><strong>Module có sẵn:</strong> Bộ cộng/trừ 4-bit từ Bài 2</li>
+                            <li><strong>Linh kiện:</strong> Multiplexer 4:1, 8:1; comparators</li>
+                            <li><strong>Kiến thức:</strong> ALU design, status flags, function codes</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hướng dẫn thực hiện -->
+                    <div class="content-section instructions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-book-open"></i></span>
+                            HƯỚNG DẪN THỰC HIỆN
+                        </h3>
+                        <p><strong>Phần A: Thiết kế khối xử lý logic</strong></p>
+                        <ol>
+                            <li>Tạo khối thực hiện AND, OR, XOR cho 2 input 4-bit</li>
+                            <li>Thiết kế khối thực hiện NOT, NAND, NOR</li>
+                            <li>Thêm khối shift left/shift right logic</li>
+                            <li>Dùng multiplexer để chọn chức năng</li>
+                        </ol>
+                        
+                        <p><strong>Phần B: Tích hợp khối số học</strong></p>
+                        <ol>
+                            <li>Import bộ cộng/trừ 4-bit từ Bài 2</li>
+                            <li>Thêm chức năng increment (+1), decrement (-1)</li>
+                            <li>Thiết kế khối so sánh (comparator)</li>
+                            <li>Kết hợp với khối logic qua multiplexer</li>
+                        </ol>
+                        
+                        <p><strong>Phần C: Thiết kế cờ trạng thái</strong></p>
+                        <ol>
+                            <li>Cờ Zero: kết quả = 0000</li>
+                            <li>Cờ Carry: nhớ từ bit cao nhất</li>
+                            <li>Cờ Overflow: tràn số có dấu</li>
+                            <li>Cờ Sign: bit dấu của kết quả</li>
+                        </ol>
+                        
+                        <p><strong>Phần D: Tích hợp hoàn chỉnh ALU</strong></p>
+                        <ol>
+                            <li>Kết nối tất cả khối với nhau</li>
+                            <li>Thiết kế bộ điều khiển chọn chức năng 3-bit</li>
+                            <li>Thêm input/output 4-bit A, B, Result</li>
+                            <li>Thêm output 4-bit cho status flags</li>
+                        </ol>
+                    </div>
+
+                    <!-- Mô phỏng -->
+                    <div class="content-section">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
+                            MÔ PHỎNG TRỰC TUYẾN
+                        </h3>
+                        <div class="circuit-frame">
+                            <iframe 
+                                src="https://circuitverse.org/simulator/embed/4-bit-alu-complete" 
+                                width="100%" 
+                                height="100%"
+                                style="border:none;"
+                                title="Mô phỏng ALU 4-bit">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu nộp -->
+                    <div class="content-section requirements">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-file-export"></i></span>
+                            YÊU CẦU NỘP
+                        </h3>
+                        <ul>
+                            <li>File CircuitVerse ALU 4-bit hoàn chỉnh</li>
+                            <li>Support 8 operations: AND, OR, XOR, ADD, SUB, INC, DEC, CMP</li>
+                            <li>Đầy đủ 4 status flags: Z, C, V, S</li>
+                            <li>Test cases: (7 AND 3), (8+4), (12-5), (15 CMP 15)</li>
+                            <li>Bảng mã chức năng (function code table)</li>
+                            <li>Báo cáo thiết kế chi tiết và kết quả kiểm tra</li>
+                            <li><strong>Hạn nộp:</strong> 2 tuần sau buổi thực hành</li>
+                        </ul>
+                    </div>
+
+                    <!-- Câu hỏi ôn tập -->
+                    <div class="content-section questions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-question-circle"></i></span>
+                            CÂU HỎI ÔN TẬP
+                        </h3>
+                        <ol>
+                            <li>Tại sao ALU cần status flags? Ứng dụng trong lập trình?</li>
+                            <li>So sánh ALU ripple-carry và ALU carry-lookahead.</li>
+                            <li>Mở rộng ALU 4-bit thành 8-bit như thế nào?</li>
+                            <li>Thiết kế ALU hỗ trợ phép nhân cơ bản (shift-add).</li>
+                            <li>Ưu điểm của ALU slice design trong vi xử lý hiện đại?</li>
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Simulator Content (VÀO TRÌNH MÔ PHỎNG) -->
+        <!-- ========== BÀI 5: CPU MINI ========== -->
+        <div id="lab5" class="content">
+            <div class="lab-section">
+                <div class="lab-header">
+                    <div class="lab-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="lab-title-container">
+                        <h2 class="lab-title">BÀI 5: THIẾT KẾ CPU MINI - REGISTER FILE + ALU + CONTROL</h2>
+                        <p class="lab-subtitle">Vi xử lý đơn giản • Tích hợp các thành phần CPU cơ bản</p>
+                        <span class="difficulty">★★★★★ Nâng cao • Thời gian: 8 giờ</span>
+                    </div>
+                </div>
+
+                <div class="lab-content">
+                    <!-- Mục tiêu -->
+                    <div class="content-section objective">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-bullseye"></i></span>
+                            MỤC TIÊU
+                        </h3>
+                        <ul>
+                            <li>Thiết kế Register File 4×4-bit với 2 port đọc và 1 port ghi (2R1W)</li>
+                            <li>Tích hợp ALU từ Bài 4 vào CPU mini</li>
+                            <li>Thiết kế bộ điều khiển (Control Unit) đơn giản</li>
+                            <li>Thiết kế đường dữ liệu (Datapath) cơ bản</li>
+                            <li>Thiết kế bộ đếm chương trình (Program Counter) và thanh ghi lệnh (Instruction Register)</li>
+                            <li>Thực hiện chu trình fetch-decode-execute cơ bản</li>
+                            <li>Thiết kế tập lệnh đơn giản (AND, OR, ADD, SUB, LOAD, STORE)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Công cụ và chuẩn bị -->
+                    <div class="content-section tools">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-tools"></i></span>
+                            CÔNG CỤ VÀ CHUẨN BỊ
+                        </h3>
+                        <ul>
+                            <li><strong>Phần mềm:</strong> CircuitVerse với tất cả module</li>
+                            <li><strong>Module có sẵn:</strong> ALU 4-bit từ Bài 4, Register File thiết kế riêng</li>
+                            <li><strong>Tài liệu:</strong> Slide chương 6 - Kiến trúc CPU và pipeline</li>
+                            <li><strong>Linh kiện:</strong> Memory RAM đơn giản, multiplexers nhiều cổng</li>
+                            <li><strong>Kiến thức:</strong> CPU architecture, instruction set, control signals</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hướng dẫn thực hiện -->
+                    <div class="content-section instructions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-book-open"></i></span>
+                            HƯỚNG DẪN THỰC HIỆN
+                        </h3>
+                        <p><strong>Phần A: Thiết kế Register File 4×4-bit (2R1W)</strong></p>
+                        <ol>
+                            <li>Thiết kế thanh ghi 4-bit dùng D Flip-Flop</li>
+                            <li>Nhân thành 4 thanh ghi (R0, R1, R2, R3)</li>
+                            <li>Thiết kế bộ giải mã địa chỉ 2→4 cho port ghi</li>
+                            <li>Thiết kế bộ chọn 4→1 cho 2 port đọc</li>
+                            <li>Thêm tín hiệu Write Enable và Clock</li>
+                        </ol>
+                        
+                        <p><strong>Phần B: Tích hợp ALU và đường dữ liệu</strong></p>
+                        <ol>
+                            <li>Kết nối output của Register File vào ALU</li>
+                            <li>Thiết kế đường dữ liệu từ ALU về Register File</li>
+                            <li>Thêm immediate data input 4-bit</li>
+                            <li>Thiết kế bộ chọn giữa register data và immediate</li>
+                        </ol>
+                        
+                        <p><strong>Phần C: Thiết kế bộ điều khiển (Control Unit)</strong></p>
+                        <ol>
+                            <li>Thiết kế instruction decoder cho 8-bit instruction</li>
+                            <li>opcode 3-bit: 000=AND, 001=OR, 010=ADD, 011=SUB, 100=LOAD, 101=STORE</li>
+                            <li>operand fields: 2-bit cho src1, 2-bit cho src2/dest, 4-bit immediate</li>
+                            <li>Tạo control signals: RegWrite, ALUOp, MemRead, MemWrite</li>
+                        </ol>
+                        
+                        <p><strong>Phần D: Bộ nhớ và điều khiển chương trình</strong></p>
+                        <ol>
+                            <li>Thiết kế Program Counter 4-bit</li>
+                            <li>Thiết kế Instruction Memory 16×8-bit</li>
+                            <li>Thiết kế Data Memory 16×4-bit</li>
+                            <li>Thiết kế chu trình fetch-decode-execute</li>
+                        </ol>
+                        
+                        <p><strong>Phần E: Tích hợp hoàn chỉnh CPU mini</strong></p>
+                        <ol>
+                            <li>Kết nối tất cả thành phần</li>
+                            <li>Thiết kế clock generator và reset circuit</li>
+                            <li>Thêm output display cho các thanh ghi và trạng thái</li>
+                            <li>Viết chương trình mẫu và kiểm tra hoạt động</li>
+                        </ol>
+                    </div>
+
+                    <!-- Mô phỏng -->
+                    <div class="content-section">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
+                            MÔ PHỎNG TRỰC TUYẾN
+                        </h3>
+                        <div class="circuit-frame">
+                            <iframe 
+                                src="https://circuitverse.org/simulator/embed/mini-cpu-design" 
+                                width="100%" 
+                                height="100%"
+                                style="border:none;"
+                                title="Mô phỏng CPU mini">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu nộp -->
+                    <div class="content-section requirements">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-file-export"></i></span>
+                            YÊU CẦU NỘP
+                        </h3>
+                        <ul>
+                            <li>File CircuitVerse CPU mini hoàn chỉnh</li>
+                            <li>Register File 4×4-bit 2R1W hoạt động đúng</li>
+                            <li>ALU tích hợp đầy đủ từ Bài 4</li>
+                            <li>Control Unit với 6 lệnh cơ bản</li>
+                            <li>Chương trình mẫu tính tổng 3 số: 5+7+3 = 15</li>
+                            <li>Instruction set architecture document</li>
+                            <li>Báo cáo thiết kế chi tiết và đánh giá hiệu năng</li>
+                            <li><strong>Hạn nộp:</strong> 3 tuần sau buổi thực hành (dự án cuối kỳ)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Câu hỏi ôn tập -->
+                    <div class="content-section questions">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-question-circle"></i></span>
+                            CÂU HỎI ÔN TẬP
+                        </h3>
+                        <ol>
+                            <li>Tại sao Register File cần nhiều port đọc/ghi? Trade-off là gì?</li>
+                            <li>Phân tích critical path trong CPU mini của bạn.</li>
+                            <li>Mở rộng CPU thành 8-bit cần thay đổi gì?</li>
+                            <li>Thiết kế pipeline 2-stage cho CPU mini.</li>
+                            <li>So sánh Harvard architecture vs Von Neumann architecture.</li>
+                            <li>Cách thêm lệnh nhảy (JUMP) vào instruction set?</li>
+                            <li>Tối ưu hóa CPU để giảm số chu kỳ clock mỗi lệnh.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TRÌNH MÔ PHỎNG ========== -->
         <div id="simulator" class="content">
             <div class="practice-content">
                 <h2 class="lab-title"><i class="fas fa-play-circle"></i> TRÌNH MÔ PHỎNG CIRCUITVERSE</h2>
@@ -586,7 +1260,8 @@
                             src="https://circuitverse.org/simulator" 
                             width="100%" 
                             height="100%"
-                            style="border:none;">
+                            style="border:none;"
+                            title="CircuitVerse Simulator">
                         </iframe>
                     </div>
                     
@@ -600,7 +1275,7 @@
         <!-- Footer -->
         <footer class="footer">
             <p>Phòng thí nghiệm Kiến trúc Máy tính • 
-               <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" style="color:#0ea5e9; text-decoration:none;">
+               <a href="https://hoaminh.github.io/Computer-Architecture-Lab/">
                    hoaminh.github.io/Computer-Architecture-Lab
                </a>
             </p>
@@ -610,99 +1285,76 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Lấy các phần tử DOM
             const mainTabs = document.querySelectorAll('.nav-tab');
             const subTabs = document.querySelectorAll('.sub-tab');
             const contents = document.querySelectorAll('.content');
             const labsSubnav = document.getElementById('labs-subnav');
             
-            // Ẩn tất cả nội dung và hiển thị nội dung mặc định
             function hideAllContents() {
                 contents.forEach(content => {
                     content.classList.remove('active');
                 });
             }
             
-            // Xóa active class từ tất cả main tabs
             function deactivateAllMainTabs() {
                 mainTabs.forEach(tab => {
                     tab.classList.remove('active');
                 });
             }
             
-            // Xóa active class từ tất cả sub tabs
             function deactivateAllSubTabs() {
                 subTabs.forEach(tab => {
                     tab.classList.remove('active');
                 });
             }
             
-            // Xử lý click vào main tabs
             mainTabs.forEach(tab => {
                 tab.addEventListener('click', function(e) {
-                    // Kiểm tra nếu là link đến trang khác (VỀ TRANG CHỦ)
                     if(this.href && !this.getAttribute('data-tab')) {
-                        return; // Cho phép chuyển trang bình thường
+                        return;
                     }
                     
                     e.preventDefault();
                     
                     const tabType = this.getAttribute('data-tab');
                     
-                    // Xóa active class từ tất cả tabs
                     deactivateAllMainTabs();
                     deactivateAllSubTabs();
                     
-                    // Thêm active class cho tab được click
                     this.classList.add('active');
                     
-                    // Ẩn tất cả nội dung
                     hideAllContents();
                     
-                    // Xử lý hiển thị nội dung tương ứng
                     if (tabType === 'labs') {
-                        // Hiển thị thanh sub navigation cho bài thực hành
                         labsSubnav.style.display = 'flex';
-                        
-                        // Hiển thị bài thực hành đầu tiên
                         document.getElementById('lab1').classList.add('active');
                         document.querySelector('[data-subtab="lab1"]').classList.add('active');
                     } else if (tabType === 'simulator') {
-                        // Ẩn thanh sub navigation
                         labsSubnav.style.display = 'none';
-                        
-                        // Hiển thị trình mô phỏng
                         document.getElementById('simulator').classList.add('active');
                     }
                 });
             });
             
-            // Xử lý click vào sub tabs (các bài thực hành con)
             subTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const subtabId = this.getAttribute('data-subtab');
                     
-                    // Xóa active class từ tất cả sub tabs
                     deactivateAllSubTabs();
-                    
-                    // Thêm active class cho tab được click
                     this.classList.add('active');
                     
-                    // Ẩn tất cả nội dung bài thực hành
                     contents.forEach(content => {
                         if (content.id.startsWith('lab')) {
                             content.classList.remove('active');
                         }
                     });
                     
-                    // Hiển thị nội dung bài thực hành được chọn
                     document.getElementById(subtabId).classList.add('active');
                 });
             });
             
-            // Khởi tạo trạng thái ban đầu
-            labsSubnav.style.display = 'flex'; // Hiển thị sub nav cho bài thực hành
-            console.log("CircuitVerse Lab Page với Menu tích hợp đã sẵn sàng!");
+            labsSubnav.style.display = 'flex';
+            console.log("CircuitVerse Lab Page với đầy đủ nội dung đã sẵn sàng!");
         });
     </script>
 </body>

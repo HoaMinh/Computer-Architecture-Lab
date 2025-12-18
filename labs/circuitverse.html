@@ -3,19 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành CircuitVerse - Hệ thống mô phỏng KTMT</title><a href="/Computer-Architecture-Lab/index.html">VỀ TRANG CHỦ</a></p>
+    <title>Bài Thực Hành CircuitVerse - Hệ thống mô phỏng KTMT</title>
     <style>
         /* Thiết lập chung */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 0; background-color: #f8f9fa; }
         
-        /* THANH MENU ĐIỀU HƯỚNG */
+        /* THANH TIỆN ÍCH PHÍA TRÊN CÙNG (Chứa nút Về trang chủ riêng biệt) */
+        .top-utility-bar {
+            background-color: #f1f2f6;
+            padding: 8px 20px;
+            text-align: right;
+            border-bottom: 1px solid #dcdde1;
+        }
+        .btn-home {
+            text-decoration: none;
+            color: #2f3640;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 5px 15px;
+            border: 1px solid #7f8c8d;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .btn-home:hover {
+            background-color: #2f3640;
+            color: white;
+        }
+
+        /* THANH MENU ĐIỀU HƯỚNG CHÍNH (Đã bỏ Hướng dẫn) */
         nav { 
             background-color: #2c3e50; 
-            padding: 15px 0; 
+            padding: 12px 0; 
             position: sticky; 
             top: 0; 
             z-index: 1000; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
         }
         .menu-container { 
             display: flex; 
@@ -24,114 +46,107 @@
             padding: 0; 
             margin: 0; 
         }
-        .menu-container li { margin: 0 10px; }
+        .menu-container li { margin: 0 15px; }
         .menu-container a { 
             color: #ecf0f1; 
             text-decoration: none; 
             font-weight: bold; 
-            padding: 10px 20px; 
+            padding: 10px 25px; 
             border-radius: 5px; 
             transition: all 0.3s ease;
             text-transform: uppercase;
-            font-size: 14px;
         }
-        /* Style riêng cho nút VỀ TRANG CHỦ để nổi bật */
-        .home-link { 
-            background-color: #d35400; /* Màu cam đậm */
-            color: white !important;
-        }
-        .home-link:hover { background-color: #e67e22; }
-        
         .menu-container a:hover { background-color: #34495e; color: #3498db; }
-        .active { background-color: #2980b9; }
+        .active { background-color: #2980b9; color: white !important; }
 
-        /* Nội dung các bài Lab */
+        /* Nội dung chính */
         .main-content { padding: 40px 20px; }
         .lab-card { 
             background: #fff; 
             padding: 30px; 
             margin-bottom: 40px; 
             border-radius: 8px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
             border-top: 6px solid #2980b9; 
         }
         h1 { color: #2c3e50; text-align: center; margin-bottom: 40px; text-transform: uppercase; }
         h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 25px; letter-spacing: 1px; }
+        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 25px; }
         
         .guide-box { background-color: #eef7fd; border-left: 4px solid #3498db; padding: 20px; margin: 20px 0; border-radius: 4px; }
-        .submit-info { background-color: #fff9e6; border-left: 4px solid #f1c40f; padding: 20px; margin-top: 25px; font-weight: 600; }
-        code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; color: #c7254e; }
+        .submit-info { background-color: #fff9e6; border-left: 4px solid #f1c40f; padding: 15px; margin-top: 25px; font-weight: 600; }
         
         footer { text-align: center; padding: 30px; color: #95a5a6; border-top: 1px solid #ddd; margin-top: 50px; }
     </style>
 </head>
 <body>
 
+    <div class="top-utility-bar">
+        <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="btn-home">← VỀ TRANG CHỦ</a>
+    </div>
+
     <nav>
         <ul class="menu-container">
-            <li><a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="home-link">VỀ TRANG CHỦ</a></li>
-           
             <li><a href="#" class="active">Bài thực hành</a></li>
             <li><a href="https://circuitverse.org/simulator" target="_blank">Vào trình</a></li>
         </ul>
     </nav>
 
     <div class="main-content">
-        <h1>Danh Sách Các Bài Thực Hành CircuitVerse</h1>
+        <h1>Danh Sách Bài Thực Hành CircuitVerse</h1>
 
         <div class="lab-card">
             <h2>BÀI 1-1: Mạch logic cơ bản & Bảng chân trị</h2>
             <h3>Mục tiêu</h3>
             <ul>
-                <li>Nhận biết các cổng logic: AND, OR, NOT, XOR, NAND, NOR, XNOR.</li>
+                <li>Nhận biết AND, OR, NOT, XOR, NAND, NOR, XNOR.</li>
                 <li>Tạo bảng chân trị 2 ngõ vào (4 tổ hợp).</li>
-                <li>Đo kiểm và ghi nhận kết quả bằng LED/Probe.</li>
+                <li>Đo kiểm bằng LED/Probe và chụp hình kết quả.</li>
             </ul>
             <div class="guide-box">
-                <strong>Hướng dẫn nhanh:</strong> Tạo dự án <code>CV01_Logic</code>, dùng 2 Switch làm đầu vào và LED làm đầu ra để kiểm tra trạng thái các cổng logic.
+                Tạo dự án <code>CV01_Logic</code>. Thử nghiệm lần lượt các tổ hợp 00, 01, 10, 11 cho từng cổng logic.
             </div>
-            <div class="submit-info">Nộp: Ảnh mạch, bảng chân trị đầy đủ và Public link dự án.</div>
+            <div class="submit-info">Yêu cầu nộp: Ảnh mạch; Bảng chân trị điền đủ; Public link dự án.</div>
         </div>
 
         <div class="lab-card">
             <h2>BÀI 1-2: Full Adder 1-bit & Bộ cộng 4-bit (Ripple)</h2>
-            <h3>Mục tiêu</h3>
+            <h3>Hướng dẫn thực hiện</h3>
             <ul>
-                <li>Thiết kế mạch HA/FA 1-bit.</li>
-                <li>Ghép 4 FA thành bộ cộng 4-bit (Ripple Carry Adder).</li>
+                <li>Thiết kế HA/FA 1-bit dựa trên cổng XOR/AND/OR.</li>
+                <li>Ghép 4 khối FA thành bộ cộng 4-bit hoàn chỉnh.</li>
+                <li>Kiểm thử: A=0011, B=0101, Cin=0 → Kết quả Sum=1000, Cout=0.</li>
             </ul>
-            <div class="guide-box">
-                <strong>Công thức FA:</strong><br>
-                Sum = A XOR B XOR Cin<br>
-                Cout = (A & B) OR (Cin & (A XOR B))
-            </div>
-            <div class="submit-info">Nộp: Ảnh mạch HA, FA, Adder_4bit và kết quả 2 bài test kiểm thử.</div>
+            
+            <div class="submit-info">Yêu cầu nộp: Ảnh mạch HA, FA, Adder_4bit; Kết quả kiểm thử.</div>
         </div>
 
         <div class="lab-card">
             <h2>BÀI 1-3: D-Latch, D-FlipFlop & Register 4-bit</h2>
-            <p>Xây dựng thanh ghi 4-bit sử dụng 4 D-FlipFlop có chân điều khiển <code>Load</code>.</p>
-            <div class="submit-info">Nộp: Ảnh mạch và bảng log trạng thái Q qua từng bước nhấn Clock.</div>
+            <div class="guide-box">
+                Xây dựng thanh ghi 4-bit kích hoạt cạnh. Giá trị Q chỉ cập nhật khi chân <code>Load = 1</code> và có xung <code>Clock</code>.
+            </div>
+            <div class="submit-info">Yêu cầu nộp: Ảnh mạch; Bảng log trạng thái Q qua từng bước.</div>
         </div>
 
         <div class="lab-card">
             <h2>BÀI 1-4: ALU 4-bit (ADD, SUB, AND, OR)</h2>
-            <p>Xây dựng khối ALU thực hiện 4 phép tính cơ bản, sử dụng MUX 4→1 để lựa chọn chức năng thông qua mã Op[1:0].</p>
-            <div class="submit-info">Nộp: Ảnh ALU, bảng kết quả và Public link.</div>
+            <ul>
+                <li>Sử dụng MUX 4→1 bus để chọn chức năng theo mã Op[1:0].</li>
+                <li>Tạo cờ trạng thái Zero và Carry cho bộ ALU.</li>
+            </ul>
+            <div class="submit-info">Yêu cầu nộp: Ảnh ALU; Bảng kết quả chạy thử; Public link.</div>
         </div>
 
         <div class="lab-card">
-            <h2>BÀI 1-5: CPU Mini – Hệ thống hoàn chỉnh</h2>
-            <p>Ghép nối Tập thanh ghi (Register File) với khối ALU để thực thi các lệnh tính toán mẫu.</p>
-            <div class="submit-info">Nộp: Sơ đồ khối hệ thống và kết quả thực thi chuỗi lệnh.</div>
+            <h2>BÀI 1-5: CPU Mini – Register File & ALU Control</h2>
+            <p>Ghép nối Tập thanh ghi với khối ALU để thực hiện chuỗi lệnh tính toán và quan sát luồng dữ liệu thực thi.</p>
+            <div class="submit-info">Yêu cầu nộp: Sơ đồ khối hệ thống hoàn chỉnh; Kết quả thực thi chuỗi lệnh mẫu.</div>
         </div>
-
     </div>
 
     <footer>
-        <p>© 2025 - Hệ thống mô phỏng thực hành Kiến trúc máy tính</p>
-        <p>Phát triển bởi nhóm nghiên cứu đề tài C24.67</p>
+        <p>© 2025 - Hệ thống mô phỏng thực hành Kiến trúc máy tính (C24.67)</p>
     </footer>
 
 </body>

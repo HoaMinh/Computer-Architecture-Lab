@@ -2,52 +2,120 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Hướng dẫn CircuitVerse</title>
+  <title>Hướng dẫn sử dụng CircuitVerse</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+    }
+    h1, h2, h3 {
+      color: #0b3c6f;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .note {
+      background: #f1f5f9;
+      padding: 12px;
+      border-left: 4px solid #0b3c6f;
+      margin: 20px 0;
+    }
+    a {
+      color: #0b3c6f;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hướng dẫn CircuitVerse</h1>
-  <p>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG
-•	Nhấn tab Hướng dẫn để xem hướng dẫn tóm tắt.
-•	Nhấn tab Bài thực hành để xem các bài tập.
-•	Nhấn tab Vào trình để vào trang web CircuitVerse (https://hoaminh.github.io/Computer-Architecture-Lab/) làm bài.
-•	Đăng ký hoặc đăng nhập trước khi sử dụng để có thể lưu và chia sẻ dự án.
-•	Sau khi đăng nhập, nhấn “Launch Simulator” để bắt đầu thiết kế mạch.
-	ĐĂNG KÝ VÀ ĐĂNG NHẬP
-	Nhấn vào “Sign Up” để tạo tài khoản mới.
-	Điền thông tin: tên, email, mật khẩu → nhấn “Register”.
-	Đăng nhập bằng email và mật khẩu đã tạo hoặc sử dụng Google/Facebook/GitHub.
-	Đăng nhập giúp bạn lưu dự án, chia sẻ, và truy cập lại sau này.
-	CÁC BƯỚC CƠ BẢN ĐỂ THIẾT KẾ MẠCH
-1.	Tạo dự án mới
-o	Nhấn vào “My Projects” → “New Project”
-o	Đặt tên cho dự án (ví dụ: “MIPS Datapath”) và nhấn “Create”
-2.	Thêm linh kiện
-Sử dụng thanh công cụ bên trái để chọn các linh kiện như:
-o	Input: Input, Button, Power, Ground, constant Value, Stepper.
-o	Output: Output, RGB Led, Digital led,
-              Variable led, Hex display, Seven regment Display, 
-               Sixteen Segment Display, Square RGBLed, RGBLed Matrix
-o	Gates: AND, OR, NOT, XOR, NASND, NOR, XNOR
-o	Decoder & Plexer: Multiplexer, Demultiplaxer, Bit Selector, Priority 
-            Encoder, MSB (Most Significant Bit), LSB (Least Significant Bit), 
-            Decoder.
-o	Sequentical Elements: D flip flop, D Latch, T flip flop, JK flip flop, 
-            SR flip flop, TTY, Keyboard, Clock, RAM, ROM, EFROM.
-o	Anotation: Retangle, Arrow, Image Annotation, Text.
-o	Misc: Two Complement, Flag, Splitter, Adder, ALU, Adder, ALU, 
-          TriState flip flop, Tunel, Buffer, Controller, Inverter, TB input, 
-          TB output, Force gate
-3.	Kết nối mạch
-o	Kéo dây từ đầu ra của linh kiện này đến đầu vào của linh kiện khác.
-o	Dùng “Label” để đặt tên cho các tín hiệu.
-4.	Chạy mô phỏng
-o	Nhấn nút “Simulate” để chạy mạch.
-o	Quan sát trạng thái của các tín hiệu, đèn LED, và kết quả tính toán.
-	LƯU VÀ CHIA SẺ
-•	Nhấn “Save” để lưu dự án
-•	Dự án sẽ được lưu trên tài khoản CircuitVerse của bạn
-•	Có thể chia sẻ bằng cách gửi liên kết dự án
+
+<h1>Hướng dẫn sử dụng CircuitVerse</h1>
+
+<h2>1. Hướng dẫn thực hiện trong ứng dụng</h2>
+<ul>
+  <li>Nhấn tab <b>Hướng dẫn</b> để xem hướng dẫn tóm tắt.</li>
+  <li>Nhấn tab <b>Bài thực hành</b> để xem các bài tập tương ứng.</li>
+  <li>Nhấn tab <b>Vào trình</b> để truy cập công cụ CircuitVerse và thực hiện bài tập.</li>
+</ul>
+
+<p>
+Trang web CircuitVerse được truy cập tại:
+<br>
+<a href="https://circuitverse.org" target="_blank">https://circuitverse.org</a>
 </p>
-  <a href="../index.html">← Quay về trang chủ</a>
-</body>
-</html>
+
+<p>
+Sinh viên cần <b>đăng ký hoặc đăng nhập</b> trước khi sử dụng để có thể lưu và chia sẻ dự án.
+Sau khi đăng nhập, nhấn <b>“Launch Simulator”</b> để bắt đầu thiết kế mạch.
+</p>
+
+---
+
+<h2>2. Đăng ký và đăng nhập</h2>
+<ul>
+  <li>Nhấn <b>Sign Up</b> để tạo tài khoản mới.</li>
+  <li>Nhập các thông tin: tên, email, mật khẩu → nhấn <b>Register</b>.</li>
+  <li>Đăng nhập bằng email/mật khẩu đã tạo hoặc sử dụng Google, Facebook, GitHub.</li>
+</ul>
+
+<div class="note">
+Việc đăng nhập giúp sinh viên lưu dự án, chia sẻ mạch thiết kế và truy cập lại
+các bài thực hành trong những lần học sau.
+</div>
+
+---
+
+<h2>3. Các bước cơ bản để thiết kế mạch</h2>
+
+<h3>3.1. Tạo dự án mới</h3>
+<ul>
+  <li>Nhấn <b>My Projects</b> → <b>New Project</b>.</li>
+  <li>Đặt tên dự án (ví dụ: <i>MIPS Datapath</i>) và nhấn <b>Create</b>.</li>
+</ul>
+
+<h3>3.2. Thêm linh kiện</h3>
+<p>Sử dụng thanh công cụ bên trái để chọn linh kiện:</p>
+
+<ul>
+  <li><b>Input:</b> Input, Button, Power, Ground, Constant Value, Stepper.</li>
+
+  <li><b>Output:</b> Output, RGB LED, Digital LED, Variable LED,
+      Hex Display, Seven Segment Display, Sixteen Segment Display,
+      RGB LED Matrix.</li>
+
+  <li><b>Gates:</b> AND, OR, NOT, XOR, NAND, NOR, XNOR.</li>
+
+  <li><b>Decoder & Plexer:</b> Multiplexer, Demultiplexer,
+      Bit Selector, Priority Encoder, MSB, LSB, Decoder.</li>
+
+  <li><b>Sequential Elements:</b> D Flip-Flop, D Latch, T Flip-Flop,
+      JK Flip-Flop, SR Flip-Flop, TTY, Keyboard, Clock, RAM, ROM, EEPROM.</li>
+
+  <li><b>Annotation:</b> Rectangle, Arrow, Image Annotation, Text.</li>
+
+  <li><b>Misc:</b> Two's Complement, Flag, Splitter, Adder, ALU,
+      Tri-State Buffer, Tunnel, Buffer, Controller, Inverter,
+      Testbench Input/Output, Force Gate.</li>
+</ul>
+
+---
+
+<h3>3.3. Kết nối mạch</h3>
+<ul>
+  <li>Kéo dây từ đầu ra của linh kiện này đến đầu vào của linh kiện khác.</li>
+  <li>Sử dụng <b>Label</b> để đặt tên cho các tín hiệu, giúp mạch dễ đọc và dễ kiểm tra.</li>
+</ul>
+
+---
+
+<h3>3.4. Chạy mô phỏng</h3>
+<ul>
+  <li>Nhấn nút <b>Simulate</b> để chạy mạch.</li>
+  <li>Quan sát trạng thái tín hiệu, đèn LED và kết quả tính toán.</li>
+</ul>
+
+---
+
+<h2>4. Lưu và chia sẻ dự án</h2>
+<u

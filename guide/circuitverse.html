@@ -2,80 +2,1023 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Hướng dẫn CircuitVerse</title><a href="/Computer-Architecture-Lab/index.html">VỀ TRANG CHỦ</a></p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Sử Dụng CircuitVerse - Kiến Trúc Máy Tính</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
-        h2 { color: #e67e22; border-left: 5px solid #e67e22; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; }
-        ul { margin-bottom: 20px; }
-        li { margin-bottom: 8px; }
-        .highlight { background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
-        .link-box { text-align: center; margin: 20px 0; font-weight: bold; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6e6e6;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #8b5cf6;
+            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #8b5cf6;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Main Navigation Menu */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            max-width: 250px;
+            justify-content: center;
+        }
+
+        .nav-tab i {
+            font-size: 1.2rem;
+        }
+
+        /* Màu sắc cho các tab */
+        .nav-tab.guide {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-tab.guide:hover {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0.15) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .nav-tab.guide.active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .nav-tab.practice {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.05) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .nav-tab.practice:hover {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0.15) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+        }
+
+        .nav-tab.practice.active {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+        }
+
+        .nav-tab.home {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-tab.home:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.15) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .nav-tab.home.active {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Main Content */
+        .content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Guide Sections */
+        .guide-section {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid #8b5cf6;
+        }
+
+        .guide-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .guide-icon {
+            background: #8b5cf6;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .guide-title {
+            font-size: 2rem;
+            color: #8b5cf6;
+            margin-bottom: 5px;
+        }
+
+        .guide-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        /* Guide Content */
+        .guide-content {
+            padding: 10px 0;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .content-section.overview {
+            border-left-color: #8b5cf6;
+        }
+
+        .content-section.account {
+            border-left-color: #10b981;
+        }
+
+        .content-section.steps {
+            border-left-color: #f59e0b;
+        }
+
+        .content-section.components {
+            border-left-color: #0ea5e9;
+        }
+
+        .content-section.tips {
+            border-left-color: #ef4444;
+        }
+
+        .content-title {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-title i {
+            font-size: 1.6rem;
+        }
+
+        .content-title .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .overview .content-title .section-icon {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .account .content-title .section-icon {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .steps .content-title .section-icon {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .components .content-title .section-icon {
+            background: rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
+        }
+
+        .tips .content-title .section-icon {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* List Styling */
+        .guide-content ul, .guide-content ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .guide-content li {
+            margin-bottom: 12px;
+            color: #cbd5e1;
+            line-height: 1.7;
+            padding-left: 5px;
+        }
+
+        .guide-content p {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Step Boxes */
+        .step-box {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #f59e0b;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .step-title {
+            color: #f59e0b;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Component Grid */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .component-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .component-icon {
+            background: rgba(14, 165, 233, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #0ea5e9;
+        }
+
+        .component-name {
+            color: #0ea5e9;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .component-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .component-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(148, 163, 184, 0.1);
+        }
+
+        .component-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Important Notes */
+        .important-note {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .important-note i {
+            color: #f59e0b;
+            font-size: 1.5rem;
+            margin-top: 2px;
+        }
+
+        .important-note p {
+            margin: 0;
+            flex: 1;
+        }
+
+        /* Code/Command Styling */
+        .command-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #10b981;
+            overflow-x: auto;
+        }
+
+        /* Practice Content */
+        .practice-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .simulator-container {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .simulator-frame {
+            width: 100%;
+            height: 700px;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #0ea5e9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #38bdf8;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-tab {
+                min-width: 160px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .component-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-nav {
+                padding: 8px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                max-width: 100%;
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+            
+            .guide-section {
+                padding: 20px;
+            }
+            
+            .guide-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .guide-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .simulator-frame {
+                height: 500px;
+            }
+            
+            .content-section {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-book-open"></i> HƯỚNG DẪN SỬ DỤNG CIRCUITVERSE</h1>
+            <p>Phòng thí nghiệm Kiến trúc Máy tính - Hướng dẫn chi tiết sử dụng công cụ mô phỏng mạch số</p>
+        </header>
 
-    <h1>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h1>
+        <!-- Main Navigation Menu -->
+        <nav class="main-nav">
+            <div class="nav-tabs">
+                <a href="#" class="nav-tab guide active" data-tab="guide">
+                    <i class="fas fa-book"></i> HƯỚNG DẪN
+                </a>
+                <a href="#" class="nav-tab practice" data-tab="simulator">
+                    <i class="fas fa-play-circle"></i> VÀO TRÌNH MÔ PHỎNG
+                </a>
+                <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="nav-tab home" target="_blank">
+                    <i class="fas fa-home"></i> VỀ TRANG CHỦ
+                </a>
+            </div>
+        </nav>
 
-    <div class="highlight">
-        <ul>
-            <li>Nhấn tab <strong>Hướng dẫn</strong> để xem hướng dẫn tóm tắt. [cite: 2]</li>
-            <li>Nhấn tab <strong>Bài thực hành</strong> để xem các bài tập. [cite: 2]</li>
-            <li>Nhấn tab <strong>Vào trình</strong> để truy cập trình mô phỏng trực tiếp tại: [cite: 3]
-                <div class="link-box">
-                    <a href="https://hoaminh.github.io/Computer-Architecture-Lab/">https://hoaminh.github.io/Computer-Architecture-Lab/</a> [cite: 4]
+        <!-- ========== NỘI DUNG HƯỚNG DẪN ========== -->
+        <div id="guide" class="content active">
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h2 class="guide-title">HƯỚNG DẪN SỬ DỤNG CIRCUITVERSE</h2>
+                        <p class="guide-subtitle">Từ cơ bản đến nâng cao - Thiết kế mạch số hiệu quả</p>
+                    </div>
                 </div>
-            </li>
-            <li><strong>Lưu ý:</strong> Đăng ký hoặc đăng nhập trước khi sử dụng để có thể lưu và chia sẻ dự án. [cite: 5] Sau khi đăng nhập, nhấn <strong>“Launch Simulator”</strong> để bắt đầu thiết kế mạch. [cite: 6]</li>
-        </ul>
+
+                <div class="guide-content">
+                    <!-- Tổng quan hướng dẫn -->
+                    <div class="content-section overview">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-info-circle"></i></span>
+                            TỔNG QUAN HƯỚNG DẪN
+                        </h3>
+                        <p>CircuitVerse là một công cụ mô phỏng mạch số trực tuyến mạnh mẽ, cho phép bạn thiết kế, mô phỏng và chia sẻ các mạch số từ đơn giản đến phức tạp. Hướng dẫn này sẽ giúp bạn làm quen với giao diện và các tính năng chính của CircuitVerse.</p>
+                        
+                        <div class="important-note">
+                            <i class="fas fa-lightbulb"></i>
+                            <p><strong>Lưu ý quan trọng:</strong> Luôn đăng nhập trước khi bắt đầu thiết kế để có thể lưu và chia sẻ dự án của bạn. Các dự án không được lưu sẽ bị mất khi đóng trình duyệt.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tài khoản và đăng nhập -->
+                    <div class="content-section account">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-user-circle"></i></span>
+                            ĐĂNG KÝ VÀ ĐĂNG NHẬP TÀI KHOẢN
+                        </h3>
+                        
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">1</span>
+                                Đăng ký tài khoản mới
+                            </div>
+                            <ul>
+                                <li>Truy cập trang chủ CircuitVerse</li>
+                                <li>Nhấn vào nút <strong>"Sign Up"</strong> ở góc trên bên phải</li>
+                                <li>Điền đầy đủ thông tin: Tên, Email, Mật khẩu</li>
+                                <li>Nhấn <strong>"Register"</strong> để hoàn tất đăng ký</li>
+                                <li>Kiểm tra email để xác nhận tài khoản (nếu có)</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">2</span>
+                                Đăng nhập vào hệ thống
+                            </div>
+                            <ul>
+                                <li>Nhấn vào nút <strong>"Login"</strong> trên trang chủ</li>
+                                <li>Đăng nhập bằng email và mật khẩu đã tạo</li>
+                                <li>Hoặc sử dụng đăng nhập nhanh qua: <strong>Google / Facebook / GitHub</strong></li>
+                                <li>Sau khi đăng nhập thành công, bạn sẽ được chuyển đến trang "My Projects"</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">3</span>
+                                Truy cập trình mô phỏng
+                            </div>
+                            <ul>
+                                <li>Sau khi đăng nhập, nhấn <strong>"Launch Simulator"</strong></li>
+                                <li>Bạn sẽ được chuyển đến giao diện thiết kế chính</li>
+                                <li>Có thể truy cập nhanh qua: <a href="https://circuitverse.org/simulator" target="_blank">https://circuitverse.org/simulator</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Các bước cơ bản thiết kế mạch -->
+                    <div class="content-section steps">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-cogs"></i></span>
+                            CÁC BƯỚC CƠ BẢN ĐỂ THIẾT KẾ MẠCH
+                        </h3>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">1</span>
+                                Tạo dự án mới
+                            </div>
+                            <ul>
+                                <li>Từ trang "My Projects", nhấn nút <strong>"New Project"</strong></li>
+                                <li>Đặt tên cho dự án (ví dụ: "ALU 4-bit", "CPU Mini")</li>
+                                <li>Thêm mô tả ngắn gọn (không bắt buộc)</li>
+                                <li>Nhấn <strong>"Create"</strong> để tạo dự án</li>
+                                <li>Dự án mới sẽ xuất hiện trong danh sách của bạn</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">2</span>
+                                Thêm linh kiện vào mạch
+                            </div>
+                            <p>Sử dụng thanh công cụ bên trái để chọn và kéo thả các linh kiện:</p>
+                            <div class="command-box">
+                                Thanh công cụ bên trái → Chọn loại linh kiện → Kéo thả vào vùng làm việc
+                            </div>
+                            <p>Nhấn đúp vào linh kiện để chỉnh sửa thuộc tính (tên, kích thước, giá trị...)</p>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">3</span>
+                                Kết nối các linh kiện
+                            </div>
+                            <ul>
+                                <li>Nhấp vào <strong>đầu ra (output)</strong> của linh kiện đầu tiên</li>
+                                <li>Kéo chuột đến <strong>đầu vào (input)</strong> của linh kiện thứ hai</li>
+                                <li>Thả chuột để tạo kết nối</li>
+                                <li>Sử dụng <strong>"Label"</strong> để đặt tên cho các đường tín hiệu quan trọng</li>
+                                <li>Dùng <strong>"Splitter"</strong> để chia nhỏ/tổng hợp bus nhiều bit</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">4</span>
+                                Chạy mô phỏng và kiểm tra
+                            </div>
+                            <ul>
+                                <li>Nhấn nút <strong>"Simulate"</strong> (hoặc phím tắt Ctrl+R) để bắt đầu mô phỏng</li>
+                                <li>Thay đổi trạng thái input bằng cách nhấp vào các switch/button</li>
+                                <li>Quan sát output thay đổi trên LED, display, hoặc probes</li>
+                                <li>Sử dụng <strong>"Clock"</strong> component cho các mạch tuần tự</li>
+                                <li>Nhấn <strong>"Stop"</strong> để dừng mô phỏng khi cần</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <span class="step-number">5</span>
+                                Lưu và chia sẻ dự án
+                            </div>
+                            <ul>
+                                <li>Nhấn <strong>"Save"</strong> (Ctrl+S) thường xuyên để tránh mất dữ liệu</li>
+                                <li>Dự án sẽ tự động lưu trên tài khoản CircuitVerse của bạn</li>
+                                <li>Để chia sẻ: vào "My Projects" → chọn dự án → nhấn "Share"</li>
+                                <li>Copy link chia sẻ và gửi cho người khác</li>
+                                <li>Có thể nhúng (embed) dự án vào website như các bài thực hành trên trang này</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Các loại linh kiện -->
+                    <div class="content-section components">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-microchip"></i></span>
+                            DANH MỤC LINH KIỆN CƠ BẢN
+                        </h3>
+                        <p>CircuitVerse cung cấp đầy đủ các linh kiện cần thiết cho thiết kế mạch số, từ cơ bản đến nâng cao:</p>
+
+                        <div class="component-grid">
+                            <!-- Input Components -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-toggle-on"></i>
+                                </div>
+                                <h4 class="component-name">INPUT</h4>
+                                <ul class="component-list">
+                                    <li><strong>Input:</strong> Switch cơ bản (0/1)</li>
+                                    <li><strong>Button:</strong> Nút nhấn tạm thời</li>
+                                    <li><strong>Power:</strong> Nguồn logic 1</li>
+                                    <li><strong>Ground:</strong> Mass logic 0</li>
+                                    <li><strong>Constant Value:</strong> Giá trị cố định</li>
+                                    <li><strong>Stepper:</strong> Bộ tạo xung nhịp</li>
+                                </ul>
+                            </div>
+
+                            <!-- Output Components -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h4 class="component-name">OUTPUT</h4>
+                                <ul class="component-list">
+                                    <li><strong>Output:</strong> Đầu ra cơ bản</li>
+                                    <li><strong>RGB Led:</strong> LED đổi màu</li>
+                                    <li><strong>Digital Led:</strong> LED số</li>
+                                    <li><strong>Variable Led:</strong> LED biến đổi</li>
+                                    <li><strong>Hex Display:</strong> Hiển thị hex</li>
+                                    <li><strong>7-Segment Display:</strong> Hiển thị số</li>
+                                </ul>
+                            </div>
+
+                            <!-- Gates -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <h4 class="component-name">CỔNG LOGIC (GATES)</h4>
+                                <ul class="component-list">
+                                    <li><strong>AND, OR, NOT:</strong> Cổng cơ bản</li>
+                                    <li><strong>XOR, XNOR:</strong> Cổng exclusive</li>
+                                    <li><strong>NAND, NOR:</strong> Universal gates</li>
+                                    <li><strong>Buffer, Inverter:</strong> Đệm và đảo</li>
+                                    <li><strong>TriState:</strong> Cổng 3 trạng thái</li>
+                                </ul>
+                            </div>
+
+                            <!-- Combinational -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <h4 class="component-name">MẠCH TỔ HỢP</h4>
+                                <ul class="component-list">
+                                    <li><strong>Multiplexer (MUX):</strong> Chọn kênh</li>
+                                    <li><strong>Demultiplexer (DEMUX):</strong> Phân kênh</li>
+                                    <li><strong>Decoder:</strong> Giải mã</li>
+                                    <li><strong>Encoder:</strong> Mã hóa</li>
+                                    <li><strong>Priority Encoder:</strong> Mã hóa ưu tiên</li>
+                                    <li><strong>Bit Selector:</strong> Chọn bit</li>
+                                </ul>
+                            </div>
+
+                            <!-- Sequential -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-memory"></i>
+                                </div>
+                                <h4 class="component-name">MẠCH TUẦN TỰ</h4>
+                                <ul class="component-list">
+                                    <li><strong>D Flip Flop:</strong> FF cơ bản</li>
+                                    <li><strong>D Latch:</strong> Latch D</li>
+                                    <li><strong>T Flip Flop:</strong> FF toggle</li>
+                                    <li><strong>JK Flip Flop:</strong> FF đa năng</li>
+                                    <li><strong>SR Flip Flop:</strong> FF set-reset</li>
+                                    <li><strong>Clock:</strong> Tạo xung nhịp</li>
+                                </ul>
+                            </div>
+
+                            <!-- Memory -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h4 class="component-name">BỘ NHỚ</h4>
+                                <ul class="component-list">
+                                    <li><strong>RAM:</strong> Bộ nhớ truy cập ngẫu nhiên</li>
+                                    <li><strong>ROM:</strong> Bộ nhớ chỉ đọc</li>
+                                    <li><strong>EPROM:</strong> ROM xóa được</li>
+                                    <li><strong>Register File:</strong> Tập thanh ghi</li>
+                                    <li><strong>Counter:</strong> Bộ đếm</li>
+                                    <li><strong>Shift Register:</strong> Thanh ghi dịch</li>
+                                </ul>
+                            </div>
+
+                            <!-- Arithmetic -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4 class="component-name">MẠCH SỐ HỌC</h4>
+                                <ul class="component-list">
+                                    <li><strong>Adder:</strong> Bộ cộng</li>
+                                    <li><strong>Subtractor:</strong> Bộ trừ</li>
+                                    <li><strong>ALU:</strong> Đơn vị logic số học</li>
+                                    <li><strong>Comparator:</strong> Bộ so sánh</li>
+                                    <li><strong>Multiplier:</strong> Bộ nhân</li>
+                                    <li><strong>Divider:</strong> Bộ chia</li>
+                                </ul>
+                            </div>
+
+                            <!-- Misc -->
+                            <div class="component-card">
+                                <div class="component-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h4 class="component-name">CÔNG CỤ & KHÁC</h4>
+                                <ul class="component-list">
+                                    <li><strong>Text:</strong> Thêm chú thích</li>
+                                    <li><strong>Rectangle:</strong> Vùng nhóm</li>
+                                    <li><strong>Arrow:</strong> Mũi tên chỉ dẫn</li>
+                                    <li><strong>Splitter:</strong> Chia/tổng bus</li>
+                                    <li><strong>Tunnel:</strong> Kết nối ảo</li>
+                                    <li><strong>Label:</strong> Nhãn tín hiệu</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mẹo và thủ thuật -->
+                    <div class="content-section tips">
+                        <h3 class="content-title">
+                            <span class="section-icon"><i class="fas fa-lightbulb"></i></span>
+                            MẸO VÀ THỦ THUẬT HỮU ÍCH
+                        </h3>
+                        
+                        <div class="step-box">
+                            <div class="step-title">
+                                <i class="fas fa-keyboard"></i> Phím tắt quan trọng
+                            </div>
+                            <ul>
+                                <li><strong>Ctrl + S:</strong> Lưu dự án</li>
+                                <li><strong>Ctrl + R:</strong> Bắt đầu/dừng mô phỏng</li>
+                                <li><strong>Ctrl + Z:</strong> Hoàn tác</li>
+                                <li><strong>Ctrl + Y:</strong> Làm lại</li>
+                                <li><strong>Ctrl + C:</strong> Sao chép</li>
+                                <li><strong>Ctrl + V:</strong> Dán</li>
+                                <li><strong>Ctrl + D:</strong> Nhân bản</li>
+                                <li><strong>Delete:</strong> Xóa linh kiện</li>
+                                <li><strong>Space:</strong> Tạm dừng mô phỏng</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <i class="fas fa-rocket"></i> Tối ưu hóa thiết kế
+                            </div>
+                            <ul>
+                                <li>Sử dụng <strong>"Subcircuit"</strong> để tạo module tái sử dụng</li>
+                                <li>Đặt tên có ý nghĩa cho tất cả linh kiện và tín hiệu</li>
+                                <li>Nhóm các linh kiện liên quan bằng <strong>"Rectangle"</strong></li>
+                                <li>Sử dụng <strong>"Label"</strong> cho các bus nhiều bit</li>
+                                <li>Thêm chú thích bằng <strong>"Text"</strong> cho các khối phức tạp</li>
+                                <li>Kiểm tra từng module nhỏ trước khi tích hợp toàn bộ</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-box">
+                            <div class="step-title">
+                                <i class="fas fa-bug"></i> Gỡ lỗi (Debugging)
+                            </div>
+                            <ul>
+                                <li>Bắt đầu với mạch đơn giản, kiểm tra từng bước</li>
+                                <li>Sử dụng nhiều <strong>"Output"</strong> probes để theo dõi tín hiệu</li>
+                                <li>Kiểm tra kết nối bị đứt hoặc thiếu</li>
+                                <li>Xác minh bảng chân trị cho từng cổng</li>
+                                <li>Kiểm tra hướng của clock edge cho mạch tuần tự</li>
+                                <li>Sử dụng <strong>"Hex Display"</strong> để xem giá trị bus</li>
+                            </ul>
+                        </div>
+
+                        <div class="important-note">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p><strong>Cảnh báo:</strong> Các mạch phức tạp có thể tiêu tốn nhiều tài nguyên. Hãy chia nhỏ thành các module và kiểm tra từng module trước khi ghép lại. Luôn lưu dự án trước khi thử nghiệm các thay đổi lớn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TRÌNH MÔ PHỎNG ========== -->
+        <div id="simulator" class="content">
+            <div class="practice-content">
+                <h2 class="guide-title"><i class="fas fa-play-circle"></i> TRÌNH MÔ PHỎNG CIRCUITVERSE</h2>
+                <p class="guide-subtitle">Môi trường thực hành trực tuyến - Thiết kế và kiểm tra mạch số</p>
+                
+                <div class="simulator-container">
+                    <h3 class="content-title"><i class="fas fa-info-circle"></i> TRUY CẬP TRỰC TIẾP TRÌNH MÔ PHỎNG</h3>
+                    <p>Dưới đây là trình mô phỏng CircuitVerse chính thức. Bạn có thể bắt đầu thiết kế ngay lập tức:</p>
+                    
+                    <div class="important-note">
+                        <i class="fas fa-info-circle"></i>
+                        <p><strong>Lưu ý:</strong> Để lưu và chia sẻ dự án, bạn cần đăng nhập vào CircuitVerse. Nhấn nút "Login" ở góc trên bên phải của trình mô phỏng để đăng nhập.</p>
+                    </div>
+                    
+                    <div class="simulator-frame">
+                        <iframe 
+                            src="https://circuitverse.org/simulator" 
+                            width="100%" 
+                            height="100%"
+                            style="border:none;"
+                            title="CircuitVerse Simulator">
+                        </iframe>
+                    </div>
+                    
+                    <div class="step-box" style="margin-top: 25px;">
+                        <div class="step-title">
+                            <i class="fas fa-external-link-alt"></i> Các cách truy cập khác
+                        </div>
+                        <ul>
+                            <li><strong>Trang chủ CircuitVerse:</strong> <a href="https://circuitverse.org" target="_blank">https://circuitverse.org</a></li>
+                            <li><strong>Trực tiếp đến simulator:</strong> <a href="https://circuitverse.org/simulator" target="_blank">https://circuitverse.org/simulator</a></li>
+                            <li><strong>GitHub Repository:</strong> <a href="https://github.com/CircuitVerse" target="_blank">https://github.com/CircuitVerse</a></li>
+                            <li><strong>Tài liệu hướng dẫn:</strong> <a href="https://docs.circuitverse.org" target="_blank">https://docs.circuitverse.org</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Phòng thí nghiệm Kiến trúc Máy tính • 
+               <a href="https://hoaminh.github.io/Computer-Architecture-Lab/">
+                   hoaminh.github.io/Computer-Architecture-Lab
+               </a>
+            </p>
+            <p>© 2024 - Hướng dẫn sử dụng CircuitVerse | Tài liệu giáo dục môn Kiến trúc Máy tính</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: #64748b;">
+                <i class="fas fa-link"></i> Liên kết nhanh: 
+                <a href="../labs/circuitverse.html" style="margin: 0 10px;">Bài Thực Hành</a> | 
+                <a href="circuitverse.html" style="margin: 0 10px;">Hướng Dẫn</a> | 
+                <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" style="margin: 0 10px;">Trang Chủ</a>
+            </p>
+        </footer>
     </div>
 
-    <h2>1. ĐĂNG KÝ VÀ ĐĂNG NHẬP</h2> [cite: 7]
-    <ul>
-        <li>Nhấn vào <strong>“Sign Up”</strong> để tạo tài khoản mới. [cite: 8]</li>
-        <li>Điền thông tin: tên, email, mật khẩu &rarr; nhấn <strong>"Register"</strong>. [cite: 9]</li>
-        <li>Bạn cũng có thể đăng nhập bằng email và mật khẩu đã tạo hoặc sử dụng tài khoản <strong>Google/Facebook/GitHub</strong>. [cite: 10, 11]</li>
-        <li><em>Lợi ích:</em> Đăng nhập giúp bạn lưu dự án, chia sẻ, và truy cập lại sau này. [cite: 12]</li>
-    </ul>
-
-    <h2>2. CÁC BƯỚC CƠ BẢN ĐỂ THIẾT KẾ MẠCH</h2> [cite: 13]
-    
-    <h3>Bước 1: Tạo dự án mới</h3> [cite: 14]
-    <ul>
-        <li>Nhấn vào <strong>“My Projects”</strong> &rarr; <strong>"New Project"</strong>. [cite: 15]</li>
-        <li>Đặt tên cho dự án (ví dụ: “MIPS Datapath”) và nhấn <strong>"Create"</strong>. [cite: 16]</li>
-    </ul>
-
-    <h3>Bước 2: Thêm linh kiện</h3> [cite: 17]
-    <p>Sử dụng thanh công cụ bên trái để chọn các linh kiện cần thiết: [cite: 18]</p>
-    <ul>
-        <li><strong>Input:</strong> Input, Button, Power, Ground, Constant Value, Stepper. [cite: 19]</li>
-        <li><strong>Output:</strong> Output, RGB Led, Digital led, Variable led, Hex display, Seven Segment Display, Sixteen Segment Display, Square RGBLed, RGBLed Matrix. [cite: 19, 20, 21]</li>
-        <li><strong>Gates:</strong> AND, OR, NOT, XOR, NAND, NOR, XNOR. [cite: 22]</li>
-        <li><strong>Decoder & Plexer:</strong> Multiplexer, Demultiplexer, Bit Selector, Priority Encoder, MSB, LSB, Decoder. [cite: 22, 23]</li>
-        <li><strong>Sequential Elements:</strong> D flip flop, D Latch, T flip flop, JK flip flop, SR flip flop, TTY, Keyboard, Clock, RAM, ROM, EEPROM. [cite: 24]</li>
-        <li><strong>Annotation:</strong> Rectangle, Arrow, Image Annotation, Text. [cite: 25]</li>
-        <li><strong>Misc:</strong> Two's Complement, Flag, Splitter, Adder, ALU, TriState flip flop, Tunnel, Buffer, Controller, Inverter, TB input, TB output, Force gate. [cite: 25]</li>
-    </ul>
-
-    <h3>Bước 3: Kết nối mạch</h3> [cite: 26]
-    <ul>
-        <li>Kéo dây từ đầu ra của linh kiện này đến đầu vào của linh kiện khác. [cite: 27]</li>
-        <li>Sử dụng <strong>“Label”</strong> để đặt tên cho các tín hiệu giúp mạch rõ ràng hơn. [cite: 28]</li>
-    </ul>
-
-    <h3>Bước 4: Chạy mô phỏng</h3> [cite: 29]
-    <ul>
-        <li>Nhấn nút <strong>“Simulate”</strong> để chạy mạch. [cite: 30]</li>
-        <li>Quan sát trạng thái của các tín hiệu, đèn LED và kết quả tính toán. [cite: 31]</li>
-    </ul>
-
-    <h2>3. LƯU VÀ CHIA SẺ</h2> [cite: 32]
-    <ul>
-        <li>Nhấn <strong>“Save”</strong> để lưu dự án vào tài khoản CircuitVerse của bạn. [cite: 33, 34]</li>
-        <li>Có thể chia sẻ sản phẩm bằng cách gửi liên kết (link) dự án cho người khác. [cite: 35]</li>
-    </ul>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainTabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.content');
+            
+            function hideAllContents() {
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+            }
+            
+            function deactivateAllMainTabs() {
+                mainTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+            }
+            
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    if(this.href && !this.getAttribute('data-tab')) {
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    
+                    const tabType = this.getAttribute('data-tab');
+                    
+                    deactivateAllMainTabs();
+                    
+                    this.classList.add('active');
+                    
+                    hideAllContents();
+                    
+                    document.getElementById(tabType).classList.add('active');
+                });
+            });
+            
+            console.log("CircuitVerse Guide Page đã sẵn sàng!");
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

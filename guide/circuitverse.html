@@ -2,168 +2,80 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Hướng dẫn sử dụng CircuitVerse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Hướng dẫn CircuitVerse</title>
     <style>
-        body {
-            font-family: "Times New Roman", serif;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 40px;
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 26px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        h3 {
-            font-size: 18px;
-            margin-top: 15px;
-            margin-bottom: 8px;
-        }
-
-        .content {
-            column-count: 2;
-            column-gap: 40px;
-        }
-
-        p {
-            margin: 8px 0;
-        }
-
-        ul {
-            margin-left: 20px;
-        }
-
-        li {
-            margin-bottom: 6px;
-        }
-
-        .section {
-            break-inside: avoid;
-            margin-bottom: 20px;
-        }
-
-        a {
-            color: #003366;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 900px) {
-            .content {
-                column-count: 1;
-            }
-        }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+        h2 { color: #e67e22; border-left: 5px solid #e67e22; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; }
+        ul { margin-bottom: 20px; }
+        li { margin-bottom: 8px; }
+        .highlight { background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+        .link-box { text-align: center; margin: 20px 0; font-weight: bold; }
     </style>
 </head>
-
 <body>
 
-<h1>Hướng dẫn thực hiện trong ứng dụng CircuitVerse</h1>
+    <h1>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h1>
 
-<div class="content">
-
-    <div class="section">
-        <h2>1. Giới thiệu chung</h2>
-        <p>
-            Hệ thống <strong>Integrated Computer Architecture Simulation Portal</strong> tích hợp
-            trình mô phỏng <strong>CircuitVerse</strong> nhằm hỗ trợ sinh viên học tập và thực hành
-            môn <strong>Kiến trúc máy tính</strong> thông qua các mô hình mạch số trực quan,
-            dễ thao tác và có khả năng lưu trữ, chia sẻ kết quả.
-        </p>
-    </div>
-
-    <div class="section">
-        <h2>2. Truy cập và sử dụng hệ thống</h2>
+    <div class="highlight">
         <ul>
-            <li>Nhấn tab <strong>Hướng dẫn</strong> để xem nội dung hướng dẫn sử dụng.</li>
-            <li>Nhấn tab <strong>Bài thực hành</strong> để xem danh sách các bài tập.</li>
-            <li>
-                Nhấn tab <strong>Vào trình</strong> để truy cập CircuitVerse tại:<br>
-                <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" target="_blank">
-                    https://hoaminh.github.io/Computer-Architecture-Lab/
-                </a>
+            <li>Nhấn tab <strong>Hướng dẫn</strong> để xem hướng dẫn tóm tắt. [cite: 2]</li>
+            <li>Nhấn tab <strong>Bài thực hành</strong> để xem các bài tập. [cite: 2]</li>
+            <li>Nhấn tab <strong>Vào trình</strong> để truy cập trình mô phỏng trực tiếp tại: [cite: 3]
+                <div class="link-box">
+                    <a href="https://hoaminh.github.io/Computer-Architecture-Lab/">https://hoaminh.github.io/Computer-Architecture-Lab/</a> [cite: 4]
+                </div>
             </li>
-            <li>Người học cần đăng ký hoặc đăng nhập để lưu và chia sẻ dự án.</li>
-            <li>Sau khi đăng nhập, nhấn <strong>“Launch Simulator”</strong> để bắt đầu thiết kế mạch.</li>
+            <li><strong>Lưu ý:</strong> Đăng ký hoặc đăng nhập trước khi sử dụng để có thể lưu và chia sẻ dự án. [cite: 5] Sau khi đăng nhập, nhấn <strong>“Launch Simulator”</strong> để bắt đầu thiết kế mạch. [cite: 6]</li>
         </ul>
     </div>
 
-    <div class="section">
-        <h2>3. Đăng ký và đăng nhập</h2>
-        <ul>
-            <li>Nhấn <strong>“Sign Up”</strong> để tạo tài khoản mới.</li>
-            <li>Nhập Tên, Email, Mật khẩu → nhấn <strong>“Register”</strong>.</li>
-            <li>Có thể đăng nhập bằng Email hoặc Google / Facebook / GitHub.</li>
-            <li>Đăng nhập giúp lưu dự án, chia sẻ và truy cập lại sau này.</li>
-        </ul>
-    </div>
+    <h2>1. ĐĂNG KÝ VÀ ĐĂNG NHẬP</h2> [cite: 7]
+    <ul>
+        <li>Nhấn vào <strong>“Sign Up”</strong> để tạo tài khoản mới. [cite: 8]</li>
+        <li>Điền thông tin: tên, email, mật khẩu &rarr; nhấn <strong>"Register"</strong>. [cite: 9]</li>
+        <li>Bạn cũng có thể đăng nhập bằng email và mật khẩu đã tạo hoặc sử dụng tài khoản <strong>Google/Facebook/GitHub</strong>. [cite: 10, 11]</li>
+        <li><em>Lợi ích:</em> Đăng nhập giúp bạn lưu dự án, chia sẻ, và truy cập lại sau này. [cite: 12]</li>
+    </ul>
 
-    <div class="section">
-        <h2>4. Các bước cơ bản để thiết kế mạch</h2>
+    <h2>2. CÁC BƯỚC CƠ BẢN ĐỂ THIẾT KẾ MẠCH</h2> [cite: 13]
+    
+    <h3>Bước 1: Tạo dự án mới</h3> [cite: 14]
+    <ul>
+        <li>Nhấn vào <strong>“My Projects”</strong> &rarr; <strong>"New Project"</strong>. [cite: 15]</li>
+        <li>Đặt tên cho dự án (ví dụ: “MIPS Datapath”) và nhấn <strong>"Create"</strong>. [cite: 16]</li>
+    </ul>
 
-        <h3>4.1. Tạo dự án mới</h3>
-        <ul>
-            <li>Chọn <strong>My Projects</strong> → <strong>New Project</strong></li>
-            <li>Đặt tên dự án (ví dụ: <em>MIPS Datapath</em>)</li>
-            <li>Nhấn <strong>Create</strong></li>
-        </ul>
+    <h3>Bước 2: Thêm linh kiện</h3> [cite: 17]
+    <p>Sử dụng thanh công cụ bên trái để chọn các linh kiện cần thiết: [cite: 18]</p>
+    <ul>
+        <li><strong>Input:</strong> Input, Button, Power, Ground, Constant Value, Stepper. [cite: 19]</li>
+        <li><strong>Output:</strong> Output, RGB Led, Digital led, Variable led, Hex display, Seven Segment Display, Sixteen Segment Display, Square RGBLed, RGBLed Matrix. [cite: 19, 20, 21]</li>
+        <li><strong>Gates:</strong> AND, OR, NOT, XOR, NAND, NOR, XNOR. [cite: 22]</li>
+        <li><strong>Decoder & Plexer:</strong> Multiplexer, Demultiplexer, Bit Selector, Priority Encoder, MSB, LSB, Decoder. [cite: 22, 23]</li>
+        <li><strong>Sequential Elements:</strong> D flip flop, D Latch, T flip flop, JK flip flop, SR flip flop, TTY, Keyboard, Clock, RAM, ROM, EEPROM. [cite: 24]</li>
+        <li><strong>Annotation:</strong> Rectangle, Arrow, Image Annotation, Text. [cite: 25]</li>
+        <li><strong>Misc:</strong> Two's Complement, Flag, Splitter, Adder, ALU, TriState flip flop, Tunnel, Buffer, Controller, Inverter, TB input, TB output, Force gate. [cite: 25]</li>
+    </ul>
 
-        <h3>4.2. Thêm linh kiện</h3>
-        <p><strong>Input:</strong> Input, Button, Power, Ground, Constant Value, Stepper</p>
-        <p><strong>Output:</strong> Output, RGB LED, Digital LED, Variable LED, Hex Display,
-            Seven Segment Display, Sixteen Segment Display, RGB LED Matrix</p>
-        <p><strong>Gates:</strong> AND, OR, NOT, XOR, NAND, NOR, XNOR</p>
-        <p><strong>Decoder & Plexer:</strong> Multiplexer, Demultiplexer, Encoder, Decoder,
-            MSB, LSB</p>
-        <p><strong>Sequential Elements:</strong> D Flip-Flop, T Flip-Flop, JK Flip-Flop,
-            SR Flip-Flop, Clock, RAM, ROM, EEPROM</p>
-        <p><strong>Annotation:</strong> Rectangle, Arrow, Text</p>
-        <p><strong>Misc:</strong> Adder, ALU, Splitter, Buffer, Controller, Inverter</p>
-    </div>
+    <h3>Bước 3: Kết nối mạch</h3> [cite: 26]
+    <ul>
+        <li>Kéo dây từ đầu ra của linh kiện này đến đầu vào của linh kiện khác. [cite: 27]</li>
+        <li>Sử dụng <strong>“Label”</strong> để đặt tên cho các tín hiệu giúp mạch rõ ràng hơn. [cite: 28]</li>
+    </ul>
 
-    <div class="section">
-        <h3>4.3. Kết nối mạch</h3>
-        <ul>
-            <li>Kéo dây từ đầu ra của linh kiện này sang đầu vào của linh kiện khác.</li>
-            <li>Sử dụng <strong>Label</strong> để đặt tên tín hiệu.</li>
-        </ul>
-    </div>
+    <h3>Bước 4: Chạy mô phỏng</h3> [cite: 29]
+    <ul>
+        <li>Nhấn nút <strong>“Simulate”</strong> để chạy mạch. [cite: 30]</li>
+        <li>Quan sát trạng thái của các tín hiệu, đèn LED và kết quả tính toán. [cite: 31]</li>
+    </ul>
 
-    <div class="section">
-        <h3>4.4. Chạy mô phỏng</h3>
-        <ul>
-            <li>Nhấn <strong>Simulate</strong> để chạy mạch.</li>
-            <li>Quan sát trạng thái tín hiệu, LED và kết quả tính toán.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>5. Lưu và chia sẻ dự án</h2>
-        <ul>
-            <li>Nhấn <strong>Save</strong> để lưu dự án.</li>
-            <li>Dự án được lưu trên tài khoản CircuitVerse.</li>
-            <li>Có thể chia sẻ dự án bằng cách gửi liên kết.</li>
-        </ul>
-    </div>
-
-</div>
+    <h2>3. LƯU VÀ CHIA SẺ</h2> [cite: 32]
+    <ul>
+        <li>Nhấn <strong>“Save”</strong> để lưu dự án vào tài khoản CircuitVerse của bạn. [cite: 33, 34]</li>
+        <li>Có thể chia sẻ sản phẩm bằng cách gửi liên kết (link) dự án cho người khác. [cite: 35]</li>
+    </ul>
 
 </body>
 </html>

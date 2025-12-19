@@ -1,30 +1,154 @@
-<!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><title>Bài thực hành ParaCache</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto}</style></head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn ParaCache - Hệ Thống Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS đồng bộ hoàn toàn với giao diện MIPS Guide */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* THANH TIỆN ÍCH TRÊN CÙNG (Nút về trang chủ riêng biệt) */
+        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
+        .btn-home { 
+            text-decoration: none; 
+            color: #d35400; 
+            font-weight: bold; 
+            font-size: 14px; 
+            border: 2px solid #d35400; 
+            padding: 6px 18px; 
+            border-radius: 20px; 
+            transition: 0.3s;
+        }
+        .btn-home:hover { background: #d35400; color: #fff; }
+
+        /* HEADER */
+        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
+        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
+        .nav-menu { 
+            background: #000080; 
+            display: flex; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .nav-item { 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none; 
+            color: #ffffff !important; 
+            padding: 18px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            font-size: 15px;
+        }
+        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
+        .nav-item.active { background: #3498db; }
+
+        /* NỘI DUNG */
+        .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 5px solid #3498db; }
+        h2 { color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 20px; }
+        h3 { color: #16a085; margin: 20px 0 10px; font-size: 18px; }
+        
+        .step-item { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3498db; }
+        .step-num { background: #3498db; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
+        
+        .info-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
+        .tag { background: #eee; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; color: #555; margin-right: 5px; }
+
+        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
 <body>
-<header><h1>Bài thực hành ParaCache</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
 
-<section>
-  <h2>Mục tiêu</h2>
-  <p>Hiểu tác động của cấu hình cache lên hit/miss và thời gian truy xuất trung bình (AMAT).</p>
-</section>
+    <div class="top-nav">
+        <div class="container">
+            <a href="../index.html" class="btn-home"><i class="fas fa-arrow-left"></i> VỀ TRANG CHỦ</a>
+        </div>
+    </div>
 
-<section>
-  <h2>Bài 1</h2>
-  <p>Cho trace sau (địa chỉ hex): 0x00,0x04,0x08,0x0C,0x00,0x04,0x10,... Thử cấu hình:</p>
-  <ul>
-    <li>Cache size = 16 bytes; block size = 4 bytes; direct-mapped</li>
-    <li>Ghi lại hit/miss</li>
-  </ul>
-</section>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-memory"></i> Giới Thiệu Về ParaCache</h1>
+        </div>
 
-<section>
-  <h2>Bài 2</h2>
-  <p>Thay associativity = 2-way; so sánh miss rate; phân tích nguyên nhân.</p>
-</section>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i class="fas fa-book-open"></i> Hướng dẫn</a>
+            <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank" class="nav-item">
+                <i class="fas fa-external-link-alt"></i> Vào trình
+            </a>
+        </nav>
 
-<section>
-  <h2>Báo cáo</h2>
-  <p>Nộp bảng kết quả, biểu đồ so sánh, và kết luận ngắn.</p>
-</section>
+        <div class="card">
+            <h2><i class="fas fa-info-circle"></i> ParaCache là gì?</h2>
+            <p><strong>ParaCache</strong> là một ứng dụng mô phỏng trực quan hoạt động của bộ nhớ đệm (Cache Memory). Công cụ này giúp người học hiểu rõ cách dữ liệu được nạp, truy xuất và thay thế trong Cache thông qua các thông số cấu hình thực tế.</p>
+            <div class="info-box">
+                <i class="fas fa-link"></i> <strong>Đường dẫn truy cập:</strong> <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank">Mở ParaCache Simulator</a>.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-cogs"></i> Các thông số cấu hình chính</h2>
+            <p>Để bắt đầu mô phỏng, bạn cần thiết lập các thông số cơ bản sau:</p>
+            <div class="step-item">
+                <h3>Cache Size & Block Size</h3>
+                <p>Xác định tổng dung lượng bộ nhớ đệm và kích thước của mỗi khối dữ liệu (Block). Kích thước Block ảnh hưởng trực tiếp đến tính địa phương của dữ liệu.</p>
+            </div>
+            <div class="step-item">
+                <h3>Associativity (Tính kết hiệp)</h3>
+                <p>Lựa chọn kiểu tổ chức Cache:</p>
+                <ul>
+                    <li><strong>Direct Mapped:</strong> Mỗi khối nhớ chính chỉ có 1 vị trí cố định trong Cache.</li>
+                    <li><strong>Fully Associative:</strong> Khối nhớ có thể nằm ở bất kỳ đâu.</li>
+                    <li><strong>N-way Set Associative:</strong> Kết hợp cả hai phương thức trên.</li>
+                </ul>
+            </div>
+            <div class="step-item">
+                <h3>Replacement Policy (Chính sách thay thế)</h3>
+                <p>Xác định khối nào sẽ bị loại bỏ khi Cache đầy, ví dụ: <strong>LRU</strong> (Least Recently Used) hoặc <strong>Random</strong>.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-play"></i> Quy trình mô phỏng</h2>
+            <div class="step-item">
+                <span class="step-num">1</span> <strong>Thiết lập:</strong> Chọn các thông số phần cứng tại bảng cấu hình bên trái.
+            </div>
+            <div class="step-item">
+                <span class="step-num">2</span> <strong>Truy xuất:</strong> Nhập địa chỉ bộ nhớ (Address) và thực hiện thao tác Đọc (Read) hoặc Ghi (Write).
+            </div>
+            <div class="step-item">
+                <span class="step-num">3</span> <strong>Quan sát:</strong> Xem luồng dữ liệu di chuyển và trạng thái thay đổi của các thẻ (Tags), dữ liệu trong bảng Cache.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Phân tích kết quả</h2>
+            <p>Sau mỗi thao tác, hệ thống sẽ thống kê:</p>
+            <ul>
+                <li><strong>Hit:</strong> Dữ liệu có sẵn trong Cache.</li>
+                <li><strong>Miss:</strong> Dữ liệu không có trong Cache, phải nạp từ bộ nhớ chính.</li>
+                <li><strong>Miss Rate:</strong> Tỷ lệ lỗi truy xuất, mục tiêu là tối thiểu hóa thông số này.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Phát triển bởi nhóm nghiên cứu C24.67</p>
+        </footer>
+    </div>
+
 </body>
 </html>

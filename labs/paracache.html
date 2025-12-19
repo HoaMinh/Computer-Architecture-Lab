@@ -3,6 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Thực Hành ParaCache - Hệ Thống Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS đồng bộ với giao diện Guide và MIPS Labs */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* THANH TIỆN ÍCH TRÊN CÙNG */
+        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
+        .btn-home { 
+            text-decoration: none; 
+            color: #d35400; 
+            font-weight: bold; 
+            font-size: 14px; 
+            border: 2px solid #d35400; 
+            padding: 6px 18px; 
+            border-radius: 20px; 
+            transition: 0.3s;
+        }
+        .btn-home:hover { background: #d35400; color: #fff; }
+
+        /* HEADER */
+        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
+        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
+        .nav-menu { 
+            background: #000080; 
+            display: flex; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .nav-item { 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none; 
+            color: #ffffff !important; 
+            padding: 18px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            font-size: 15px;
+        }
+        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
+        .nav-item.active { background: #3498db; }
+
+        /* NỘI DUNG BÀI LAB */
+        .lab-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 30px; border-top: 6px solid #2980b9; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; font-size: 20px; }
+        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 20px; letter-spacing: 1px; }
+        
+        .config-box { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #3498db; }
+        .step-item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ddd; }
+        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; color: #856404; }
+        
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'Consolas', monospace; }
+        
+        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container">
+            <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="btn-home"><i class="fas fa-home"></i> VỀ TRANG CHỦ</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-microchip"></i> THỰC HÀNH MÔ PHỎNG BỘ NHỚ CACHE</h1>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i class="fas fa-list-check"></i> Bài thực hành</a>
+            <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank" class="nav-item">
+                <i class="fas fa-play-circle"></i> Vào trình
+            </a>
+        </nav>
+
+        <div class="lab-card">
+            <h2>BÀI 5.1: Truy cập Cache ánh xạ trực tiếp (Direct Mapped)</h2>
+            <p>Mô phỏng quá trình truy xuất dữ liệu từ bộ nhớ chính lên Cache để hiểu cơ chế Tag, Index và Offset.</p>
+            
+            <h3>Thông số cấu hình</h3>
+            <div class="config-box">
+                <ul>
+                    <li><strong>Cache Size:</strong> 64 Bytes</li>
+                    <li><strong>Memory Size:</strong> 512 Bytes</li>
+                    <li><strong>Offset Bits:</strong> 3 (Tương đương 8 Bytes/Block)</li>
+                    <li><strong>Write Policy:</strong> Write Back / Write On Allocate</li>
+                </ul>
+            </div>
+
+            <h3>Hướng dẫn thực hiện</h3>
+            <div class="step-item">
+                <strong>Bước 1:</strong> Chọn chế độ <code>Direct Mapped Cache</code> trên thanh menu ứng dụng.
+            </div>
+            <div class="step-item">
+                <strong>Bước 2:</strong> Nhấn <code>Reset</code>, nhập các thông số trên và nhấn <code>Submit</code>.
+            </div>
+            <div class="step-item">
+                <strong>Bước 3:</strong> Tại mục Instruction, nhập lần lượt các lệnh:
+                <br><code>LOAD(4)</code>, <code>LOAD(A)</code>, <code>LOAD(2C)</code> (giá trị Hex).
+            </div>
+            <div class="step-item">
+                <strong>Bước 4:</strong> Nhấn <code>Next</code> để quan sát từng giai đoạn chuyển đổi từ địa chỉ Hex sang nhị phân và ánh xạ vào bảng Cache.
+            </div>
+
+            <div class="submit-info">
+                <i class="fas fa-edit"></i> Yêu cầu nộp: 
+                <br>- Ảnh chụp bảng Cache sau khi thực hiện 3 lệnh Load.
+                <br>- Nhận xét về sự thay đổi của Bit hiệu lực (Valid) và Thẻ (Tag).
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 5.2: Cache hoàn toàn phối hợp (Fully Associative)</h2>
+            <p>So sánh hiệu năng và cơ chế thay thế khối khi Cache đầy trong cấu trúc phối hợp hoàn toàn.</p>
+            
+            <h3>Nội dung thực hiện</h3>
+            <div class="config-box">
+                <p>Thực hiện tương tự Bài 5.1 nhưng chọn chế độ <code>Fully Associative Cache</code>.</p>
+                <p>Thử nghiệm lần lượt với 2 chiến thuật thay thế:</p>
+                <ul>
+                    <li><strong>FIFO:</strong> First In First Out (Vào trước ra trước).</li>
+                    <li><strong>LRU:</strong> Least Recently Used (Khối lâu nhất không dùng).</li>
+                </ul>
+            </div>
+
+            <div class="submit-info">
+                <i class="fas fa-edit"></i> Yêu cầu nộp: 
+                <br>- So sánh kết quả số lần Hit/Miss giữa 2 chiến thuật thay thế.
+                <br>- Giải thích tại sao một khối bị loại bỏ khỏi Cache trong mỗi trường hợp.
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
+        </footer>
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hướng Dẫn ParaCache - Hệ Thống Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>

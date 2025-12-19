@@ -3,200 +3,701 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu về JsSpim - Lab Guide</title>
-    <link rel="stylesheet" href="lib/style.css"> <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --text-color: #333;
-            --bg-light: #f4f7f6;
+    <title>Hướng dẫn JsSpim - Mô phỏng hợp ngữ MIPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; display: flex; }
-        
-        /* Sidebar Styles */
-        .sidebar { width: 280px; background: var(--primary-color); color: white; height: 100vh; position: fixed; overflow-y: auto; padding: 20px 0; }
-        .sidebar h2 { padding: 0 20px; font-size: 1.2rem; margin-bottom: 20px; color: var(--accent-color); }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar ul li a { display: block; padding: 12px 20px; color: #bdc3c7; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
-        .sidebar ul li a:hover, .sidebar ul li a.active { background: var(--secondary-color); color: white; border-left: 4px solid var(--accent-color); }
 
-        /* Main Content Styles */
-        .main-content { margin-left: 280px; padding: 40px; max-width: 900px; background: white; min-height: 100vh; }
-        h1 { color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; }
-        h2 { color: var(--secondary-color); margin-top: 30px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
-        h3 { color: #2980b9; margin-top: 25px; }
-        
-        .info-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 20px 0; border-radius: 4px; }
-        .step-box { background: #fff; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: var(--primary-color); color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        
-        .code-block { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; overflow-x: auto; margin: 15px 0; }
-        img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin: 15px 0; }
-        .tag { background: #eee; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-weight: bold; }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem 0;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list a:hover, .nav-list a.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        h3 {
+            color: #3498db;
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background-color: #f0f8ff;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .image-placeholder {
+            background-color: #f0f0f0;
+            border: 1px dashed #ccc;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .step-box {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .step-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 0 0 auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <nav class="sidebar">
-        <h2>JsSpim Guide</h2>
-        <ul>
-            <li><a href="#intro" class="active">1. Giới thiệu chung</a></li>
-            <li><a href="#interface">2. Giao diện JsSpim</a></li>
-            <li><a href="#regs">2.1. Thanh ghi (Regs)</a></li>
-            <li><a href="#text-segment">2.2. Phân đoạn lệnh</a></li>
-            <li><a href="#data-segment">2.3. Phân đoạn dữ liệu</a></li>
-            <li><a href="#output-log">2.4. Output & Log</a></li>
-            <li><a href="#stack">2.5. Ngăn xếp (Stack)</a></li>
-            <li><a href="#steps">3. Các bước sử dụng</a></li>
-            <li><a href="#advanced">4. Thực hành nâng cao</a></li>
-        </ul>
-    </nav>
-
-    <main class="main-content">
-        <section id="intro">
-            <h1>GIỚI THIỆU VỀ JsSpim</h1>
-            <p><strong>JsSpim</strong> là một phiên bản mô phỏng (emulator) của kiến trúc bộ lệnh <strong>MIPS</strong> (Microprocessor without Interlocked Pipeline Stages), được viết bằng JavaScript và chạy trực tiếp trên trình duyệt web[cite: 2].</p>
-            <div class="info-box">
-                <p>Nó là công cụ mô phỏng chính cho các bài thực hành lập trình Assembly MIPS, giúp trực quan hóa việc thực thi mã nguồn và quản lý tài nguyên hệ thống[cite: 3, 7].</p>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Hướng dẫn sử dụng JsSpim</h1>
+                <p class="subtitle">Mô phỏng hợp ngữ MIPS trong trình duyệt web</p>
             </div>
-            <h3>Vai trò trong môn Kiến trúc Máy tính:</h3>
-            <ul>
-                <li><strong>Học tập Lập trình:</strong> Môi trường để viết, dịch, và chạy mã Assembly MIPS RISC[cite: 5, 6].</li>
-                <li><strong>Trực quan hóa:</strong> Quan sát sự thay đổi của Thanh ghi (Registers) và Bộ nhớ (Memory) theo từng bước[cite: 7].</li>
-                <li><strong>Thực hành Syscall:</strong> Hiểu cách chương trình giao tiếp với hệ điều hành để thực hiện nhập/xuất (I/O)[cite: 8].</li>
-                <li><strong>Quản lý Stack:</strong> Mô phỏng cơ chế ngăn xếp để gọi hàm và lưu trữ biến cục bộ[cite: 9].</li>
-            </ul>
-        </section>
+        </header>
 
-        <section id="interface">
-            <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
-            <p>Truy cập thông qua Cổng thông tin: <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" target="_blank">Hoaminh GitHub Lab</a>[cite: 12].</p>
-            
-            <h3>Giao diện JsSpim</h3>
-            <p>Giao diện gồm 6 vùng chức năng chính giúp kiểm soát việc thực thi chương trình[cite: 15]:</p>
-            
-            <div id="regs">
-                <h4>1. Regs – Thanh ghi (Registers Window)</h4>
-                <ul>
-                    <li><strong>Chức năng:</strong> Hiển thị tất cả thanh ghi CPU MIPS bao gồm GPRs ($t0-$t9, $s0-$s7,...) và thanh ghi đặc biệt (PC, HI, LO)[cite: 17, 18, 19].</li>
-                    <li><strong>Cách dùng:</strong> Giá trị cập nhật tự động khi chạy. Di chuột để xem giá trị ở dạng thập phân hoặc hexa[cite: 20, 25].</li>
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <h2>Mục lục</h2>
+                <ul class="nav-list">
+                    <li><a href="#introduction" class="active">Giới thiệu JsSpim</a></li>
+                    <li><a href="#registers">Regs - Thanh ghi</a></li>
+                    <li><a href="#text-segment">Text Segment</a></li>
+                    <li><a href="#data-segment">Data Segment</a></li>
+                    <li><a href="#output">Output - Kết quả</a></li>
+                    <li><a href="#log">Log - Nhật ký</a></li>
+                    <li><a href="#user-stack">User Stack</a></li>
+                    <li><a href="#basic-steps">Các bước cơ bản</a></li>
+                    <li><a href="#advanced">Bài thực hành nâng cao</a></li>
                 </ul>
-            </div>
+            </aside>
 
-            <div id="text-segment">
-                <h4>2. Text Segment – Phân đoạn lệnh</h4>
-                <ul>
-                    <li>Hiển thị mã máy (Assembly) đã nạp. Dòng lệnh đang chạy sẽ được <strong>tô sáng màu vàng</strong> theo Program Counter (PC)[cite: 29, 32, 33].</li>
-                    <li>Có thể click vào dòng lệnh để đặt <strong>breakpoint</strong>[cite: 34].</li>
-                </ul>
-                <p><em>Hỗ trợ tệp tin:</em></p>
-                <ul>
-                    <li><span class="tag">Please choose...</span>: Chọn các file mẫu có sẵn như test_core.s, fibonacci.s[cite: 41, 42].</li>
-                    <li><span class="tag">Upload your own</span> / <span class="tag">Browse</span>: Tải tệp .s hoặc .asm từ máy tính cá nhân[cite: 46, 51].</li>
-                </ul>
-            </div>
+            <main class="main-content">
+                <section id="introduction">
+                    <h2>GIỚI THIỆU VỀ JsSpim</h2>
+                    <p><strong>JsSpim</strong> là một phiên bản mô phỏng (emulator) của kiến trúc bộ lệnh <strong>MIPS (Microprocessor without Interlocked Pipeline Stages)</strong>, được viết bằng JavaScript và chạy trực tiếp trên trình duyệt web. Nó là công cụ mô phỏng chính cho các bài thực hành lập trình Assembly MIPS.</p>
+                    
+                    <div class="info-box">
+                        <h3>Vai trò trong môn Kiến trúc Máy tính:</h3>
+                        <ul>
+                            <li><strong>Học tập Lập trình MIPS Assembly:</strong> Cung cấp môi trường để sinh viên viết, dịch, và chạy mã Assembly MIPS. MIPS Assembly là một ngôn ngữ Assembly <strong>RISC (Reduced Instruction Set Computer)</strong> kinh điển, đơn giản, rất phù hợp để học các nguyên tắc cơ bản của kiến trúc máy tính.</li>
+                            <li><strong>Trực quan hóa Thực thi:</strong> Cho phép sinh viên chạy mã theo từng bước (<strong>step-by-step</strong>), quan sát sự thay đổi của <strong>Thanh ghi (Registers)</strong> và <strong>Bộ nhớ (Memory)</strong>.</li>
+                            <li><strong>Bài thực hành Syscall:</strong> Giúp sinh viên hiểu cách chương trình Assembly giao tiếp với hệ điều hành thông qua các lệnh <strong>Syscall</strong> để thực hiện các thao tác nhập/xuất cơ bản (I/O) như in chuỗi, in số, nhập số.</li>
+                            <li><strong>Quản lý Stack:</strong> Mô phỏng chính xác cơ chế quản lý ngăn xếp (<strong>Stack Frame</strong>) để thực hiện lời gọi hàm, lưu trữ biến cục bộ và địa chỉ trả về ($ra), là kiến thức nền tảng về tổ chức chương trình.</li>
+                        </ul>
+                    </div>
+                </section>
 
-            <div id="data-segment">
-                <h4>3. Data Segment – Phân đoạn dữ liệu</h4>
-                <p>Hiển thị vùng nhớ dữ liệu (.data). Cập nhật giá trị khi thực hiện các lệnh <span class="tag">lw</span>, <span class="tag">sw</span>, <span class="tag">lb</span>, <span class="tag">sb</span>[cite: 58, 62].</p>
-            </div>
+                <section id="registers">
+                    <h2>Regs - Thanh ghi (Registers Window)</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <p>Hiển thị <strong>tất cả các thanh ghi của CPU MIPS</strong>, bao gồm:</p>
+                    <ul>
+                        <li>General Purpose Registers (GPRs): $zero, $at, $v0--$v1, $a0--$a3, $t0--$t9, $s0--$s7, $k0--$k1, $gp, $sp, $fp, $ra.</li>
+                        <li>Special Registers: HI, LO, PC (Program Counter).</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <p>Khi <strong>chạy chương trình (Run / Step)</strong>, giá trị của các thanh ghi sẽ <strong>tự động cập nhật</strong> sau mỗi lệnh.</p>
+                    
+                    <div class="info-box">
+                        <p>Sinh viên có thể <strong>theo dõi biến thiên giá trị</strong> của thanh ghi khi:</p>
+                        <ul>
+                            <li>Thực hiện phép toán (add, sub, mul, ...).</li>
+                            <li>Truy cập bộ nhớ (lw, sw).</li>
+                            <li>Gọi hàm (jal, jr).</li>
+                        </ul>
+                        <p><strong>Gợi ý:</strong> Quan sát $t0--$t7 trong quá trình chạy vòng lặp hoặc $a0--$a3 khi sử dụng syscall nhập/xuất.</p>
+                    </div>
+                </section>
 
-            <div id="output-log">
-                <h4>4. Output & Log</h4>
-                <ul>
-                    <li><strong>Output:</strong> Hiển thị kết quả của lệnh <span class="tag">syscall</span> (in số, in chuỗi)[cite: 70].</li>
-                    <li><strong>Log:</strong> Nhật ký chi tiết thứ tự lệnh và các thông báo lỗi (như lỗi canh lề bộ nhớ)[cite: 83, 86, 91].</li>
-                </ul>
-            </div>
+                <section id="text-segment">
+                    <h2>Text Segment - Phân đoạn lệnh</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <ul>
+                        <li>Hiển thị mã máy MIPS (Assembly) đã được nạp từ chương trình nguồn (.text).</li>
+                        <li>Mỗi dòng chứa địa chỉ lệnh, mã nhị phân (hex) và lệnh Assembly tương ứng.</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <ul>
+                        <li>Khi ấn Run hoặc Step, JsSpim sẽ tô sáng dòng lệnh đang được thực thi.</li>
+                        <li>Dòng tô sáng theo dõi Program Counter (PC) — giúp hiểu thứ tự lệnh.</li>
+                        <li>Có thể click vào dòng để đặt breakpoint (dừng chạy tại đó).</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>Gợi ý:</strong> Dùng vùng này để kiểm tra thứ tự thực thi, đặc biệt khi có nhảy (j, beq, bne, jal).</p>
+                    </div>
+                    
+                    <h3>Hỗ trợ tải và chọn tệp MIPS Assembly trong JsSpim</h3>
+                    
+                    <div class="image-placeholder">
+                        <p>Hình 5.2: Phía trên của vùng Text Segment</p>
+                    </div>
+                    
+                    <h4>1. "Please choose a MIPS assembly file:"</h4>
+                    <p>Đây là hộp chọn (dropdown menu) cho phép người dùng chọn chương trình mẫu (.s) có sẵn trong trình mô phỏng.</p>
+                    <div class="info-box">
+                        <p><strong>Ví dụ:</strong> Chọn test_core.s → phần soạn thảo hiển thị mã chương trình cơ bản của CPU MIPS để kiểm tra các thanh ghi $t0--$t7.</p>
+                    </div>
+                    
+                    <h4>2. "upload your own"</h4>
+                    <p>Tùy chọn này cho phép người dùng <strong>tải lên tệp mã hợp ngữ của riêng mình</strong> từ máy tính.</p>
+                    <div class="info-box">
+                        <p><strong>Ứng dụng thực tế:</strong> Sinh viên có thể soạn bài thực hành bằng <strong>Notepad++</strong> hoặc <strong>VS Code</strong>, lưu thành tập tin .s (ví dụ: baitap1.s), sau đó dùng <strong>upload your own</strong> để nạp vào JsSpim.</p>
+                    </div>
+                    
+                    <h4>3. "Browse"</h4>
+                    <p>Nút <strong>"Browse"</strong> mở <strong>hộp thoại chọn tệp từ máy tính</strong>.</p>
+                    <div class="info-box">
+                        <p><strong>Lưu ý:</strong></p>
+                        <ul>
+                            <li>Nếu tệp có lỗi cú pháp, JsSpim sẽ hiển thị thông báo trong vùng <strong>Log</strong>.</li>
+                            <li>Sau khi tải lên, nên nhấn <strong>Reset</strong> trước khi <strong>Run</strong> để mô phỏng chạy từ đầu.</li>
+                        </ul>
+                    </div>
+                </section>
 
-            <div id="stack">
-                <h4>5. User Stack – Ngăn xếp người dùng</h4>
-                <p>Mô phỏng vùng nhớ Stack bắt đầu từ địa chỉ cao <span class="tag">0x7ffffffc</span> và giảm dần. Dùng để lưu trữ địa chỉ trả về ($ra) và biến cục bộ khi gọi hàm[cite: 93, 98, 99].</p>
-            </div>
-        </section>
+                <section id="data-segment">
+                    <h2>Data Segment - Phân đoạn dữ liệu</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <p>Hiển thị vùng nhớ dữ liệu tương ứng với phần .data trong chương trình:</p>
+                    <ul>
+                        <li>Các biến kiểu word, byte, asciiz (chuỗi ký tự) được khai báo.</li>
+                        <li>Địa chỉ (address), giá trị nhị phân/hex và nội dung ASCII.</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <ul>
+                        <li>Khi lệnh lw, sw, la, lb, sb được thực thi → vùng này sẽ cập nhật giá trị.</li>
+                        <li>Có thể quan sát giá trị mảng, biến hoặc chuỗi thay đổi khi ghi vào bộ nhớ.</li>
+                        <li>Rất hữu ích để kiểm tra lỗi truy xuất sai địa chỉ (load/store error).</li>
+                    </ul>
+                    
+                    <div class="code-block">
+# Ví dụ khai báo dữ liệu
+.data
+num: .word 10
+str: .asciiz "Hello, MIPS!"
+arr: .word 1, 2, 3, 4, 5
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>Gợi ý:</strong> Theo dõi biến trong .data như:</p>
+                        <div class="code-block">
+.data
+num: .word 10
+                        </div>
+                        <p>Sau khi chạy <code>sw $t0, num</code>, kiểm tra giá trị tại địa chỉ của num.</p>
+                    </div>
+                </section>
 
-        <section id="steps">
-            <h2>CÁC BƯỚC CƠ BẢN ĐỂ SỬ DỤNG</h2>
-            
-            <div class="step-box">
-                <strong>Bước 1: Nhập mã hợp ngữ</strong>
-                <p>Gõ trực tiếp hoặc dán mã vào khung soạn thảo bên trái. Đảm bảo đúng cú pháp MIPS[cite: 110, 112].</p>
-                <div class="code-block">
-                    addi $t0, $zero, 5     # Gán $t0 = 5<br>
-                    addi $t1, $zero, 10    # Gán $t1 = 10<br>
-                    add  $t2, $t0, $t1     # $t2 = $t0 + $t1
-                </div>
-            </div>
+                <section id="output">
+                    <h2>Output - Kết quả xuất ra màn hình</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <p>Hiển thị <strong>kết quả của các lệnh syscall in ra màn hình</strong>, chẳng hạn:</p>
+                    <ul>
+                        <li>syscall 1 — in số nguyên.</li>
+                        <li>syscall 4 — in chuỗi ký tự.</li>
+                        <li>syscall 11 — in ký tự đơn.</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <ul>
+                        <li>Khi chạy chương trình có in chuỗi hoặc nhập dữ liệu → xem kết quả tại đây.</li>
+                        <li>Có thể copy nội dung Output để ghi vào báo cáo.</li>
+                    </ul>
+                    
+                    <div class="code-block">
+# Ví dụ chương trình in chuỗi
+li $v0, 4
+la $a0, msg
+syscall
+                    </div>
+                    
+                    <div class="info-box">
+                        <p>Output sẽ hiển thị nội dung của biến msg trong .data.</p>
+                    </div>
+                </section>
 
-            <div class="step-box">
-                <strong>Bước 2: Thực thi chương trình</strong>
-                <p>Nhấn <strong>Run ▶️</strong> để chạy toàn bộ hoặc <strong>Step</strong> để chạy từng lệnh[cite: 121, 122]. Sử dụng <strong>Speed Slider</strong> để điều chỉnh tốc độ mô phỏng[cite: 137].</p>
-            </div>
+                <section id="log">
+                    <h2>Log - Nhật ký thực thi (Execution Log)</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <p>Hiển thị <strong>toàn bộ quá trình thực thi chi tiết</strong> của chương trình:</p>
+                    <ul>
+                        <li>Thứ tự lệnh, giá trị thanh ghi trước và sau mỗi lệnh.</li>
+                        <li>Các thao tác bộ nhớ (đọc/ghi).</li>
+                        <li>Các cảnh báo hoặc lỗi khi thực thi.</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <ul>
+                        <li>Sử dụng khi cần gỡ lỗi (debug) hoặc theo dõi luồng chương trình phức tạp.</li>
+                        <li>Có thể dùng chức năng Step để kiểm tra từng bước và đọc log tương ứng.</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>Gợi ý:</strong> Nếu chương trình chạy sai hoặc không in kết quả, mở Log để kiểm tra dòng lỗi như:</p>
+                        <p><code>Exception: address not aligned on word boundary</code> → Cho biết có lỗi truy xuất bộ nhớ.</p>
+                    </div>
+                </section>
 
-            <h3>Tóm tắt nội dung cập nhật</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Vùng hiển thị</th>
-                        <th>Nội dung cập nhật</th>
-                        <th>Mục đích</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Regs</td>
-                        <td>Giá trị thanh ghi CPU</td>
-                        <td>Theo dõi biến & phép toán</td>
-                    </tr>
-                    <tr>
-                        <td>Text Segment</td>
-                        <td>Dòng lệnh hiện tại</td>
-                        <td>Xem thứ tự thực thi</td>
-                    </tr>
-                    <tr>
-                        <td>Data Segment</td>
-                        <td>Giá trị biến/mảng</td>
-                        <td>Theo dõi dữ liệu bộ nhớ</td>
-                    </tr>
-                    <tr>
-                        <td>Output</td>
-                        <td>Kết quả syscall</td>
-                        <td>Hiển thị kết quả ra màn hình</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                <section id="user-stack">
+                    <h2>User Stack - Ngăn xếp người dùng</h2>
+                    
+                    <h3>Chức năng:</h3>
+                    <p>Biểu diễn <strong>vùng nhớ stack</strong> trong mô hình bộ nhớ MIPS và dùng để <strong>lưu trữ tạm thời dữ liệu</strong> trong quá trình gọi hàm, như:</p>
+                    <ul>
+                        <li>Địa chỉ trả về (return address — $ra).</li>
+                        <li>Biến cục bộ, tham số hàm, hoặc giá trị trung gian.</li>
+                        <li>Lưu trạng thái khi gọi đệ quy.</li>
+                    </ul>
+                    
+                    <h3>Cách sử dụng:</h3>
+                    <ul>
+                        <li>Stack bắt đầu ở địa chỉ cao (0x7ffffffc) và giảm dần xuống khi có lệnh push hoặc addi $sp, $sp, -4.</li>
+                        <li>Khi thực hiện jal, JsSpim sẽ lưu địa chỉ trả về vào $ra, và khi hàm con kết thúc (jr $ra), giá trị đó được lấy từ stack.</li>
+                        <li>Các thao tác thường gặp:
+                            <ul>
+                                <li>sw $ra, 0($sp) → lưu địa chỉ trả về.</li>
+                                <li>lw $ra, 0($sp) → khôi phục địa chỉ trả về.</li>
+                                <li>addi $sp, $sp, -4 → tạo chỗ trống trên stack.</li>
+                                <li>addi $sp, $sp, 4 → thu hẹp stack sau khi trả về.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>Gợi ý sử dụng:</strong> Khi chạy chương trình có hàm đệ quy như factorial, vùng <strong>User Stack</strong> sẽ hiển thị nhiều khung stack frame, mỗi khung chứa giá trị $ra và biến tạm tương ứng.</p>
+                    </div>
+                </section>
 
-        <section id="advanced">
-            <h2>GỢI Ý THỰC HÀNH NÂNG CAO</h2>
-            <ul>
-                <li>Thử nghiệm các mã <span class="tag">syscall</span> khác nhau (in/đọc số nguyên, chuỗi)[cite: 151].</li>
-                <li>Sử dụng lệnh <span class="tag">jal</span>, <span class="tag">jr</span> để phân tích sự thay đổi trong User Stack[cite: 152].</li>
-                <li>Dùng <strong>Step</strong> để gỡ lỗi các bài toán vòng lặp hoặc đệ quy (như tính factorial)[cite: 153].</li>
-            </ul>
-        </section>
-    </main>
+                <section id="basic-steps">
+                    <h2>Các bước cơ bản để sử dụng</h2>
+                    
+                    <div class="step-box">
+                        <h3><span class="step-number">1</span> Nhập mã hợp ngữ MIPS</h3>
+                        <ol>
+                            <li>Mở trình duyệt và truy cập trang <strong>JsSpim</strong>.</li>
+                            <li>Trong khung soạn thảo (bên trái giao diện), gõ mã lệnh hợp ngữ (Assembly) vào theo đúng cú pháp MIPS.</li>
+                            <li>Mỗi dòng chỉ chứa một lệnh hợp ngữ, được viết đúng định dạng.</li>
+                            <li>Có thể dán trực tiếp nội dung từ file .asm hoặc tự nhập thủ công.</li>
+                        </ol>
+                        
+                        <div class="code-block">
+# Ví dụ chương trình cộng hai số
+addi $t0, $zero, 5   # Gán $t0 = 5
+addi $t1, $zero, 10  # Gán $t1 = 10
+add $t2, $t0, $t1    # $t2 = $t0 + $t1
+                        </div>
+                        
+                        <div class="info-box">
+                            <p><strong>Lưu ý:</strong></p>
+                            <ul>
+                                <li>Không để dòng trống hoặc ký tự lạ trong đoạn mã.</li>
+                                <li>Nên ghi chú (comment) bằng dấu # để dễ theo dõi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3><span class="step-number">2</span> Thực thi chương trình mô phỏng</h3>
+                        <ol>
+                            <li>Nhấn nút <strong>"Run"</strong> ▶️ để chạy toàn bộ chương trình một lần.</li>
+                            <li>Nhấn <strong>"Step"</strong> để thực hiện từng lệnh giúp quan sát quá trình thay đổi chi tiết.</li>
+                            <li>Dòng lệnh đang được thực thi sẽ <strong>tô sáng màu vàng</strong> trong vùng <strong>Text Segment</strong>.</li>
+                            <li>Mỗi lần nhấn "Step", giá trị trong <strong>thanh ghi, bộ nhớ, và stack</strong> sẽ cập nhật ngay lập tức.</li>
+                        </ol>
+                        
+                        <div class="info-box">
+                            <p><strong>Gợi ý:</strong> Dùng <strong>Step-by-Step</strong> trong giai đoạn đầu học để quan sát thay đổi của các thanh ghi $t0--$t7 và $a0--$a3.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3><span class="step-number">3</span> Quan sát kết quả mô phỏng</h3>
+                        <p>Trong khi chương trình đang chạy, JsSpim sẽ cập nhật trực quan các vùng dữ liệu theo thời gian thực.</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Vùng hiển thị</th>
+                                        <th>Nội dung cập nhật</th>
+                                        <th>Mục đích quan sát</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Regs</strong></td>
+                                        <td>Giá trị của các thanh ghi CPU</td>
+                                        <td>Theo dõi biến và phép toán</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Text Segment</strong></td>
+                                        <td>Dòng lệnh hiện tại</td>
+                                        <td>Xem thứ tự thực thi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Data Segment</strong></td>
+                                        <td>Giá trị biến/mảng .data</td>
+                                        <td>Theo dõi dữ liệu bộ nhớ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Output</strong></td>
+                                        <td>Kết quả lệnh syscall</td>
+                                        <td>Hiển thị chuỗi/số in ra</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Log</strong></td>
+                                        <td>Nhật ký chi tiết</td>
+                                        <td>Gỡ lỗi và xem tiến trình</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>User Stack</strong></td>
+                                        <td>Ngăn xếp chương trình</td>
+                                        <td>Quan sát lời gọi hàm và đệ quy</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="code-block">
+# Ví dụ chương trình in số nguyên
+li $v0, 1
+li $a0, 25
+syscall
+                        </div>
+                        
+                        <div class="info-box">
+                            <p>→ Vùng <strong>Output</strong> sẽ hiển thị kết quả: 25</p>
+                            <p><strong>Lưu ý:</strong> Quan sát đồng thời vùng <strong>Regs</strong> và <strong>Output</strong> để hiểu cách dữ liệu di chuyển qua thanh ghi, bộ nhớ, và syscall.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3><span class="step-number">4</span> Điều chỉnh tốc độ mô phỏng</h3>
+                        <ul>
+                            <li>Dùng <strong>thanh trượt tốc độ (Speed Slider)</strong> ở thanh công cụ để điều chỉnh:
+                                <ul>
+                                    <li>Kéo sang phải → chương trình chạy nhanh hơn.</li>
+                                    <li>Kéo sang trái → chạy chậm hơn, giúp quan sát chi tiết từng lệnh.</li>
+                                </ul>
+                            </li>
+                            <li>Khi cần trình chiếu hoặc giảng dạy, nên giảm tốc độ để sinh viên dễ theo dõi.</li>
+                        </ul>
+                        
+                        <div class="info-box">
+                            <p><strong>Ví dụ:</strong> Khi thực hiện lệnh nhảy có điều kiện (beq, bne), giảm tốc độ giúp dễ nhận biết đường đi của lệnh nhảy và giá trị PC.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h3><span class="step-number">5</span> Gỡ lỗi và xuất kết quả</h3>
+                        <ul>
+                            <li>Nếu chương trình dừng đột ngột hoặc không có kết quả, mở vùng <strong>Log</strong> để kiểm tra lỗi.</li>
+                            <li>Một số lỗi thường gặp:
+                                <ul>
+                                    <li><strong>"Address not aligned on word boundary"</strong> → lỗi địa chỉ không chia hết cho 4.</li>
+                                    <li><strong>"Invalid syscall code"</strong> → sử dụng mã syscall không hợp lệ.</li>
+                                </ul>
+                            </li>
+                            <li>Sau khi chương trình chạy thành công, có thể <strong>chụp lại vùng Output</strong> để nộp kèm báo cáo Bài thực hành.</li>
+                        </ul>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Mục tiêu</th>
+                                        <th>Thao tác trên JsSpim</th>
+                                        <th>Kết quả quan sát</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nhập chương trình</td>
+                                        <td>Gõ mã hợp ngữ vào khung soạn thảo</td>
+                                        <td>Mã hiển thị trong Text Segment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thực thi chương trình</td>
+                                        <td>Nhấn "Run" hoặc "Step"</td>
+                                        <td>Cập nhật thanh ghi và bộ nhớ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quan sát dữ liệu</td>
+                                        <td>Mở Regs, Data Segment</td>
+                                        <td>Theo dõi biến và giá trị thanh ghi</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kiểm tra kết quả</td>
+                                        <td>Quan sát vùng Output</td>
+                                        <td>In chuỗi hoặc số ra màn hình</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gỡ lỗi chương trình</td>
+                                        <td>Đọc thông tin trong Log</td>
+                                        <td>Xác định lỗi và vị trí phát sinh</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Điều chỉnh tốc độ</td>
+                                        <td>Dùng thanh trượt Speed</td>
+                                        <td>Kiểm soát tốc độ thực thi</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="advanced">
+                    <h2>Gợi ý Bài thực hành nâng cao</h2>
+                    <ul>
+                        <li>Chạy thử các lệnh <strong>syscall</strong> khác nhau (print_int, print_string, read_int, read_string).</li>
+                        <li>Thực hiện <strong>gọi hàm con</strong> (jal, jr) để quan sát thay đổi trong <strong>User Stack</strong>.</li>
+                        <li>Dùng "Step" để phân tích chi tiết các chương trình tính tổng, tìm max/min, hoặc factorial.</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p>Khi kết hợp cùng các bài mẫu và sơ đồ khối, người học có thể dễ dàng hình dung <strong>hoạt động nội tại của CPU MIPS</strong> một cách trực quan và sinh động.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <p>Hướng dẫn sử dụng JsSpim - Mô phỏng hợp ngữ MIPS</p>
+            <p>© 2023 - Tài liệu hướng dẫn thực hành Kiến trúc Máy tính</p>
+        </footer>
+    </div>
 
     <script>
-        // Script đơn giản để highlight mục menu khi scroll (tùy chọn)
-        window.addEventListener('scroll', () => {
-            let fromTop = window.scrollY + 50;
-            const links = document.querySelectorAll('.sidebar ul li a');
-            
-            links.forEach(link => {
-                let section = document.querySelector(link.hash);
-                if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-                    link.classList.add('active');
-                } else {
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-list a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-list a').forEach(link => {
                     link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to target section
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
-    </script>
-</body>
-</html>
+        
+        // Highlight current section in navigation based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-list a');
+            
+            let currentSectionId = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop &&

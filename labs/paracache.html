@@ -6,7 +6,7 @@
     <title>Bài Thực Hành ParaCache - Hệ Thống Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS đồng bộ với giao diện Guide và MIPS Labs */
+        /* CSS đồng bộ với hệ thống Lab */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
@@ -57,14 +57,13 @@
         .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
         .nav-item.active { background: #3498db; }
 
-        /* NỘI DUNG BÀI LAB */
+        /* NỘI DUNG CÁC BÀI LAB */
         .lab-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 30px; border-top: 6px solid #2980b9; }
         h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; font-size: 20px; }
         h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 20px; letter-spacing: 1px; }
         
-        .config-box { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #3498db; }
-        .step-item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ddd; }
-        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; color: #856404; }
+        .box { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db; }
+        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; }
         
         ul, ol { padding-left: 20px; }
         li { margin-bottom: 8px; }
@@ -83,7 +82,7 @@
 
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-microchip"></i> THỰC HÀNH MÔ PHỎNG BỘ NHỚ CACHE</h1>
+            <h1><i class="fas fa-tasks"></i> DANH SÁCH BÀI THỰC HÀNH PARACACHE</h1>
         </div>
 
         <nav class="nav-menu">
@@ -94,217 +93,56 @@
         </nav>
 
         <div class="lab-card">
-            <h2>BÀI 5.1: Truy cập Cache ánh xạ trực tiếp (Direct Mapped)</h2>
-            <p>Mô phỏng quá trình truy xuất dữ liệu từ bộ nhớ chính lên Cache để hiểu cơ chế Tag, Index và Offset.</p>
-            
-            <h3>Thông số cấu hình</h3>
-            <div class="config-box">
-                <ul>
-                    <li><strong>Cache Size:</strong> 64 Bytes</li>
-                    <li><strong>Memory Size:</strong> 512 Bytes</li>
-                    <li><strong>Offset Bits:</strong> 3 (Tương đương 8 Bytes/Block)</li>
-                    <li><strong>Write Policy:</strong> Write Back / Write On Allocate</li>
-                </ul>
+            <h2>BÀI 5.1: Mô phỏng Cache ánh xạ trực tiếp (Direct Mapped)</h2>
+            <div class="box">
+                <strong>Cấu hình:</strong> Cache Size = 64 Bytes, Memory Size = 512 Bytes, Offset Bits = 3.
             </div>
-
-            <h3>Hướng dẫn thực hiện</h3>
-            <div class="step-item">
-                <strong>Bước 1:</strong> Chọn chế độ <code>Direct Mapped Cache</code> trên thanh menu ứng dụng.
-            </div>
-            <div class="step-item">
-                <strong>Bước 2:</strong> Nhấn <code>Reset</code>, nhập các thông số trên và nhấn <code>Submit</code>.
-            </div>
-            <div class="step-item">
-                <strong>Bước 3:</strong> Tại mục Instruction, nhập lần lượt các lệnh:
-                <br><code>LOAD(4)</code>, <code>LOAD(A)</code>, <code>LOAD(2C)</code> (giá trị Hex).
-            </div>
-            <div class="step-item">
-                <strong>Bước 4:</strong> Nhấn <code>Next</code> để quan sát từng giai đoạn chuyển đổi từ địa chỉ Hex sang nhị phân và ánh xạ vào bảng Cache.
-            </div>
-
-            <div class="submit-info">
-                <i class="fas fa-edit"></i> Yêu cầu nộp: 
-                <br>- Ảnh chụp bảng Cache sau khi thực hiện 3 lệnh Load.
-                <br>- Nhận xét về sự thay đổi của Bit hiệu lực (Valid) và Thẻ (Tag).
-            </div>
+            <p>Thực hiện các lệnh <code>LOAD(4)</code>, <code>LOAD(A)</code>, <code>LOAD(2C)</code>. Quan sát cách địa chỉ Hex chuyển sang nhị phân và phân bổ vào Tag, Index, Offset.</p>
+            <div class="submit-info">Yêu cầu: Ảnh chụp kết quả sau lệnh LOAD(2C) và giải thích sự thay đổi Valid bit.</div>
         </div>
 
         <div class="lab-card">
             <h2>BÀI 5.2: Cache hoàn toàn phối hợp (Fully Associative)</h2>
-            <p>So sánh hiệu năng và cơ chế thay thế khối khi Cache đầy trong cấu trúc phối hợp hoàn toàn.</p>
-            
-            <h3>Nội dung thực hiện</h3>
-            <div class="config-box">
-                <p>Thực hiện tương tự Bài 5.1 nhưng chọn chế độ <code>Fully Associative Cache</code>.</p>
-                <p>Thử nghiệm lần lượt với 2 chiến thuật thay thế:</p>
-                <ul>
-                    <li><strong>FIFO:</strong> First In First Out (Vào trước ra trước).</li>
-                    <li><strong>LRU:</strong> Least Recently Used (Khối lâu nhất không dùng).</li>
-                </ul>
-            </div>
+            <p>Thực hiện tương tự Bài 5.1 nhưng chọn chế độ Fully Associative. Thử nghiệm với các chiến thuật thay thế khối: <strong>FIFO</strong> và <strong>LRU</strong>.</p>
+            <div class="submit-info">Yêu cầu: So sánh số lần Hit/Miss của FIFO và LRU sau 10 lệnh truy xuất ngẫu nhiên.</div>
+        </div>
 
-            <div class="submit-info">
-                <i class="fas fa-edit"></i> Yêu cầu nộp: 
-                <br>- So sánh kết quả số lần Hit/Miss giữa 2 chiến thuật thay thế.
-                <br>- Giải thích tại sao một khối bị loại bỏ khỏi Cache trong mỗi trường hợp.
+        <div class="lab-card">
+            <h2>BÀI 5.3: Cache phối hợp theo tập hợp 2 chiều (2-Way Set)</h2>
+            <p>Cấu hình Cache phối hợp theo tập 2 chiều. Quan sát cách một địa chỉ có thể được đặt vào một trong hai vị trí trong tập (Set) tương ứng.</p>
+            <div class="submit-info">Yêu cầu: Ảnh chụp bảng Cache và chỉ rõ vị trí các Set.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 5.4: Cache phối hợp theo tập hợp 4 chiều (4-Way Set)</h2>
+            <p>Mở rộng mô phỏng lên 4-Way Set Associative. Phân tích lợi ích của việc tăng số "Way" đối với tỉ lệ Miss do tranh chấp (Conflict Miss).</p>
+            <div class="submit-info">Yêu cầu: Nhận xét về độ phức tạp của việc tìm kiếm Tag khi số Way tăng lên.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 5.5: Phân tích hiệu suất các loại Cache</h2>
+            <p>Sử dụng chế độ <strong>Cache Type Analysis</strong> để chạy cùng một chuỗi lệnh trên nhiều loại cấu hình Cache khác nhau cùng một lúc.</p>
+            <div class="submit-info">Yêu cầu: Lập bảng so sánh Hit Rate của 4 loại: Direct, Fully, 2-Way, 4-Way.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 5.6: Mô phỏng Bộ nhớ ảo (Virtual Memory)</h2>
+            <div class="box">
+                <strong>Cấu hình:</strong> Physical Pages = 128, Page Size = 4, Virtual Pages = 2048.
             </div>
+            <p>Sử dụng <code>Gen. Random</code> để tạo 10 lệnh. Quan sát quá trình ánh xạ từ Virtual Address sang Physical Address thông qua <strong>TLB</strong> và <strong>Page Table</strong>.</p>
+            
+            <div class="submit-info">Yêu cầu: Giải thích hiện tượng Page Fault nếu xảy ra trong quá trình mô phỏng.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 5.7: Tính toán AMAT (Average Memory Access Time)</h2>
+            <p>Dựa trên kết quả thống kê (Statistics) sau khi chạy 20 lệnh, hãy tính thời gian truy cập bộ nhớ trung bình dựa trên tỉ lệ Hit/Miss và độ trễ (Latency) thiết lập.</p>
+            <div class="submit-info">Yêu cầu: Trình bày công thức và kết quả tính toán AMAT cụ thể.</div>
         </div>
 
         <footer>
             <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
-        </footer>
-    </div>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng Dẫn ParaCache - Hệ Thống Lab</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CSS đồng bộ hoàn toàn với giao diện MIPS Guide */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-        /* THANH TIỆN ÍCH TRÊN CÙNG (Nút về trang chủ riêng biệt) */
-        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
-        .btn-home { 
-            text-decoration: none; 
-            color: #d35400; 
-            font-weight: bold; 
-            font-size: 14px; 
-            border: 2px solid #d35400; 
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            transition: 0.3s;
-        }
-        .btn-home:hover { background: #d35400; color: #fff; }
-
-        /* HEADER */
-        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
-        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
-        .nav-menu { 
-            background: #000080; 
-            display: flex; 
-            justify-content: center; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .nav-item { 
-            flex: 1; 
-            text-align: center; 
-            text-decoration: none; 
-            color: #ffffff !important; 
-            padding: 18px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            font-size: 15px;
-        }
-        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
-        .nav-item.active { background: #3498db; }
-
-        /* NỘI DUNG */
-        .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 5px solid #3498db; }
-        h2 { color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 20px; }
-        h3 { color: #16a085; margin: 20px 0 10px; font-size: 18px; }
-        
-        .step-item { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3498db; }
-        .step-num { background: #3498db; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
-        
-        .info-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
-        .tag { background: #eee; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; color: #555; margin-right: 5px; }
-
-        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
-        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="top-nav">
-        <div class="container">
-            <a href="../index.html" class="btn-home"><i class="fas fa-arrow-left"></i> VỀ TRANG CHỦ</a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-memory"></i> Giới Thiệu Về ParaCache</h1>
-        </div>
-
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active"><i class="fas fa-book-open"></i> Hướng dẫn</a>
-            <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank" class="nav-item">
-                <i class="fas fa-external-link-alt"></i> Vào trình
-            </a>
-        </nav>
-
-        <div class="card">
-            <h2><i class="fas fa-info-circle"></i> ParaCache là gì?</h2>
-            <p><strong>ParaCache</strong> là một ứng dụng mô phỏng trực quan hoạt động của bộ nhớ đệm (Cache Memory). Công cụ này giúp người học hiểu rõ cách dữ liệu được nạp, truy xuất và thay thế trong Cache thông qua các thông số cấu hình thực tế.</p>
-            <div class="info-box">
-                <i class="fas fa-link"></i> <strong>Đường dẫn truy cập:</strong> <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank">Mở ParaCache Simulator</a>.
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-cogs"></i> Các thông số cấu hình chính</h2>
-            <p>Để bắt đầu mô phỏng, bạn cần thiết lập các thông số cơ bản sau:</p>
-            <div class="step-item">
-                <h3>Cache Size & Block Size</h3>
-                <p>Xác định tổng dung lượng bộ nhớ đệm và kích thước của mỗi khối dữ liệu (Block). Kích thước Block ảnh hưởng trực tiếp đến tính địa phương của dữ liệu.</p>
-            </div>
-            <div class="step-item">
-                <h3>Associativity (Tính kết hiệp)</h3>
-                <p>Lựa chọn kiểu tổ chức Cache:</p>
-                <ul>
-                    <li><strong>Direct Mapped:</strong> Mỗi khối nhớ chính chỉ có 1 vị trí cố định trong Cache.</li>
-                    <li><strong>Fully Associative:</strong> Khối nhớ có thể nằm ở bất kỳ đâu.</li>
-                    <li><strong>N-way Set Associative:</strong> Kết hợp cả hai phương thức trên.</li>
-                </ul>
-            </div>
-            <div class="step-item">
-                <h3>Replacement Policy (Chính sách thay thế)</h3>
-                <p>Xác định khối nào sẽ bị loại bỏ khi Cache đầy, ví dụ: <strong>LRU</strong> (Least Recently Used) hoặc <strong>Random</strong>.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-play"></i> Quy trình mô phỏng</h2>
-            <div class="step-item">
-                <span class="step-num">1</span> <strong>Thiết lập:</strong> Chọn các thông số phần cứng tại bảng cấu hình bên trái.
-            </div>
-            <div class="step-item">
-                <span class="step-num">2</span> <strong>Truy xuất:</strong> Nhập địa chỉ bộ nhớ (Address) và thực hiện thao tác Đọc (Read) hoặc Ghi (Write).
-            </div>
-            <div class="step-item">
-                <span class="step-num">3</span> <strong>Quan sát:</strong> Xem luồng dữ liệu di chuyển và trạng thái thay đổi của các thẻ (Tags), dữ liệu trong bảng Cache.
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-chart-line"></i> Phân tích kết quả</h2>
-            <p>Sau mỗi thao tác, hệ thống sẽ thống kê:</p>
-            <ul>
-                <li><strong>Hit:</strong> Dữ liệu có sẵn trong Cache.</li>
-                <li><strong>Miss:</strong> Dữ liệu không có trong Cache, phải nạp từ bộ nhớ chính.</li>
-                <li><strong>Miss Rate:</strong> Tỷ lệ lỗi truy xuất, mục tiêu là tối thiểu hóa thông số này.</li>
-            </ul>
-        </div>
-
-        <footer>
-            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Phát triển bởi nhóm nghiên cứu C24.67</p>
         </footer>
     </div>
 

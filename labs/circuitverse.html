@@ -14,8 +14,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e6e6e6;
+            background: #ffffff;
+            color: #333333;
             line-height: 1.6;
             min-height: 100vh;
         }
@@ -30,37 +30,35 @@
         .header {
             text-align: center;
             padding: 30px 0;
-            border-bottom: 2px solid #0ea5e9;
+            border-bottom: 3px solid #00a8cc;
             margin-bottom: 40px;
-            background: rgba(0, 0, 0, 0.3);
+            background: #f8f9fa;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 168, 204, 0.1);
         }
 
         .header h1 {
-            color: #0ea5e9;
+            color: #00a8cc;
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .header p {
-            color: #94a3b8;
+            color: #666;
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        /* Main Navigation Menu */
+        /* Main Navigation Menu - MÀU XANH LƠ ĐẬM */
         .main-nav {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
-            background: rgba(15, 23, 42, 0.8);
+            background: #00a8cc;
             border-radius: 15px;
             padding: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(14, 165, 233, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 168, 204, 0.3);
         }
 
         .nav-tabs {
@@ -73,10 +71,10 @@
 
         .nav-tab {
             padding: 14px 28px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.15);
             border: none;
             border-radius: 10px;
-            color: #e2e8f0;
+            color: #fffacd; /* Vàng nhạt */
             font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
@@ -96,53 +94,18 @@
             font-size: 1.2rem;
         }
 
-        /* Màu sắc cho các tab */
-        .nav-tab.lab {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.05) 100%);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-        }
-
-        .nav-tab.lab:hover {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0.15) 100%);
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: #fff;
         }
 
-        .nav-tab.lab.active {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
-        }
-
-        .nav-tab.practice {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-        }
-
-        .nav-tab.practice:hover {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0.15) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
-        }
-
-        .nav-tab.practice.active {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-        }
-
-        .nav-tab.home {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .nav-tab.home:hover {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.15) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-        }
-
-        .nav-tab.home.active {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        .nav-tab.active {
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
         }
 
         /* Sub Navigation */
@@ -153,16 +116,17 @@
             gap: 8px;
             flex-wrap: wrap;
             padding: 15px;
-            background: rgba(15, 23, 42, 0.6);
+            background: #f8f9fa;
             border-radius: 12px;
+            border: 2px solid #00a8cc;
         }
 
         .sub-tab {
             padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            background: white;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            color: #cbd5e1;
+            color: #666;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
@@ -175,14 +139,15 @@
         }
 
         .sub-tab:hover {
-            background: rgba(14, 165, 233, 0.1);
-            border-color: rgba(14, 165, 233, 0.3);
+            background: #e6f7ff;
+            border-color: #00a8cc;
+            color: #00a8cc;
         }
 
         .sub-tab.active {
-            background: rgba(14, 165, 233, 0.2);
-            border-color: #0ea5e9;
-            color: #0ea5e9;
+            background: #00a8cc;
+            border-color: #00a8cc;
+            color: white;
             font-weight: 600;
         }
 
@@ -203,12 +168,12 @@
 
         /* Lab Sections */
         .lab-section {
-            background: rgba(30, 41, 59, 0.8);
+            background: #f8f9fa;
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border-left: 5px solid #0ea5e9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #00a8cc;
         }
 
         .lab-header {
@@ -216,11 +181,11 @@
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+            border-bottom: 2px solid #e9ecef;
         }
 
         .lab-icon {
-            background: #0ea5e9;
+            background: #00a8cc;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -230,6 +195,7 @@
             margin-right: 20px;
             font-size: 1.8rem;
             flex-shrink: 0;
+            color: white;
         }
 
         .lab-title-container {
@@ -238,19 +204,19 @@
 
         .lab-title {
             font-size: 2rem;
-            color: #0ea5e9;
+            color: #00a8cc;
             margin-bottom: 5px;
         }
 
         .lab-subtitle {
-            color: #94a3b8;
+            color: #666;
             font-size: 1.1rem;
         }
 
         .difficulty {
             display: inline-block;
-            background: rgba(245, 158, 11, 0.2);
-            color: #f59e0b;
+            background: #fff3cd;
+            color: #e6a700;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -266,40 +232,41 @@
         .content-section {
             margin-bottom: 30px;
             padding: 25px;
-            background: rgba(15, 23, 42, 0.5);
+            background: white;
             border-radius: 12px;
             border-left: 4px solid;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .content-section.objective {
-            border-left-color: #10b981;
+            border-left-color: #28a745;
         }
 
         .content-section.tools {
-            border-left-color: #f59e0b;
+            border-left-color: #ffc107;
         }
 
         .content-section.instructions {
-            border-left-color: #8b5cf6;
+            border-left-color: #17a2b8;
         }
 
         .content-section.requirements {
-            border-left-color: #ef4444;
+            border-left-color: #dc3545;
         }
 
         .content-section.questions {
-            border-left-color: #0ea5e9;
+            border-left-color: #00a8cc;
         }
 
         .content-title {
-            color: #fff;
+            color: #333;
             font-size: 1.4rem;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
             padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid #e9ecef;
         }
 
         .content-title i {
@@ -314,31 +281,27 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            color: white;
         }
 
         .objective .content-title .section-icon {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            background: #28a745;
         }
 
         .tools .content-title .section-icon {
-            background: rgba(245, 158, 11, 0.2);
-            color: #f59e0b;
+            background: #ffc107;
         }
 
         .instructions .content-title .section-icon {
-            background: rgba(139, 92, 246, 0.2);
-            color: #8b5cf6;
+            background: #17a2b8;
         }
 
         .requirements .content-title .section-icon {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            background: #dc3545;
         }
 
         .questions .content-title .section-icon {
-            background: rgba(14, 165, 233, 0.2);
-            color: #0ea5e9;
+            background: #00a8cc;
         }
 
         .lab-content ul, .lab-content ol {
@@ -348,27 +311,27 @@
 
         .lab-content li {
             margin-bottom: 12px;
-            color: #cbd5e1;
+            color: #444;
             line-height: 1.7;
             padding-left: 5px;
         }
 
         .lab-content p {
             margin-bottom: 15px;
-            color: #cbd5e1;
+            color: #444;
             line-height: 1.7;
         }
 
         .important-note {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 4px solid #f59e0b;
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
             padding: 15px 20px;
             margin: 20px 0;
             border-radius: 8px;
         }
 
         .important-note i {
-            color: #f59e0b;
+            color: #e6a700;
             margin-right: 10px;
         }
 
@@ -377,44 +340,45 @@
             overflow-x: auto;
             margin: 20px 0;
             border-radius: 10px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid #e9ecef;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(15, 23, 42, 0.7);
+            background: white;
         }
 
         th {
-            background: rgba(14, 165, 233, 0.3);
+            background: #00a8cc;
             color: white;
             padding: 16px;
             text-align: left;
             font-weight: 600;
-            border-bottom: 2px solid #0ea5e9;
+            border-bottom: 2px solid #0097b7;
         }
 
         td {
             padding: 14px 16px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-            color: #cbd5e1;
+            border-bottom: 1px solid #e9ecef;
+            color: #444;
         }
 
         tr:hover {
-            background: rgba(14, 165, 233, 0.05);
+            background: #f8f9fa;
         }
 
         /* Circuit Frames */
         .circuit-frame {
             width: 100%;
             height: 600px;
-            border: 2px solid #0ea5e9;
+            border: 2px solid #00a8cc;
             border-radius: 12px;
             margin: 25px 0;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            background: #000;
+            box-shadow: 0 4px 12px rgba(0, 168, 204, 0.15);
+            background: #f8f9fa;
         }
 
         /* Practice Content */
@@ -424,21 +388,39 @@
         }
 
         .simulator-container {
-            background: rgba(30, 41, 59, 0.8);
+            background: white;
             border-radius: 15px;
             padding: 30px;
             margin-top: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid #00a8cc;
         }
 
         .simulator-frame {
             width: 100%;
             height: 700px;
-            border: 2px solid #8b5cf6;
+            border: 2px solid #00a8cc;
             border-radius: 12px;
             margin: 20px 0;
             overflow: hidden;
-            background: #000;
+            background: #f8f9fa;
+        }
+
+        /* Links */
+        a:not(.nav-tab):not(.sub-tab) {
+            color: #00a8cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:not(.nav-tab):not(.sub-tab):hover {
+            color: #007b9a;
+            text-decoration: underline;
+        }
+
+        /* Strong text */
+        strong {
+            color: #00a8cc;
         }
 
         /* Footer */
@@ -446,19 +428,19 @@
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
-            border-top: 1px solid rgba(148, 163, 184, 0.2);
-            color: #94a3b8;
+            border-top: 2px solid #e9ecef;
+            color: #666;
             font-size: 0.9rem;
         }
 
         .footer a {
-            color: #0ea5e9;
+            color: #00a8cc;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            color: #38bdf8;
+            color: #007b9a;
             text-decoration: underline;
         }
 
@@ -545,17 +527,17 @@
             <p>Phòng thí nghiệm Kiến trúc Máy tính - Mô phỏng và thiết kế mạch số</p>
         </header>
 
-        <!-- Main Navigation Menu -->
+        <!-- Main Navigation Menu - MÀU XANH LƠ ĐẬM -->
         <nav class="main-nav">
             <div class="nav-tabs">
-                <a href="#" class="nav-tab lab active" data-tab="labs">
+                <a href="../guide/circuitverse.html" class="nav-tab">
+                    <i class="fas fa-book"></i> HƯỚNG DẪN
+                </a>
+                <a href="#" class="nav-tab active" data-tab="labs">
                     <i class="fas fa-flask"></i> BÀI THỰC HÀNH
                 </a>
-                <a href="#" class="nav-tab practice" data-tab="simulator">
+                <a href="#" class="nav-tab" data-tab="simulator">
                     <i class="fas fa-play-circle"></i> VÀO TRÌNH MÔ PHỎNG
-                </a>
-                <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="nav-tab home" target="_blank">
-                    <i class="fas fa-home"></i> VỀ TRANG CHỦ
                 </a>
             </div>
         </nav>
@@ -1265,8 +1247,8 @@
                         </iframe>
                     </div>
                     
-                    <div style="margin-top: 20px; color: #94a3b8; font-size: 0.9rem;">
-                        <p><i class="fas fa-lightbulb"></i> <strong>Mẹo:</strong> Sử dụng trình mô phỏng này để hoàn thành các bài thực hành và thử nghiệm ý tưởng mới.</p>
+                    <div style="margin-top: 20px; color: #666; font-size: 0.9rem;">
+                        <p><i class="fas fa-lightbulb" style="color: #00a8cc;"></i> <strong>Mẹo:</strong> Sử dụng trình mô phỏng này để hoàn thành các bài thực hành và thử nghiệm ý tưởng mới.</p>
                     </div>
                 </div>
             </div>
@@ -1285,7 +1267,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const mainTabs = document.querySelectorAll('.nav-tab');
+            const mainTabs = document.querySelectorAll('.nav-tab[data-tab]');
             const subTabs = document.querySelectorAll('.sub-tab');
             const contents = document.querySelectorAll('.content');
             const labsSubnav = document.getElementById('labs-subnav');
@@ -1354,7 +1336,7 @@
             });
             
             labsSubnav.style.display = 'flex';
-            console.log("CircuitVerse Lab Page với đầy đủ nội dung đã sẵn sàng!");
+            console.log("CircuitVerse Labs Page với màu sắc mới đã sẵn sàng!");
         });
     </script>
 </body>

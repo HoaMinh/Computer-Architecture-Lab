@@ -38,18 +38,25 @@
             margin-top: 0;
             color: #003366;
         }
+        
+        /* BUTTON GROUP - OPTION 1: Chữ trắng, hover vàng */
         .button-group a {
             display: inline-block;
             padding: 8px 14px;
             margin: 5px 8px 0 0;
             text-decoration: none;
             background: #003366;
-            color: white;
+            color: white !important;  /* CHỮ TRẮNG */
             border-radius: 6px;
+            font-weight: bold;  /* CHỮ ĐẬM */
+            border: 1px solid rgba(255, 255, 255, 0.2);  /* VIỀN SÁNG */
         }
         .button-group a:hover {
             background: #00509e;
+            color: #ffff00 !important;  /* CHỮ VÀNG KHI HOVER */
+            border-color: rgba(255, 255, 255, 0.5);
         }
+        
         footer {
             text-align: center;
             padding: 15px;
@@ -65,16 +72,17 @@
             transform: translateY(-50%);
             padding: 8px 16px;
             background: #ff9900;
-            color: white;
+            color: #000000 !important;  /* CHỮ ĐEN TRÊN NỀN CAM */
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            border: none;
+            border: 2px solid #ffffff;
             cursor: pointer;
             font-size: 14px;
         }
         .home-btn:hover {
             background: #ff6600;
+            color: #ffffff !important;  /* CHỮ TRẮNG KHI HOVER */
         }
         
         /* Nội dung hướng dẫn */

@@ -2,319 +2,147 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Hướng Dẫn Sử Dụng MIPS Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Compiler Explorer - Hệ Thống Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS giống hệt CircuitVerse */
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            margin: 0;
-            padding: 0;
+        /* CSS đồng bộ hoàn toàn với giao diện Guide */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* THANH TIỆN ÍCH TRÊN CÙNG */
+        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
+        .btn-home { 
+            text-decoration: none; 
+            color: #d35400; 
+            font-weight: bold; 
+            font-size: 14px; 
+            border: 2px solid #d35400; 
+            padding: 6px 18px; 
+            border-radius: 20px; 
+            transition: 0.3s;
         }
-        header {
-            background: #003366;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            position: relative;
+        .btn-home:hover { background: #d35400; color: #fff; }
+
+        /* HEADER */
+        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
+        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
+        .nav-menu { 
+            background: #000080; 
+            display: flex; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        h1 { 
-            margin: 0; 
-            padding: 0 20px;
+        .nav-item { 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none; 
+            color: #ffffff !important; 
+            padding: 18px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            font-size: 15px;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
-        }
-        .tool-card {
-            background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .tool-card h2 {
-            margin-top: 0;
-            color: #003366;
-        }
-        .button-group a {
-            display: inline-block;
-            padding: 8px 14px;
-            margin: 5px 8px 0 0;
-            text-decoration: none;
-            background: #003366;
-            color: white;
-            border-radius: 6px;
-        }
-        .button-group a:hover {
-            background: #00509e;
-        }
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #eaeaea;
-            margin-top: 20px;
-        }
+        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
+        .nav-item.active { background: #3498db; }
+
+        /* NỘI DUNG */
+        .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 5px solid #3498db; }
+        h2 { color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 20px; }
+        h3 { color: #16a085; margin: 20px 0 10px; font-size: 18px; }
         
-        /* Nút về trang chủ */
-        .home-btn {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            padding: 8px 16px;
-            background: #ff9900;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .home-btn:hover {
-            background: #ff6600;
-        }
+        .step-item { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3498db; }
+        .step-num { background: #3498db; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
         
-        /* Nội dung hướng dẫn */
-        .guide-content {
-            line-height: 1.6;
-        }
-        
-        .guide-content h2 {
-            color: #003366;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 10px;
-            margin-top: 30px;
-        }
-        
-        .guide-content h3 {
-            color: #00509e;
-            margin-top: 20px;
-        }
-        
-        .guide-content ul, .guide-content ol {
-            margin: 15px 0 15px 20px;
-        }
-        
-        .guide-content li {
-            margin-bottom: 8px;
-        }
-        
-        .guide-content code {
-            background: #f5f5f5;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-        
-        .guide-content pre {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-        }
-        
-        .note-box {
-            background: #e8f4fd;
-            border-left: 4px solid #00509e;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .warning-box {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .step-box {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            border-left: 4px solid #28a745;
-        }
-        
-        .step-number {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 25px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
+        .info-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .tag { background: #e1e8ed; padding: 5px 12px; border-radius: 15px; font-size: 13px; font-weight: 600; color: #4b6584; }
+
+        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
     </style>
 </head>
-
 <body>
 
-<header>
-    <a href="../index.html" class="home-btn">← TRANG CHỦ</a>
-    <h1>Hướng Dẫn Sử Dụng MIPS Visualizer</h1>
-</header>
+    <div class="top-nav">
+        <div class="container">
+            <a href="../index.html" class="btn-home"><i class="fas fa-arrow-left"></i> VỀ TRANG CHỦ</a>
+        </div>
+    </div>
 
-<div class="container">
-    <div class="tool-card">
-        <h2>🔗 Truy cập MIPS Visualizer</h2>
-        <div class="guide-content">
-            <ul>
-                <li>Truy cập trang web: <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">https://aleksa-sukovic.github.io/mips-visualiser/</a></li>
-                <li>Không cần đăng nhập — bạn có thể sử dụng trực tiếp trên trình duyệt.</li>
-            </ul>
-            
-            <div class="button-group" style="margin-top: 15px;">
-                <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">Truy cập MIPS Visualizer</a>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> Giới Thiệu Về Compiler Explorer</h1>
         </div>
-    </div>
-    
-    <div class="tool-card">
-        <h2>🛠️ Các bước cơ bản để sử dụng</h2>
-        <div class="guide-content">
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <strong>Nhập mã hợp ngữ MIPS</strong>
-                <p>Gõ mã MIPS vào khung soạn thảo bên trái.</p>
-                <p>Ví dụ:</p>
-                <pre>add $t0, $t1, $t2
-sub $s0, $s1, $s2
-lw $t3, 4($sp)
-sw $t4, 8($gp)</pre>
-            </div>
-            
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <strong>Chạy mô phỏng</strong>
-                <p>Nhấn nút "Run" để thực thi mã. Quan sát các thay đổi trong thanh thanh ghi và bộ nhớ.</p>
-                <div class="note-box">
-                    <strong>Lưu ý:</strong> Nút "Run" thực thi toàn bộ chương trình từ đầu đến cuối.
-                </div>
-            </div>
-            
-            <div class="step-box">
-                <div class="step-number">3</div>
-                <strong>Kiểm tra từng bước</strong>
-                <p>Dùng nút "Step" để thực hiện từng lệnh một. Giúp theo dõi luồng dữ liệu và trạng thái từng bước.</p>
-                <div class="note-box">
-                    <strong>Lưu ý:</strong> "Step" lý tưởng cho việc debug và phân tích chi tiết.
-                </div>
-            </div>
-            
-            <div class="step-box">
-                <div class="step-number">4</div>
-                <strong>Xem sơ đồ datapath</strong>
-                <p>Phần bên phải hiển thị sơ đồ datapath tương ứng với lệnh đang chạy. Giúp hình dung cách dữ liệu di chuyển qua các thành phần.</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="tool-card">
-        <h2>💡 Ứng dụng trong Kiến trúc Máy tính</h2>
-        <div class="guide-content">
-            <ul>
-                <li>Hiểu rõ cách hoạt động của ALU, thanh ghi, và bộ nhớ.</li>
-                <li>Phân tích luồng dữ liệu của các lệnh như add, sub, lw, sw, beq.</li>
-                <li>Hỗ trợ giảng dạy và học tập môn Kiến trúc Máy tính.</li>
-                <li>Thực hành viết và kiểm tra mã hợp ngữ MIPS.</li>
-            </ul>
-            
-            <h3>Ví dụ chương trình MIPS</h3>
-            <pre># Tính tổng từ 1 đến 10
-addi $t0, $zero, 0   # sum = 0
-addi $t1, $zero, 1   # i = 1
-addi $t2, $zero, 11  # n = 11
-loop:
-    beq $t1, $t2, end   # if i == n goto end
-    add $t0, $t0, $t1    # sum = sum + i
-    addi $t1, $t1, 1     # i++
-    j loop               # goto loop
-end:</pre>
-        </div>
-    </div>
-    
-    <div class="tool-card">
-        <h2>📁 Lưu và chia sẻ</h2>
-        <div class="guide-content">
-            <ul>
-                <li>Hiện tại không hỗ trợ lưu tài khoản — bạn có thể sao chép mã để lưu thủ công.</li>
-                <li>Dùng chức năng "Copy" để sao chép mã và chia sẻ qua email hoặc tài liệu.</li>
-            </ul>
-            
-            <div class="warning-box">
-                <strong>Chú ý:</strong> Không có tính năng tự động lưu. Hãy sao chép mã của bạn trước khi đóng trình duyệt.
-            </div>
-        </div>
-    </div>
-    
-    <div class="tool-card">
-        <h2>📚 Tài nguyên học tập</h2>
-        <div class="guide-content">
-            <ul>
-                <li><a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">Mã nguồn trên GitHub</a></li>
-                <li><a href="https://opencourseware.nctu.edu.tw/" target="_blank">Tài liệu học MIPS từ NCTU</a></li>
-                <li><a href="http://www.mips.com/" target="_blank">Tài liệu chính thức kiến trúc MIPS</a></li>
-            </ul>
-            
-            <div class="button-group" style="margin-top: 15px;">
-                <a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">GitHub Repository</a>
-                <a href="https://opencourseware.nctu.edu.tw/" target="_blank">NCTU OpenCourseWare</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="tool-card">
-        <h2>🎯 Các lệnh MIPS được hỗ trợ</h2>
-        <div class="guide-content">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px;">
-                <div>
-                    <h3>Lệnh số học</h3>
-                    <ul>
-                        <li><code>add</code>, <code>sub</code>, <code>addi</code></li>
-                        <li><code>addu</code>, <code>subu</code></li>
-                        <li><code>mult</code>, <code>div</code></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Lệnh logic</h3>
-                    <ul>
-                        <li><code>and</code>, <code>or</code>, <code>nor</code></li>
-                        <li><code>andi</code>, <code>ori</code>, <code>xori</code></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Lệnh nhớ</h3>
-                    <ul>
-                        <li><code>lw</code>, <code>sw</code></li>
-                        <li><code>lb</code>, <code>sb</code></li>
-                        <li><code>lh</code>, <code>sh</code></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Lệnh điều khiển</h3>
-                    <ul>
-                        <li><code>beq</code>, <code>bne</code></li>
-                        <li><code>j</code>, <code>jal</code>, <code>jr</code></li>
-                        <li><code>slt</code>, <code>slti</code></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<footer>
-    © 2025 – Hướng Dẫn Sử Dụng MIPS Visualizer | Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính
-</footer>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i class="fas fa-book-open"></i> Hướng dẫn</a>
+            <a href="https://godbolt.org/" target="_blank" class="nav-item">
+                <i class="fas fa-external-link-alt"></i> Vào trình
+            </a>
+        </nav>
+
+        <div class="card">
+            <h2><i class="fas fa-info-circle"></i> Compiler Explorer là gì?</h2>
+            <p><strong>Compiler Explorer</strong> (hay còn gọi là <strong>Godbolt</strong>) là một công cụ trực tuyến tương tác cực kỳ mạnh mẽ. Nó cho phép bạn viết mã nguồn bằng các ngôn ngữ cấp cao (C, C++, Rust...) và xem ngay lập tức mã <strong>Assembly (ASM)</strong> tương ứng được sinh ra bởi các trình biên dịch khác nhau.</p>
+            <div class="info-box">
+                <i class="fas fa-link"></i> <strong>Truy cập trực tiếp:</strong> <a href="https://godbolt.org/" target="_blank">godbolt.org</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-university"></i> Vai trò trong Kiến trúc máy tính</h2>
+            <div class="step-item">
+                <h3>Trực quan hóa quá trình biên dịch</h3>
+                <p>Giúp sinh viên thấy rõ cách các cấu trúc lệnh, vòng lặp, và biến trong mã C được dịch thành các lệnh cấp thấp mà CPU có thể thực thi.</p>
+            </div>
+            <div class="step-item">
+                <h3>So sánh kiến trúc bộ lệnh (ISA)</h3>
+                <p>Dễ dàng so sánh mã Assembly được sinh ra cho cùng một đoạn mã nguồn trên các kiến trúc khác nhau như:</p>
+                <div class="tag-list">
+                    <span class="tag">x86-64</span>
+                    <span class="tag">ARM (AArch64)</span>
+                    <span class="tag">RISC-V</span>
+                    <span class="tag">MIPS</span>
+                </div>
+            </div>
+            <div class="step-item">
+                <h3>Nghiên cứu tối ưu hóa</h3>
+                <p>Quan sát ảnh hưởng của các mức độ tối ưu hóa từ <code>-O0</code> (không tối ưu) đến <code>-O3</code> (tối ưu tối đa) đối với kích thước và hiệu suất mã.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-play-circle"></i> Các bước sử dụng cơ bản</h2>
+            <div class="step-item">
+                <span class="step-num">1</span>
+                <strong>Nhập mã nguồn (Source Editor):</strong> Gõ mã C/C++ vào cửa sổ bên trái. Lưu ý nên đặt mã vào trong các hàm cụ thể để công cụ dễ trích xuất ASM.
+            </div>
+            <div class="step-item">
+                <span class="step-num">2</span>
+                <strong>Thiết lập trình biên dịch (Compiler Settings):</strong> Ở cửa sổ bên phải, chọn trình biên dịch (ví dụ: x86-64 GCC) và thêm các cờ tối ưu hóa (Flags).
+            </div>
+            <div class="step-item">
+                <span class="step-num">3</span>
+                <strong>Phân tích mã ASM:</strong> Di chuyển chuột qua các dòng mã C, các lệnh Assembly tương ứng sẽ được tô sáng (Highlighting) để bạn đối chiếu.
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Phát triển dựa trên Compiler Explorer (Godbolt)</p>
+        </footer>
+    </div>
 
 </body>
 </html>

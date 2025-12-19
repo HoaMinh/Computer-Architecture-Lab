@@ -1,29 +1,671 @@
-<!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><title>Bài thực hành Compiler Explorer</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto}</style></head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài Thực Hành Compiler Explorer (Godbolt)</title>
+    <style>
+        /* CSS giống hệt file compiler.html trong guide */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #003366;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        h1 { 
+            margin: 0; 
+            padding: 0 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        .tool-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tool-card h2 {
+            margin-top: 0;
+            color: #003366;
+        }
+        
+        /* BUTTON GROUP - giống guide */
+        .button-group a {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 5px 8px 0 0;
+            text-decoration: none;
+            background: #003366;
+            color: white !important;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .button-group a:hover {
+            background: #00509e;
+            color: #ffff00 !important;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #eaeaea;
+            margin-top: 20px;
+        }
+        
+        /* Nút về trang chủ và về guide */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 16px;
+            background: #ff9900;
+            color: #000000 !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .home-btn {
+            left: 20px;
+        }
+        .guide-btn {
+            right: 20px;
+            background: #28a745;
+        }
+        .nav-btn:hover {
+            background: #ff6600;
+            color: #ffffff !important;
+        }
+        .guide-btn:hover {
+            background: #218838;
+        }
+        
+        /* Nội dung bài thực hành */
+        .lab-content {
+            line-height: 1.6;
+        }
+        
+        .lab-content h3 {
+            color: #00509e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 5px;
+        }
+        
+        .lab-content h4 {
+            color: #003366;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .lab-content ul, .lab-content ol {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .lab-content li {
+            margin-bottom: 8px;
+        }
+        
+        .lab-content code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .lab-content pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            border-left: 4px solid #28a745;
+        }
+        
+        .exercise-box {
+            background: #e8f4fd;
+            border-left: 4px solid #00509e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .question-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .solution-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .show-solution {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .show-solution:hover {
+            background: #218838;
+        }
+        
+        .step-box {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #6f42c1;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        /* Link styling */
+        .lab-content a {
+            color: #00509e;
+            text-decoration: none;
+        }
+        
+        .lab-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th {
+            background: #003366;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .important {
+            background-color: #fffacd;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .task-box {
+            background: #e2e3e5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #6c757d;
+        }
+        
+        .checklist {
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            margin-bottom: 5px;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
 <body>
-<header><h1>Bài thực hành Compiler Explorer</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
 
-<section>
-  <h2>Mục tiêu</h2>
-  <p>So sánh mã Assembly được sinh ở các mức tối ưu khác nhau (-O0, -O2, -O3).</p>
-</section>
+<header>
+    <a href="../index.html" class="nav-btn home-btn">← TRANG CHỦ</a>
+    <h1>Bài Thực Hành Compiler Explorer (Godbolt)</h1>
+    <a href="../guide/compiler.html" class="nav-btn guide-btn">📘 HƯỚNG DẪN →</a>
+</header>
 
-<section>
-  <h2>Bài 1</h2>
-  <p>Code:</p>
-  <pre>
-int sum(int *a, int n){
-  int s=0;
-  for(int i=0;i<n;i++) s += a[i];
-  return s;
+<div class="container">
+    
+    <!-- Card 1: Giới thiệu bài thực hành -->
+    <div class="tool-card">
+        <h2>🎯 Mục tiêu bài thực hành</h2>
+        <div class="lab-content">
+            <p>Bài thực hành này giúp sinh viên làm quen với <strong>Compiler Explorer (Godbolt)</strong> - công cụ phân tích mã nguồn C/C++ thành mã Assembly. Qua các bài tập, sinh viên sẽ:</p>
+            
+            <ul>
+                <li>Hiểu cách mã C/C++ được biên dịch thành Assembly</li>
+                <li>So sánh mã Assembly giữa các kiến trúc khác nhau</li>
+                <li>Phân tích ảnh hưởng của các mức tối ưu hóa</li>
+                <li>Nhận biết các kỹ thuật tối ưu của compiler</li>
+            </ul>
+            
+            <div class="important">
+                ⏰ <strong>Thời gian dự kiến:</strong> 90-120 phút<br>
+                📊 <strong>Độ khó:</strong> Trung bình<br>
+                🎯 <strong>Yêu cầu:</strong> Kiến thức cơ bản về C/C++
+            </div>
+            
+            <div class="button-group">
+                <a href="https://godbolt.org/" target="_blank">Mở Compiler Explorer</a>
+                <a href="../guide/compiler.html" target="_blank">Xem hướng dẫn chi tiết</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 2: Bài tập 1 - Cơ bản -->
+    <div class="tool-card">
+        <h2>📝 Bài tập 1: Hiểu cấu trúc hàm đơn giản</h2>
+        <div class="lab-content">
+            
+            <div class="exercise-box">
+                <h3>1.1 Hàm cộng hai số nguyên</h3>
+                <p><strong>Mục tiêu:</strong> Hiểu cách compiler dịch hàm đơn giản thành mã Assembly.</p>
+                
+                <h4>Bước 1: Nhập mã nguồn</h4>
+                <pre>int add(int a, int b) {
+    return a + b;
+}</pre>
+                
+                <h4>Bước 2: Thiết lập Compiler</h4>
+                <ul>
+                    <li>Compiler: <code>x86-64 gcc 13.2</code></li>
+                    <li>Kiến trúc: <code>x86-64</code></li>
+                    <li>Optimization: <code>-O0</code> (không tối ưu)</li>
+                </ul>
+                
+                <h4>Bước 3: Quan sát và phân tích</h4>
+                <div class="question-box">
+                    <strong>Câu hỏi 1.1:</strong> Mã Assembly có bao nhiêu lệnh? Liệt kê các lệnh bạn thấy.
+                    <button class="show-solution" onclick="toggleSolution('sol1_1')">Xem đáp án</button>
+                    <div id="sol1_1" class="solution-box">
+                        <strong>Đáp án:</strong> Thông thường có 3-4 lệnh: <code>mov</code>, <code>add</code>, <code>ret</code><br>
+                        <pre>add:
+        push    rbp
+        mov     rbp, rsp
+        mov     DWORD PTR [rbp-4], edi
+        mov     DWORD PTR [rbp-8], esi
+        mov     edx, DWORD PTR [rbp-4]
+        mov     eax, DWORD PTR [rbp-8]
+        add     eax, edx
+        pop     rbp
+        ret</pre>
+                    </div>
+                </div>
+                
+                <div class="question-box">
+                    <strong>Câu hỏi 1.2:</strong> Thay đổi optimization thành <code>-O3</code>. So sánh sự khác biệt.
+                    <button class="show-solution" onclick="toggleSolution('sol1_2')">Xem đáp án</button>
+                    <div id="sol1_2" class="solution-box">
+                        <strong>Đáp án:</strong> Mã tối ưu hơn, chỉ còn 2-3 lệnh:<br>
+                        <pre>add:
+        lea     eax, [rdi+rsi]
+        ret</pre>
+                        Compiler sử dụng <code>lea</code> (Load Effective Address) để tính toán và trả về cùng lúc.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>1.2 Hàm tính giai thừa (factorial)</h3>
+                <pre>int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}</pre>
+                
+                <div class="task-box">
+                    <strong>Nhiệm vụ:</strong>
+                    <ol>
+                        <li>Biên dịch với <code>-O0</code> và <code>-O2</code></li>
+                        <li>So sánh sự khác biệt về recursion</li>
+                        <li>Nhận xét về tail recursion optimization</li>
+                    </ol>
+                </div>
+                
+                <div class="checklist">
+                    <strong>Checklist hoàn thành:</strong>
+                    <ul>
+                        <li><input type="checkbox"> Đã quan sát mã Assembly với -O0</li>
+                        <li><input type="checkbox"> Đã quan sát mã Assembly với -O2</li>
+                        <li><input type="checkbox"> Đã nhận ra sự khác biệt</li>
+                        <li><input type="checkbox"> Đã hiểu tail recursion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 3: Bài tập 2 - So sánh kiến trúc -->
+    <div class="tool-card">
+        <h2>⚖️ Bài tập 2: So sánh kiến trúc x86-64 vs ARM</h2>
+        <div class="lab-content">
+            
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <strong>Chuẩn bị mã nguồn</strong>
+                <pre>int max(int a, int b) {
+    return (a > b) ? a : b;
 }
-  </pre>
-  <p>Trên Compiler Explorer: chọn target x86-64, compile với -O0, -O2, -O3; so sánh số lệnh, có dùng SIMD hay không.</p>
-</section>
 
-<section>
-  <h2>Yêu cầu nộp</h2>
-  <p>Ảnh chụp 3 khung assembly, nhận xét ngắn (cách tối ưu, unroll, vectorize nếu có).</p>
-</section>
+int sum_array(int arr[], int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        total += arr[i];
+    }
+    return total;
+}</pre>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <strong>Thiết lập so sánh</strong>
+                <p>Thêm 2 compiler để so sánh song song:</p>
+                <ol>
+                    <li><strong>Compiler 1:</strong> x86-64 gcc 13.2, -O2</li>
+                    <li><strong>Compiler 2:</strong> ARM64 gcc 13.2, -O2</li>
+                </ol>
+                <p>Sử dụng nút <strong>"Add new compiler"</strong> (dấu +)</p>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <strong>Phân tích và so sánh</strong>
+                
+                <div class="question-box">
+                    <strong>Câu hỏi 2.1:</strong> So sánh lệnh so sánh (<code>cmp</code>) và nhảy có điều kiện giữa x86 và ARM.
+                    <button class="show-solution" onclick="toggleSolution('sol2_1')">Xem đáp án</button>
+                    <div id="sol2_1" class="solution-box">
+                        <strong>Đáp án:</strong><br>
+                        • <strong>x86:</strong> <code>cmp</code> + <code>jg/jle</code><br>
+                        • <strong>ARM:</strong> <code>cmp</code> + <code>b.gt/b.le</code><br>
+                        ARM sử dụng conditional flags và branch với condition code.
+                    </div>
+                </div>
+                
+                <div class="question-box">
+                    <strong>Câu hỏi 2.2:</strong> So sánh cách truy cập mảng <code>arr[i]</code> giữa hai kiến trúc.
+                    <button class="show-solution" onclick="toggleSolution('sol2_2')">Xem đáp án</button>
+                    <div id="sol2_2" class="solution-box">
+                        <strong>Đáp án:</strong><br>
+                        • <strong>x86:</strong> <code>mov eax, DWORD PTR [rdi+rsi*4]</code><br>
+                        • <strong>ARM:</strong> <code>ldr w3, [x0, x2, lsl 2]</code><br>
+                        Cùng là scaled index addressing nhưng cú pháp khác nhau.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <a href="https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAM1QDsCBlZAQwBtMQBGAOgC4BOAZgA0hAJ4AHAOoAlHgG8eAKF4BbH%2BwCUALngDMeBgA5WDAK6sBmACwAiFg1bcAzAGYrDhgGZBANwYQAViEAVhYACgCUBmC6Pv4BQSHMTJw8fIIi4lKysmERUboGFiwpzunOmSzZACwAzLEcPMWl5Vg2VR7evgHBIWE2kTHxiSmF6Vk5eVgFRaXlVbX1DU0tbR3pPb0D/sOjJeNTZbPzC0sra4UNKW1YANw7u3sAjEbGZuaWDtJOLm6e3se%2B/gxBgSFh4VHSseXxjQ7x2QmJiSmxAIz8UZ3VYPTJLRYrbhrTbqHZ7A4nM5XG7nS7XO4Pe6PV6fH7/AHAkFg6Gw%2BGIpEotHojH%2BHF4wl4uG5NbM1lAA" target="_blank">Mở ví dụ so sánh trên Godbolt</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 4: Bài tập 3 - Tối ưu hóa -->
+    <div class="tool-card">
+        <h2>🚀 Bài tập 3: Phân tích tối ưu hóa</h2>
+        <div class="lab-content">
+            
+            <div class="exercise-box">
+                <h3>3.1 Loop unrolling</h3>
+                <pre>// Version 1: Loop bình thường
+int sum1(int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        total += i;
+    }
+    return total;
+}
+
+// Version 2: Manual unrolling
+int sum2(int n) {
+    int total = 0;
+    for (int i = 0; i < n; i += 4) {
+        total += i;
+        total += i + 1;
+        total += i + 2;
+        total += i + 3;
+    }
+    return total;
+}</pre>
+                
+                <div class="task-box">
+                    <strong>Nhiệm vụ:</strong>
+                    <ol>
+                        <li>Biên dịch cả hai version với <code>-O3</code></li>
+                        <li>So sánh số lượng lệnh Assembly</li>
+                        <li>Nhận xét về loop unrolling tự động của compiler</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>3.2 Constant propagation và dead code elimination</h3>
+                <pre>int complex_calc(int x) {
+    int a = 10;
+    int b = 20;
+    int c = a + b;  // 30
+    int d = c * 2;  // 60
+    
+    if (x > 100) {
+        return d + x;  // 60 + x
+    } else {
+        return x * 2;
+    }
+    
+    // Dead code - never reached
+    printf("This never prints");
+    return 0;
+}</pre>
+                
+                <div class="question-box">
+                    <strong>Câu hỏi 3.2:</strong> Với <code>-O3</code>, compiler đã tối ưu những gì?
+                    <button class="show-solution" onclick="toggleSolution('sol3_2')">Xem đáp án</button>
+                    <div id="sol3_2" class="solution-box">
+                        <strong>Đáp án:</strong><br>
+                        1. <strong>Constant propagation:</strong> <code>c = 30</code>, <code>d = 60</code><br>
+                        2. <strong>Dead code elimination:</strong> Xóa <code>printf</code> và <code>return 0</code><br>
+                        3. <strong>Branch optimization:</strong> Tối ưu điều kiện if-else<br>
+                        4. <strong>Inlining constants:</strong> Thay <code>d + x</code> bằng <code>60 + x</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 5: Bài tập nâng cao -->
+    <div class="tool-card">
+        <h2>🏆 Bài tập nâng cao (Tự chọn)</h2>
+        <div class="lab-content">
+            
+            <div class="exercise-box">
+                <h3>4.1 Vectorization (SIMD)</h3>
+                <pre>// Kiểm tra auto-vectorization
+void add_arrays(int* a, int* b, int* c, int n) {
+    for (int i = 0; i < n; i++) {
+        c[i] = a[i] + b[i];
+    }
+}</pre>
+                
+                <div class="task-box">
+                    <strong>Thử thách:</strong>
+                    <ol>
+                        <li>Biên dịch với <code>-O3 -march=native</code></li>
+                        <li>Tìm các lệnh SIMD (SSE, AVX)</li>
+                        <li>Thử với các kiểu dữ liệu khác: float, double</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>4.2 Multiple compilers comparison</h3>
+                <p>So sánh 3 compiler khác nhau cho cùng mã nguồn:</p>
+                
+                <table>
+                    <tr>
+                        <th>Compiler</th>
+                        <th>Flags</th>
+                        <th>Kích thước code</th>
+                        <th>Nhận xét</th>
+                    </tr>
+                    <tr>
+                        <td>GCC 13.2</td>
+                        <td>-O3 -march=native</td>
+                        <td>___ bytes</td>
+                        <td>___</td>
+                    </tr>
+                    <tr>
+                        <td>Clang 16.0</td>
+                        <td>-O3 -march=native</td>
+                        <td>___ bytes</td>
+                        <td>___</td>
+                    </tr>
+                    <tr>
+                        <td>ICC 2021</td>
+                        <td>-O3 -xHost</td>
+                        <td>___ bytes</td>
+                        <td>___</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="button-group">
+                <a href="https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAM1QDsCBlZAQwBtMQBGAOgC4BOAZgA0hAJ4AHAOoAlHgG8eAKF4BbH%2BwCUALngDMeBgA5WDAK6sBmACwAiFg1bcAzAGYrDhgGZBANwYQAViEAVhYACgCUBmC6Pv4BQSHMTJw8fIIi4lKysmERUboGFiwpzunOmSzZACwAzLEcPMWl5Vg2VR7evgHBIWE2kTHxiSmF6Vk5eVgFRaXlVbX1DU0tbR3pPb0D/sOjJeNTZbPzC0sra4UNKW1YANw7u3sAjEbGZuaWDtJOLm6e3se%2B/gxBgSFh4VHSseXxjQ7x2QmJiSmxAIz8UZ3VYPTJLRYrbhrTbqHZ7A4nM5XG7nS7XO4Pe6PV6fH7/AHAkFg6Gw%2BGIpEotHojH%2BHF4wl4uG5NbM1lAA" target="_blank">Mở Godbolt để thực hành</a>
+                <a href="#" onclick="printPage()">🖨️ In bài tập</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 6: Tổng kết -->
+    <div class="tool-card">
+        <h2>📊 Tổng kết bài thực hành</h2>
+        <div class="lab-content">
+            <div class="checklist">
+                <strong>Đánh giá kết quả học tập:</strong>
+                <ul>
+                    <li><input type="checkbox"> Hiểu cách mã C biên dịch thành Assembly</li>
+                    <li><input type="checkbox"> So sánh được x86 và ARM Assembly</li>
+                    <li><input type="checkbox"> Phân tích được ảnh hưởng của -O0 đến -O3</li>
+                    <li><input type="checkbox"> Nhận biết được các kỹ thuật tối ưu</li>
+                    <li><input type="checkbox"> Sử dụng thành thạo Compiler Explorer</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <strong>📚 Bài tập về nhà:</strong><br>
+                1. Viết hàm tính Fibonacci và phân tích mã Assembly<br>
+                2. So sánh mã Assembly của bubble sort vs quick sort<br>
+                3. Tìm hiểu về inline assembly trong GCC
+            </div>
+            
+            <div class="important">
+                <strong>💡 Lời khuyên:</strong> Luôn kiểm tra mã Assembly khi viết code performance-critical. Compiler Explorer giúp bạn hiểu compiler nghĩ gì!
+            </div>
+            
+            <div class="button-group">
+                <a href="../index.html">Về trang chủ</a>
+                <a href="../guide/compiler.html">Xem lại hướng dẫn</a>
+                <a href="https://godbolt.org/" target="_blank">Thực hành thêm</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<footer>
+    © 2025 – Bài Thực Hành Compiler Explorer (Godbolt) | Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính
+</footer>
+
+<script>
+// Hiển thị/ẩn đáp án
+function toggleSolution(id) {
+    const solution = document.getElementById(id);
+    if (solution.style.display === 'block') {
+        solution.style.display = 'none';
+    } else {
+        solution.style.display = 'block';
+    }
+}
+
+// In trang
+function printPage() {
+    window.print();
+}
+
+// Tự động mở tất cả solution khi in
+window.addEventListener('beforeprint', function() {
+    const solutions = document.querySelectorAll('.solution-box');
+    solutions.forEach(solution => {
+        solution.style.display = 'block';
+    });
+});
+
+// Checklist persistence
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    // Load saved state
+    checkboxes.forEach(checkbox => {
+        const savedState = localStorage.getItem(checkbox.parentElement.textContent);
+        if (savedState === 'true') {
+            checkbox.checked = true;
+        }
+    });
+    
+    // Save state on change
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem(this.parentElement.textContent, this.checked);
+        });
+    });
+});
+</script>
+
 </body>
 </html>

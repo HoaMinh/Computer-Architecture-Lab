@@ -4,117 +4,128 @@
     <meta charset="UTF-8">
     <title>Hướng Dẫn Sử Dụng MIPS Visualizer</title>
     <style>
-        * {
+        /* CSS giống hệt CircuitVerse */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 20px;
+        header {
+            background: #003366;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
         }
-        
+        h1 { 
+            margin: 0; 
+            padding: 0 20px;
+        }
         .container {
             max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #003366;
-        }
-        
-        h1 {
-            color: #003366;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        h2 {
-            color: #00509e;
-            margin: 25px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #eaeaea;
-            font-size: 22px;
-        }
-        
-        h3 {
-            color: #003366;
-            margin: 20px 0 10px 0;
-            font-size: 18px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        
-        ul, ol {
-            margin: 15px 0 15px 25px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-        
-        .section {
-            margin-bottom: 30px;
+            margin: auto;
             padding: 20px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border-left: 4px solid #003366;
         }
-        
-        .step {
-            background: #e8f4fd;
-            padding: 15px;
+        .tool-card {
+            background: white;
+            padding: 20px;
             margin: 15px 0;
-            border-radius: 5px;
-            border-left: 4px solid #00509e;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        .step-number {
+        .tool-card h2 {
+            margin-top: 0;
+            color: #003366;
+        }
+        .button-group a {
             display: inline-block;
-            background: #00509e;
+            padding: 8px 14px;
+            margin: 5px 8px 0 0;
+            text-decoration: none;
+            background: #003366;
             color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            border-radius: 6px;
+        }
+        .button-group a:hover {
+            background: #00509e;
+        }
+        footer {
             text-align: center;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
+            padding: 15px;
+            background: #eaeaea;
+            margin-top: 20px;
         }
         
-        .code-example {
+        /* Nút về trang chủ */
+        .home-btn {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            padding: 8px 16px;
+            background: #ff9900;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .home-btn:hover {
+            background: #ff6600;
+        }
+        
+        /* Nội dung hướng dẫn */
+        .guide-content {
+            line-height: 1.6;
+        }
+        
+        .guide-content h2 {
+            color: #003366;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        .guide-content h3 {
+            color: #00509e;
+            margin-top: 20px;
+        }
+        
+        .guide-content ul, .guide-content ol {
+            margin: 15px 0 15px 20px;
+        }
+        
+        .guide-content li {
+            margin-bottom: 8px;
+        }
+        
+        .guide-content code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .guide-content pre {
             background: #f5f5f5;
             padding: 15px;
             border-radius: 5px;
+            overflow-x: auto;
             margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            border-left: 4px solid #28a745;
         }
         
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+        .note-box {
+            background: #e8f4fd;
+            border-left: 4px solid #00509e;
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
         }
         
-        .warning {
+        .warning-box {
             background: #f8d7da;
             border-left: 4px solid #dc3545;
             padding: 15px;
@@ -122,229 +133,188 @@
             border-radius: 5px;
         }
         
-        .link-box {
-            background: #e9ecef;
+        .step-box {
+            background: #f8f9fa;
             padding: 15px;
-            border-radius: 5px;
             margin: 15px 0;
-        }
-        
-        a {
-            color: #00509e;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-            color: #003366;
-        }
-        
-        .btn-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #003366;
-            color: white;
-            padding: 12px 24px;
             border-radius: 5px;
-            text-decoration: none;
+            border-left: 4px solid #28a745;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
             font-weight: bold;
-            margin: 0 10px;
-            transition: background 0.3s;
-        }
-        
-        .btn:hover {
-            background: #00509e;
-            text-decoration: none;
-        }
-        
-        .btn-secondary {
-            background: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        
-        .icon {
-            margin-right: 8px;
-            font-size: 1.2em;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            h2 {
-                font-size: 20px;
-            }
-            
-            .btn {
-                display: block;
-                margin: 10px 0;
-                width: 100%;
-                text-align: center;
-            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-microchip icon"></i>Hướng Dẫn Sử Dụng MIPS Visualizer</h1>
-            <p>Công cụ trực quan hóa kiến trúc MIPS cho học tập và giảng dạy</p>
-        </header>
-        
-        <div class="section">
-            <h2><i class="fas fa-link icon"></i>Truy cập MIPS Visualizer</h2>
+
+<header>
+    <a href="../index.html" class="home-btn">← TRANG CHỦ</a>
+    <h1>Hướng Dẫn Sử Dụng MIPS Visualizer</h1>
+</header>
+
+<div class="container">
+    <div class="tool-card">
+        <h2>🔗 Truy cập MIPS Visualizer</h2>
+        <div class="guide-content">
             <ul>
                 <li>Truy cập trang web: <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">https://aleksa-sukovic.github.io/mips-visualiser/</a></li>
                 <li>Không cần đăng nhập — bạn có thể sử dụng trực tiếp trên trình duyệt.</li>
             </ul>
             
-            <div class="note">
-                <i class="fas fa-info-circle"></i> <strong>Lưu ý:</strong> Đây là công cụ trực tuyến miễn phí, hoạt động trên mọi trình duyệt hiện đại.
+            <div class="button-group" style="margin-top: 15px;">
+                <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank">Truy cập MIPS Visualizer</a>
             </div>
         </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-tools icon"></i>Các bước cơ bản để sử dụng</h2>
-            
-            <div class="step">
+    </div>
+    
+    <div class="tool-card">
+        <h2>🛠️ Các bước cơ bản để sử dụng</h2>
+        <div class="guide-content">
+            <div class="step-box">
                 <div class="step-number">1</div>
                 <strong>Nhập mã hợp ngữ MIPS</strong>
-                <p>Gõ mã MIPS vào khung soạn thảo bên trái. Ví dụ:</p>
-                <div class="code-example">
-                    add $t0, $t1, $t2<br>
-                    sub $s0, $s1, $s2<br>
-                    lw $t3, 4($sp)<br>
-                    sw $t4, 8($gp)
-                </div>
+                <p>Gõ mã MIPS vào khung soạn thảo bên trái.</p>
+                <p>Ví dụ:</p>
+                <pre>add $t0, $t1, $t2
+sub $s0, $s1, $s2
+lw $t3, 4($sp)
+sw $t4, 8($gp)</pre>
             </div>
             
-            <div class="step">
+            <div class="step-box">
                 <div class="step-number">2</div>
                 <strong>Chạy mô phỏng</strong>
-                <p>Nhấn nút <strong>"Run"</strong> để thực thi mã. Quan sát các thay đổi trong thanh ghi và bộ nhớ.</p>
-                <div class="note">
-                    <i class="fas fa-play-circle"></i> Nút "Run" thực thi toàn bộ chương trình từ đầu đến cuối.
+                <p>Nhấn nút "Run" để thực thi mã. Quan sát các thay đổi trong thanh thanh ghi và bộ nhớ.</p>
+                <div class="note-box">
+                    <strong>Lưu ý:</strong> Nút "Run" thực thi toàn bộ chương trình từ đầu đến cuối.
                 </div>
             </div>
             
-            <div class="step">
+            <div class="step-box">
                 <div class="step-number">3</div>
                 <strong>Kiểm tra từng bước</strong>
-                <p>Dùng nút <strong>"Step"</strong> để thực hiện từng lệnh một. Giúp theo dõi luồng dữ liệu và trạng thái từng bước.</p>
-                <div class="note">
-                    <i class="fas fa-step-forward"></i> "Step" lý tưởng cho việc debug và phân tích chi tiết.
+                <p>Dùng nút "Step" để thực hiện từng lệnh một. Giúp theo dõi luồng dữ liệu và trạng thái từng bước.</p>
+                <div class="note-box">
+                    <strong>Lưu ý:</strong> "Step" lý tưởng cho việc debug và phân tích chi tiết.
                 </div>
             </div>
             
-            <div class="step">
+            <div class="step-box">
                 <div class="step-number">4</div>
                 <strong>Xem sơ đồ datapath</strong>
                 <p>Phần bên phải hiển thị sơ đồ datapath tương ứng với lệnh đang chạy. Giúp hình dung cách dữ liệu di chuyển qua các thành phần.</p>
-                <div class="note">
-                    <i class="fas fa-project-diagram"></i> Sơ đồ datapath được cập nhật tự động theo từng lệnh thực thi.
+            </div>
+        </div>
+    </div>
+    
+    <div class="tool-card">
+        <h2>💡 Ứng dụng trong Kiến trúc Máy tính</h2>
+        <div class="guide-content">
+            <ul>
+                <li>Hiểu rõ cách hoạt động của ALU, thanh ghi, và bộ nhớ.</li>
+                <li>Phân tích luồng dữ liệu của các lệnh như add, sub, lw, sw, beq.</li>
+                <li>Hỗ trợ giảng dạy và học tập môn Kiến trúc Máy tính.</li>
+                <li>Thực hành viết và kiểm tra mã hợp ngữ MIPS.</li>
+            </ul>
+            
+            <h3>Ví dụ chương trình MIPS</h3>
+            <pre># Tính tổng từ 1 đến 10
+addi $t0, $zero, 0   # sum = 0
+addi $t1, $zero, 1   # i = 1
+addi $t2, $zero, 11  # n = 11
+loop:
+    beq $t1, $t2, end   # if i == n goto end
+    add $t0, $t0, $t1    # sum = sum + i
+    addi $t1, $t1, 1     # i++
+    j loop               # goto loop
+end:</pre>
+        </div>
+    </div>
+    
+    <div class="tool-card">
+        <h2>📁 Lưu và chia sẻ</h2>
+        <div class="guide-content">
+            <ul>
+                <li>Hiện tại không hỗ trợ lưu tài khoản — bạn có thể sao chép mã để lưu thủ công.</li>
+                <li>Dùng chức năng "Copy" để sao chép mã và chia sẻ qua email hoặc tài liệu.</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>Chú ý:</strong> Không có tính năng tự động lưu. Hãy sao chép mã của bạn trước khi đóng trình duyệt.
+            </div>
+        </div>
+    </div>
+    
+    <div class="tool-card">
+        <h2>📚 Tài nguyên học tập</h2>
+        <div class="guide-content">
+            <ul>
+                <li><a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">Mã nguồn trên GitHub</a></li>
+                <li><a href="https://opencourseware.nctu.edu.tw/" target="_blank">Tài liệu học MIPS từ NCTU</a></li>
+                <li><a href="http://www.mips.com/" target="_blank">Tài liệu chính thức kiến trúc MIPS</a></li>
+            </ul>
+            
+            <div class="button-group" style="margin-top: 15px;">
+                <a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">GitHub Repository</a>
+                <a href="https://opencourseware.nctu.edu.tw/" target="_blank">NCTU OpenCourseWare</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tool-card">
+        <h2>🎯 Các lệnh MIPS được hỗ trợ</h2>
+        <div class="guide-content">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px;">
+                <div>
+                    <h3>Lệnh số học</h3>
+                    <ul>
+                        <li><code>add</code>, <code>sub</code>, <code>addi</code></li>
+                        <li><code>addu</code>, <code>subu</code></li>
+                        <li><code>mult</code>, <code>div</code></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Lệnh logic</h3>
+                    <ul>
+                        <li><code>and</code>, <code>or</code>, <code>nor</code></li>
+                        <li><code>andi</code>, <code>ori</code>, <code>xori</code></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Lệnh nhớ</h3>
+                    <ul>
+                        <li><code>lw</code>, <code>sw</code></li>
+                        <li><code>lb</code>, <code>sb</code></li>
+                        <li><code>lh</code>, <code>sh</code></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Lệnh điều khiển</h3>
+                    <ul>
+                        <li><code>beq</code>, <code>bne</code></li>
+                        <li><code>j</code>, <code>jal</code>, <code>jr</code></li>
+                        <li><code>slt</code>, <code>slti</code></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-lightbulb icon"></i>Ứng dụng trong Kiến trúc Máy tính</h2>
-            <ul>
-                <li>Hiểu rõ cách hoạt động của <strong>ALU</strong>, <strong>thanh ghi</strong>, và <strong>bộ nhớ</strong>.</li>
-                <li>Phân tích luồng dữ liệu của các lệnh như <code>add</code>, <code>sub</code>, <code>lw</code>, <code>sw</code>, <code>beq</code>.</li>
-                <li>Hỗ trợ giảng dạy và học tập môn <strong>Kiến trúc Máy tính</strong>.</li>
-                <li>Thực hành viết và kiểm tra mã hợp ngữ MIPS.</li>
-                <li>Quan sát pipeline và xung đột dữ liệu (nếu có).</li>
-            </ul>
-            
-            <div class="code-example">
-                <strong>Ví dụ chương trình MIPS đơn giản:</strong><br><br>
-                # Tính tổng từ 1 đến 10<br>
-                addi $t0, $zero, 0   # sum = 0<br>
-                addi $t1, $zero, 1   # i = 1<br>
-                addi $t2, $zero, 11  # n = 11<br>
-                loop:<br>
-                &nbsp;&nbsp;beq $t1, $t2, end   # if i == n goto end<br>
-                &nbsp;&nbsp;add $t0, $t0, $t1    # sum = sum + i<br>
-                &nbsp;&nbsp;addi $t1, $t1, 1     # i++<br>
-                &nbsp;&nbsp;j loop               # goto loop<br>
-                end:
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-save icon"></i>Lưu và chia sẻ</h2>
-            <ul>
-                <li>Hiện tại không hỗ trợ lưu tài khoản — bạn có thể sao chép mã để lưu thủ công.</li>
-                <li>Dùng chức năng <strong>"Copy"</strong> để sao chép mã và chia sẻ qua email hoặc tài liệu.</li>
-                <li>In trang web trực tiếp từ trình duyệt (Ctrl+P) để lưu dưới dạng PDF.</li>
-            </ul>
-            
-            <div class="warning">
-                <i class="fas fa-exclamation-triangle"></i> <strong>Chú ý:</strong> Không có tính năng tự động lưu. Hãy sao chép mã của bạn trước khi đóng trình duyệt.
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-book icon"></i>Tài nguyên học tập</h2>
-            <div class="link-box">
-                <ul>
-                    <li><i class="fab fa-github icon"></i> <a href="https://github.com/aleksa-sukovic/mips-visualiser" target="_blank">Mã nguồn trên GitHub</a> - Truy cập repository chính thức của dự án</li>
-                    <li><i class="fas fa-graduation-cap icon"></i> <a href="https://opencourseware.nctu.edu.tw/" target="_blank">Tài liệu học MIPS từ NCTU</a> - Khóa học trực tuyến mở</li>
-                    <li><i class="fas fa-file-alt icon"></i> <a href="http://www.mips.com/" target="_blank">Tài liệu chính thức kiến trúc MIPS</a> - Từ MIPS Technologies</li>
-                    <li><i class="fas fa-video icon"></i> <a href="https://www.youtube.com/results?search_query=MIPS+assembly+tutorial" target="_blank">Video hướng dẫn MIPS trên YouTube</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-question-circle icon"></i>Hướng dẫn nâng cao</h2>
-            <h3>Các lệnh MIPS được hỗ trợ</h3>
-            <div class="code-example">
-                <strong>Lệnh số học:</strong> add, sub, addi, addu, subu<br>
-                <strong>Lệnh logic:</strong> and, or, andi, ori, nor, xor<br>
-                <strong>Lệnh dịch chuyển:</strong> sll, srl, sra<br>
-                <strong>Lệnh nhân/chia:</strong> mult, div, mfhi, mflo<br>
-                <strong>Lệnh nhớ:</strong> lw, sw, lb, sb, lh, sh<br>
-                <strong>Lệnh điều khiển:</strong> beq, bne, j, jal, jr<br>
-                <strong>Lệnh so sánh:</strong> slt, slti, sltu
-            </div>
-            
-            <h3>Mẹo sử dụng hiệu quả</h3>
-            <ul>
-                <li>Sử dụng <strong>comment</strong> (#) để giải thích mã</li>
-                <li>Kiểm tra giá trị thanh ghi sau mỗi lệnh bằng "Step"</li>
-                <li>Quan sát sự thay đổi của PC (Program Counter)</li>
-                <li>Sử dụng breakpoint bằng cách chèn lệnh đặc biệt</li>
-            </ul>
-        </div>
-        
-        <div class="btn-container">
-            <a href="https://aleksa-sukovic.github.io/mips-visualiser/" class="btn" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Truy cập MIPS Visualizer
-            </a>
-            <a href="../index.html" class="btn btn-secondary">
-                <i class="fas fa-home"></i> Về trang chủ
-            </a>
-        </div>
-        
-        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px;">
-            <p>© 2025 - Hướng dẫn sử dụng MIPS Visualizer | Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính</p>
-            <p>Lần cập nhật: Tháng 3, 2025</p>
-        </footer>
     </div>
+</div>
+
+<footer>
+    © 2025 – Hướng Dẫn Sử Dụng MIPS Visualizer | Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính
+</footer>
+
 </body>
 </html>

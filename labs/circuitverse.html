@@ -15,7 +15,7 @@
 
         body {
             background: #ffffff;
-            color: #333333;
+            color: #000000;
             line-height: 1.6;
             min-height: 100vh;
         }
@@ -30,35 +30,33 @@
         .header {
             text-align: center;
             padding: 30px 0;
-            border-bottom: 3px solid #00a8cc;
+            border-bottom: 3px solid #000080;
             margin-bottom: 40px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 168, 204, 0.1);
+            background: #ffffff;
+            border-radius: 10px;
         }
 
         .header h1 {
-            color: #00a8cc;
+            color: #000080;
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         .header p {
-            color: #666;
+            color: #333333;
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        /* Main Navigation Menu - MÀU XANH LƠ ĐẬM */
+        /* Main Navigation Menu */
         .main-nav {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
-            background: #00a8cc;
-            border-radius: 15px;
+            background: #000080;
+            border-radius: 10px;
             padding: 10px;
-            box-shadow: 0 6px 20px rgba(0, 168, 204, 0.3);
         }
 
         .nav-tabs {
@@ -73,8 +71,8 @@
             padding: 14px 28px;
             background: rgba(255, 255, 255, 0.15);
             border: none;
-            border-radius: 10px;
-            color: #fffacd; /* Vàng nhạt */
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
@@ -96,15 +94,13 @@
 
         .nav-tab:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            color: #fff;
+            transform: translateY(-2px);
+            color: #ffffff;
         }
 
         .nav-tab.active {
             background: rgba(255, 255, 255, 0.3);
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
             font-weight: 700;
         }
 
@@ -116,17 +112,17 @@
             gap: 8px;
             flex-wrap: wrap;
             padding: 15px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 2px solid #00a8cc;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #000080;
         }
 
         .sub-tab {
             padding: 10px 20px;
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            color: #666;
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            color: #000000;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
@@ -139,15 +135,15 @@
         }
 
         .sub-tab:hover {
-            background: #e6f7ff;
-            border-color: #00a8cc;
-            color: #00a8cc;
+            background: #f0f8ff;
+            border-color: #000080;
+            color: #000080;
         }
 
         .sub-tab.active {
-            background: #00a8cc;
-            border-color: #00a8cc;
-            color: white;
+            background: #000080;
+            border-color: #000080;
+            color: #ffffff;
             font-weight: 600;
         }
 
@@ -168,12 +164,11 @@
 
         /* Lab Sections */
         .lab-section {
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: #ffffff;
+            border-radius: 10px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #00a8cc;
+            border: 2px solid #000080;
         }
 
         .lab-header {
@@ -181,11 +176,11 @@
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #eeeeee;
         }
 
         .lab-icon {
-            background: #00a8cc;
+            background: #000080;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -204,19 +199,19 @@
 
         .lab-title {
             font-size: 2rem;
-            color: #00a8cc;
+            color: #000080;
             margin-bottom: 5px;
         }
 
         .lab-subtitle {
-            color: #666;
+            color: #333333;
             font-size: 1.1rem;
         }
 
         .difficulty {
             display: inline-block;
             background: #fff3cd;
-            color: #e6a700;
+            color: #856404;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -232,45 +227,46 @@
         .content-section {
             margin-bottom: 30px;
             padding: 25px;
-            background: white;
-            border-radius: 12px;
-            border-left: 4px solid;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+            border-radius: 8px;
+            border-left: 4px solid #000080;
+            border: 1px solid #dddddd;
         }
 
         .content-section.objective {
-            border-left-color: #28a745;
+            border-left-color: #000080;
         }
 
         .content-section.tools {
-            border-left-color: #ffc107;
+            border-left-color: #000080;
         }
 
         .content-section.instructions {
-            border-left-color: #17a2b8;
+            border-left-color: #000080;
         }
 
         .content-section.requirements {
-            border-left-color: #dc3545;
+            border-left-color: #000080;
         }
 
         .content-section.questions {
-            border-left-color: #00a8cc;
+            border-left-color: #000080;
         }
 
         .content-title {
-            color: #333;
+            color: #000080;
             font-size: 1.4rem;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #eeeeee;
         }
 
         .content-title i {
             font-size: 1.6rem;
+            color: #000080;
         }
 
         .content-title .section-icon {
@@ -282,26 +278,7 @@
             justify-content: center;
             font-size: 1.2rem;
             color: white;
-        }
-
-        .objective .content-title .section-icon {
-            background: #28a745;
-        }
-
-        .tools .content-title .section-icon {
-            background: #ffc107;
-        }
-
-        .instructions .content-title .section-icon {
-            background: #17a2b8;
-        }
-
-        .requirements .content-title .section-icon {
-            background: #dc3545;
-        }
-
-        .questions .content-title .section-icon {
-            background: #00a8cc;
+            background: #000080;
         }
 
         .lab-content ul, .lab-content ol {
@@ -311,19 +288,19 @@
 
         .lab-content li {
             margin-bottom: 12px;
-            color: #444;
+            color: #000000;
             line-height: 1.7;
             padding-left: 5px;
         }
 
         .lab-content p {
             margin-bottom: 15px;
-            color: #444;
+            color: #000000;
             line-height: 1.7;
         }
 
         .important-note {
-            background: #fff9e6;
+            background: #fff3cd;
             border-left: 4px solid #ffc107;
             padding: 15px 20px;
             margin: 20px 0;
@@ -331,7 +308,7 @@
         }
 
         .important-note i {
-            color: #e6a700;
+            color: #856404;
             margin-right: 10px;
         }
 
@@ -339,45 +316,32 @@
         .table-container {
             overflow-x: auto;
             margin: 20px 0;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            border: 1px solid #dddddd;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            background: #ffffff;
         }
 
         th {
-            background: #00a8cc;
+            background: #000080;
             color: white;
             padding: 16px;
             text-align: left;
             font-weight: 600;
-            border-bottom: 2px solid #0097b7;
+            border-bottom: 2px solid #000060;
         }
 
         td {
             padding: 14px 16px;
-            border-bottom: 1px solid #e9ecef;
-            color: #444;
+            border-bottom: 1px solid #eeeeee;
+            color: #000000;
         }
 
         tr:hover {
-            background: #f8f9fa;
-        }
-
-        /* Circuit Frames */
-        .circuit-frame {
-            width: 100%;
-            height: 600px;
-            border: 2px solid #00a8cc;
-            border-radius: 12px;
-            margin: 25px 0;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 168, 204, 0.15);
             background: #f8f9fa;
         }
 
@@ -388,39 +352,38 @@
         }
 
         .simulator-container {
-            background: white;
-            border-radius: 15px;
+            background: #ffffff;
+            border-radius: 10px;
             padding: 30px;
             margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 2px solid #00a8cc;
+            border: 2px solid #000080;
         }
 
         .simulator-frame {
             width: 100%;
             height: 700px;
-            border: 2px solid #00a8cc;
-            border-radius: 12px;
+            border: 2px solid #000080;
+            border-radius: 8px;
             margin: 20px 0;
             overflow: hidden;
-            background: #f8f9fa;
+            background: #ffffff;
         }
 
         /* Links */
         a:not(.nav-tab):not(.sub-tab) {
-            color: #00a8cc;
+            color: #000080;
             text-decoration: none;
             font-weight: 500;
         }
 
         a:not(.nav-tab):not(.sub-tab):hover {
-            color: #007b9a;
+            color: #000060;
             text-decoration: underline;
         }
 
         /* Strong text */
         strong {
-            color: #00a8cc;
+            color: #000080;
         }
 
         /* Footer */
@@ -428,19 +391,19 @@
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
-            border-top: 2px solid #e9ecef;
-            color: #666;
+            border-top: 2px solid #eeeeee;
+            color: #666666;
             font-size: 0.9rem;
         }
 
         .footer a {
-            color: #00a8cc;
+            color: #000080;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            color: #007b9a;
+            color: #000060;
             text-decoration: underline;
         }
 
@@ -505,14 +468,6 @@
                 margin-bottom: 15px;
             }
             
-            .circuit-frame {
-                height: 400px;
-            }
-            
-            .simulator-frame {
-                height: 500px;
-            }
-            
             .content-section {
                 padding: 15px;
             }
@@ -527,7 +482,7 @@
             <p>Phòng thí nghiệm Kiến trúc Máy tính - Mô phỏng và thiết kế mạch số</p>
         </header>
 
-        <!-- Main Navigation Menu - MÀU XANH LƠ ĐẬM -->
+        <!-- Main Navigation Menu -->
         <nav class="main-nav">
             <div class="nav-tabs">
                 <a href="../guide/circuitverse.html" class="nav-tab">
@@ -624,23 +579,6 @@
                         <div class="important-note">
                             <i class="fas fa-lightbulb"></i>
                             <strong>Lưu ý quan trọng:</strong> Ghi lại bảng chân trị cho từng cổng và so sánh với lý thuyết.
-                        </div>
-                    </div>
-
-                    <!-- Mô phỏng trực tuyến -->
-                    <div class="content-section">
-                        <h3 class="content-title">
-                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
-                            MÔ PHỎNG TRỰC TUYẾN
-                        </h3>
-                        <div class="circuit-frame">
-                            <iframe 
-                                src="https://circuitverse.org/simulator/embed/logic-gates-tutorial" 
-                                width="100%" 
-                                height="100%"
-                                style="border:none;"
-                                title="Mô phỏng cổng logic">
-                            </iframe>
                         </div>
                     </div>
 
@@ -753,23 +691,6 @@
                         </ol>
                     </div>
 
-                    <!-- Mô phỏng -->
-                    <div class="content-section">
-                        <h3 class="content-title">
-                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
-                            MÔ PHỎNG TRỰC TUYẾN
-                        </h3>
-                        <div class="circuit-frame">
-                            <iframe 
-                                src="https://circuitverse.org/simulator/embed/4-bit-adder-subtractor" 
-                                width="100%" 
-                                height="100%"
-                                style="border:none;"
-                                title="Mô phỏng bộ cộng/trừ 4-bit">
-                            </iframe>
-                        </div>
-                    </div>
-
                     <!-- Yêu cầu nộp -->
                     <div class="content-section requirements">
                         <h3 class="content-title">
@@ -880,23 +801,6 @@
                             <li>Thêm chức năng đếm lên/đếm xuống</li>
                             <li>Thiết kế bộ đếm module-N (đếm 0-9)</li>
                         </ol>
-                    </div>
-
-                    <!-- Mô phỏng -->
-                    <div class="content-section">
-                        <h3 class="content-title">
-                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
-                            MÔ PHỎNG TRỰC TUYẾN
-                        </h3>
-                        <div class="circuit-frame">
-                            <iframe 
-                                src="https://circuitverse.org/simulator/embed/sequential-circuits-lab" 
-                                width="100%" 
-                                height="100%"
-                                style="border:none;"
-                                title="Mô phỏng mạch tuần tự">
-                            </iframe>
-                        </div>
                     </div>
 
                     <!-- Yêu cầu nộp -->
@@ -1017,23 +921,6 @@
                             <li>Thêm input/output 4-bit A, B, Result</li>
                             <li>Thêm output 4-bit cho status flags</li>
                         </ol>
-                    </div>
-
-                    <!-- Mô phỏng -->
-                    <div class="content-section">
-                        <h3 class="content-title">
-                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
-                            MÔ PHỎNG TRỰC TUYẾN
-                        </h3>
-                        <div class="circuit-frame">
-                            <iframe 
-                                src="https://circuitverse.org/simulator/embed/4-bit-alu-complete" 
-                                width="100%" 
-                                height="100%"
-                                style="border:none;"
-                                title="Mô phỏng ALU 4-bit">
-                            </iframe>
-                        </div>
                     </div>
 
                     <!-- Yêu cầu nộp -->
@@ -1166,23 +1053,6 @@
                         </ol>
                     </div>
 
-                    <!-- Mô phỏng -->
-                    <div class="content-section">
-                        <h3 class="content-title">
-                            <span class="section-icon"><i class="fas fa-play-circle"></i></span>
-                            MÔ PHỎNG TRỰC TUYẾN
-                        </h3>
-                        <div class="circuit-frame">
-                            <iframe 
-                                src="https://circuitverse.org/simulator/embed/mini-cpu-design" 
-                                width="100%" 
-                                height="100%"
-                                style="border:none;"
-                                title="Mô phỏng CPU mini">
-                            </iframe>
-                        </div>
-                    </div>
-
                     <!-- Yêu cầu nộp -->
                     <div class="content-section requirements">
                         <h3 class="content-title">
@@ -1247,8 +1117,8 @@
                         </iframe>
                     </div>
                     
-                    <div style="margin-top: 20px; color: #666; font-size: 0.9rem;">
-                        <p><i class="fas fa-lightbulb" style="color: #00a8cc;"></i> <strong>Mẹo:</strong> Sử dụng trình mô phỏng này để hoàn thành các bài thực hành và thử nghiệm ý tưởng mới.</p>
+                    <div style="margin-top: 20px; color: #000000; font-size: 0.9rem;">
+                        <p><i class="fas fa-lightbulb" style="color: #000080;"></i> <strong>Mẹo:</strong> Sử dụng trình mô phỏng này để hoàn thành các bài thực hành và thử nghiệm ý tưởng mới.</p>
                     </div>
                 </div>
             </div>
@@ -1336,7 +1206,7 @@
             });
             
             labsSubnav.style.display = 'flex';
-            console.log("CircuitVerse Labs Page với màu sắc mới đã sẵn sàng!");
+            console.log("CircuitVerse Labs Page với màu sắc đơn giản đã sẵn sàng!");
         });
     </script>
 </body>

@@ -4,15 +4,53 @@
     <meta charset="UTF-8">
     <title>Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f5f7fa; margin: 0; padding: 0; }
-        header { background: #003366; color: white; padding: 20px 0; text-align: center; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        .tool-card { background: white; padding: 20px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .tool-card h2 { margin-top: 0; color: #003366; }
-        .button-group a { display: inline-block; padding: 8px 14px; margin: 5px 8px 0 0; text-decoration: none; background: #003366; color: white; border-radius: 6px; }
-        footer { text-align: center; padding: 15px; background: #eaeaea; margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #003366;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 { margin: 0; }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        .tool-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tool-card h2 {
+            margin-top: 0;
+            color: #003366;
+        }
+        .button-group a {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 5px 8px 0 0;
+            text-decoration: none;
+            background: #003366;
+            color: white;
+            border-radius: 6px;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #eaeaea;
+            margin-top: 20px;
+        }
     </style>
 </head>
+
 <body>
 
 <header>
@@ -21,60 +59,60 @@
 
 <div class="container">
 
-    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính, bao gồm mô phỏng mạch số, mô phỏng các bộ phận chức năng trong CPU, mô phỏng bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo, trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS.</p>
+    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính, bao gồm mô phỏng mạch số, mô phỏng các bộ phận chức năng trong CPU, mô phỏng bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo, trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS, hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác, cho phép viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan.  </p>
 
     <!-- CircuitVerse -->
     <div class="tool-card">
         <h2>CircuitVerse – Mô phỏng mạch số</h2>
-        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến, hỗ trợ xây dựng các cổng logic, flip-flop, ALU, bộ thanh ghi, bộ giải mã lệnh và bus dữ liệu.</p>
+        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến, hỗ trợ xây dựng các cỗng logic, mạch  flip flop, các mạch làm toán, thanh ghi, mạch tổ hợp, mã hóa và giải mã, mạch đa hợp và giải đa hợp, ALU, bộ giải mã lệnh và bus dữ liệu, phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
         <div class="button-group">
             <a href="https://circuitverse.org/" target="_blank">Vào trình</a>
-            <a href="guide/circuitverse.html">Hướng dẫn</a>
-            <a href="labs/circuitverse.html">Bài thực hành</a>
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Bài thực hành</a>
         </div>
     </div>
 
     <!-- MIPS Visualizer -->
     <div class="tool-card">
         <h2>MIPS Visualizer – Mô phỏng lệnh MIPS</h2>
-        <p>Quan sát ALU, thanh ghi, bộ giải mã, pipeline và luồng thực thi lệnh MIPS theo chu kỳ.</p>
+        <p>Trình mô phỏng MIPS Visualizer hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS trên sơ đồ mạch logic. Người học có thể quan sát cách các thành phần như ALU, thanh ghi, bộ giải mã lệnh và bus dữ liệu phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
         <div class="button-group">
-            <a href="https://aleksa-sukovic.github.io/mips-visualiser" target="_blank">Vào trình</a>
-            <a href="guide/mips.html">Hướng dẫn</a>
-            <a href="labs/mips.html">Bài thực hành</a>
+            <a href="https://mips-visualizer.com/" target="_blank">Vào trình</a>
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Bài thực hành</a>
         </div>
     </div>
 
     <!-- ParaCache -->
     <div class="tool-card">
         <h2>ParaCache – Mô phỏng Cache</h2>
-        <p>Mô phỏng ParaCache giúp sinh viên hình dung các chiến lược ánh xạ, chính sách thay thế và phân tích hit/miss.</p>
+        <p>Mô phỏng ParaCache giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác. Sinh viên có thể chọn các chiến lược ánh xạ (trực tiếp, toàn phần, theo tập hợp) và thuật toán thay thế khối (LRU, FIFO, Random), quan sát cách dữ liệu được lưu trữ, truy xuất, và bị thay thế khi có cache miss </p>
         <div class="button-group">
-            <a href="https://www3.ntu.edu.sg/home/ehchua/programming/paracache/" target="_blank">Vào trình</a>
-            <a href="guide/paracache.html">Hướng dẫn</a>
-            <a href="labs/paracache.html">Bài thực hành</a>
+            <a href="https://paracache.com/" target="_blank">Vào trình</a>
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Bài thực hành</a>
         </div>
     </div>
 
     <!-- Compiler Explorer -->
     <div class="tool-card">
         <h2>Compiler Explorer – Quan sát mã Assembly</h2>
-        <p>Xem mã Assembly tạo ra bởi các compiler từ mã C/C++, so sánh các mức tối ưu và kỹ thuật tối ưu hóa.</p>
+        <p>Trình biên dịch Compiler Explorer hổ trợ biên dịch trình C qua hợp ngữ MIPS. trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
         <div class="button-group">
             <a href="https://godbolt.org/" target="_blank">Vào trình</a>
-            <a href="guide/compiler.html">Hướng dẫn</a>
-            <a href="labs/compiler.html">Bài thực hành</a>
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Bài thực hành</a>
         </div>
     </div>
 
     <!-- JsSPIM -->
     <div class="tool-card">
         <h2>JsSPIM – Mô phỏng SPIM trực tuyến</h2>
-        <p>Chạy và debug chương trình MIPS Assembly, quan sát thanh ghi, stack và memory.</p>
+        <p>Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
         <div class="button-group">
             <a href="https://spimsimulator.github.io/" target="_blank">Vào trình</a>
-            <a href="guide/sspim.html">Hướng dẫn</a>
-            <a href="labs/sspim.html">Bài thực hành</a>
+            <a href="#">Hướng dẫn</a>
+            <a href="#">Bài thực hành</a>
         </div>
     </div>
 

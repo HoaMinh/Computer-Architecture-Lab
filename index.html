@@ -4,24 +4,66 @@
     <meta charset="UTF-8">
     <title>Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính</title>
     <style>
+        /* RESET và CSS cơ bản giữ nguyên */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background: #f5f7fa;
-            margin: 0;
-            padding: 0;
         }
+        
         header {
             background: #003366;
             color: white;
-            padding: 20px 0;
+            padding: 25px 0;
             text-align: center;
+            position: relative;
+            width: 100%;
+            min-height: 80px;
         }
-        h1 { margin: 0; }
+        
+        h1 {
+            margin: 0;
+            padding-top: 10px;
+            padding-right: 150px;
+            padding-left: 20px;
+        }
+        
+        #introButton {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 140px;
+            height: 40px;
+            background: #ff9900;
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 9999;
+        }
+        
+        #introButton:hover {
+            background: #ff6600;
+            transform: scale(1.05);
+        }
+        
         .container {
             max-width: 1000px;
             margin: auto;
             padding: 20px;
         }
+        
         .tool-card {
             background: white;
             padding: 20px;
@@ -29,10 +71,12 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
         .tool-card h2 {
             margin-top: 0;
             color: #003366;
         }
+        
         .button-group a {
             display: inline-block;
             padding: 8px 14px;
@@ -41,12 +85,183 @@
             background: #003366;
             color: white;
             border-radius: 6px;
+            cursor: pointer;
         }
+        
+        .button-group a:hover {
+            background: #00509e;
+        }
+        
         footer {
             text-align: center;
             padding: 15px;
             background: #eaeaea;
             margin-top: 20px;
+        }
+        
+        /* Modal README */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+            color: #003366;
+        }
+        
+        /* Modal Hướng dẫn và Thực hành */
+        .guide-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10001;
+        }
+        
+        .guide-content {
+            background: white;
+            margin: 40px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .guide-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #003366;
+            background: none;
+            border: none;
+            z-index: 1;
+        }
+        
+        .guide-close:hover {
+            color: #ff0000;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #003366;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            background: #ddd;
+        }
+        
+        .tab-btn.active {
+            background: #003366;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h3 {
+            color: #003366;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .tab-content h4 {
+            color: #00509e;
+            margin: 15px 0 10px 0;
+        }
+        
+        .tab-content ol, .tab-content ul {
+            margin: 15px 0 15px 20px;
+        }
+        
+        .tab-content li {
+            margin-bottom: 8px;
+        }
+        
+        .tab-content pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .tab-content code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .tab-content a {
+            color: #00509e;
+            text-decoration: none;
+        }
+        
+        .tab-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .download-btn:hover {
+            background: #218838;
         }
     </style>
 </head>
@@ -55,72 +270,439 @@
 
 <header>
     <h1>Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính</h1>
+    <button id="introButton">GIỚI THIỆU</button>
 </header>
 
 <div class="container">
-
-    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính, bao gồm mô phỏng mạch số, mô phỏng các bộ phận chức năng trong CPU, mô phỏng bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo, trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS, hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác, cho phép viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan.  </p>
+    <p>Trang web này tổng hợp các công cụ mô phỏng phục vụ cho giảng dạy và học tập môn Kiến Trúc Máy Tính...</p>
 
     <!-- CircuitVerse -->
     <div class="tool-card">
         <h2>CircuitVerse – Mô phỏng mạch số</h2>
-        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến, hỗ trợ xây dựng các cỗng logic, mạch  flip flop, các mạch làm toán, thanh ghi, mạch tổ hợp, mã hóa và giải mã, mạch đa hợp và giải đa hợp, ALU, bộ giải mã lệnh và bus dữ liệu, phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
+        <p>CircuitVerse là nền tảng thiết kế và mô phỏng mạch logic trực tuyến...</p>
         <div class="button-group">
             <a href="https://circuitverse.org/" target="_blank">Vào trình</a>
-            <a href="#">Hướng dẫn</a>
-            <a href="#">Bài thực hành</a>
+            <a href="#" class="guide-btn" data-tool="CircuitVerse" data-type="guide">Hướng dẫn</a>
+            <a href="#" class="practice-btn" data-tool="CircuitVerse" data-type="practice">Bài thực hành</a>
         </div>
     </div>
 
     <!-- MIPS Visualizer -->
     <div class="tool-card">
         <h2>MIPS Visualizer – Mô phỏng lệnh MIPS</h2>
-        <p>Trình mô phỏng MIPS Visualizer hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS trên sơ đồ mạch logic. Người học có thể quan sát cách các thành phần như ALU, thanh ghi, bộ giải mã lệnh và bus dữ liệu phối hợp xử lý lệnh theo từng chu kỳ, từ đó hiểu rõ quy trình tìm nạp, giải mã và thực thi lệnh trong kiến trúc bộ xử lý.</p>
+        <p>Trình mô phỏng MIPS Visualizer hỗ trợ trực quan hóa cấu trúc và hoạt động bên trong của CPU MIPS...</p>
         <div class="button-group">
             <a href="https://mips-visualizer.com/" target="_blank">Vào trình</a>
-            <a href="#">Hướng dẫn</a>
-            <a href="#">Bài thực hành</a>
+            <a href="#" class="guide-btn" data-tool="MIPS Visualizer" data-type="guide">Hướng dẫn</a>
+            <a href="#" class="practice-btn" data-tool="MIPS Visualizer" data-type="practice">Bài thực hành</a>
         </div>
     </div>
 
     <!-- ParaCache -->
     <div class="tool-card">
         <h2>ParaCache – Mô phỏng Cache</h2>
-        <p>Mô phỏng ParaCache giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache, bộ nhớ chính và bộ nhớ ảo thông qua giao diện tương tác. Sinh viên có thể chọn các chiến lược ánh xạ (trực tiếp, toàn phần, theo tập hợp) và thuật toán thay thế khối (LRU, FIFO, Random), quan sát cách dữ liệu được lưu trữ, truy xuất, và bị thay thế khi có cache miss </p>
+        <p>Mô phỏng ParaCache giúp sinh viên hình dung rõ cách hoạt động của bộ nhớ cache...</p>
         <div class="button-group">
             <a href="https://paracache.com/" target="_blank">Vào trình</a>
-            <a href="#">Hướng dẫn</a>
-            <a href="#">Bài thực hành</a>
+            <a href="#" class="guide-btn" data-tool="ParaCache" data-type="guide">Hướng dẫn</a>
+            <a href="#" class="practice-btn" data-tool="ParaCache" data-type="practice">Bài thực hành</a>
         </div>
     </div>
 
     <!-- Compiler Explorer -->
     <div class="tool-card">
         <h2>Compiler Explorer – Quan sát mã Assembly</h2>
-        <p>Trình biên dịch Compiler Explorer hổ trợ biên dịch trình C qua hợp ngữ MIPS. trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
+        <p>Trình biên dịch Compiler Explorer hổ trợ biên dịch trình C qua hợp ngữ MIPS...</p>
         <div class="button-group">
             <a href="https://godbolt.org/" target="_blank">Vào trình</a>
-            <a href="#">Hướng dẫn</a>
-            <a href="#">Bài thực hành</a>
+            <a href="#" class="guide-btn" data-tool="Compiler Explorer" data-type="guide">Hướng dẫn</a>
+            <a href="#" class="practice-btn" data-tool="Compiler Explorer" data-type="practice">Bài thực hành</a>
         </div>
     </div>
 
     <!-- JsSPIM -->
     <div class="tool-card">
         <h2>JsSPIM – Mô phỏng SPIM trực tuyến</h2>
-        <p>Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly trên CPU MIPS một cách trực quan. Người học có thể theo dõi quá trình thực thi từng lệnh, bao gồm các bước: tìm nạp, giải mã và thực thi. Các giá trị thanh ghi và bộ nhớ được cập nhật theo thời gian thực, giúp sinh viên hiểu sâu hơn về cách hoạt động của bộ xử lý MIPS và cấu trúc chương trình Assembly ở mức phần cứng.</p>
+        <p>Công cụ mô phỏng trực tuyến này cho phép sinh viên viết, biên dịch và mô phỏng chương trình Assembly...</p>
         <div class="button-group">
             <a href="https://spimsimulator.github.io/" target="_blank">Vào trình</a>
-            <a href="#">Hướng dẫn</a>
-            <a href="#">Bài thực hành</a>
+            <a href="#" class="guide-btn" data-tool="JsSPIM" data-type="guide">Hướng dẫn</a>
+            <a href="#" class="practice-btn" data-tool="JsSPIM" data-type="practice">Bài thực hành</a>
         </div>
     </div>
+</div>
 
+<!-- Modal README -->
+<div id="readmeModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="readmeText">
+            <h2>Nội dung giới thiệu</h2>
+            <p>Đang tải...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Hướng dẫn và Thực hành -->
+<div id="guideModal" class="guide-modal">
+    <div class="guide-content">
+        <button class="guide-close" onclick="closeGuideModal()">&times;</button>
+        <h2 id="guideTitle">Hướng dẫn sử dụng</h2>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="guideTab">📘 Hướng dẫn</button>
+            <button class="tab-btn" data-tab="practiceTab">🔧 Bài thực hành</button>
+            <button class="tab-btn" data-tab="resourceTab">📚 Tài nguyên</button>
+            <button class="tab-btn" data-tab="videoTab">🎥 Video</button>
+        </div>
+        
+        <div id="guideTab" class="tab-content active">
+            <h3>Hướng dẫn sử dụng</h3>
+            <div id="guideText">
+                Chọn một công cụ để xem hướng dẫn chi tiết.
+            </div>
+        </div>
+        
+        <div id="practiceTab" class="tab-content">
+            <h3>Bài thực hành mẫu</h3>
+            <div id="practiceText">
+                Chọn một công cụ để xem bài thực hành.
+            </div>
+        </div>
+        
+        <div id="resourceTab" class="tab-content">
+            <h3>Tài nguyên tham khảo</h3>
+            <div id="resourceText">
+                <p>Các tài nguyên hữu ích sẽ hiển thị tại đây.</p>
+            </div>
+        </div>
+        
+        <div id="videoTab" class="tab-content">
+            <h3>Video hướng dẫn</h3>
+            <div id="videoText">
+                <p>Các video demo và hướng dẫn sẽ hiển thị tại đây.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer>
     © 2025 – Cổng Thông Tin Tích Hợp Mô Phỏng Kiến Trúc Máy Tính
 </footer>
+
+<script>
+// ==================== BIẾN TOÀN CỤC ====================
+let currentTool = '';
+let currentToolType = '';
+
+// ==================== MODAL README ====================
+const readmeModal = document.getElementById('readmeModal');
+const introButton = document.getElementById('introButton');
+
+introButton.onclick = function() {
+    readmeModal.style.display = 'block';
+    loadReadme();
+};
+
+function closeModal() {
+    readmeModal.style.display = 'none';
+}
+
+async function loadReadme() {
+    try {
+        const response = await fetch('README.md');
+        const text = await response.text();
+        document.getElementById('readmeText').innerHTML = 
+            `<h2>Giới thiệu về trang web</h2>
+             <div style="background: #f5f5f5; padding: 20px; border-radius: 5px; white-space: pre-line;">
+                 ${text}
+             </div>`;
+    } catch (error) {
+        document.getElementById('readmeText').innerHTML = 
+            `<div style="color: red;">
+                 <h3>Không thể tải file README.md</h3>
+                 <p>${error.message}</p>
+             </div>`;
+    }
+}
+
+// ==================== MODAL HƯỚNG DẪN ====================
+const guideModal = document.getElementById('guideModal');
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+// Nội dung hướng dẫn cho từng công cụ
+const toolContents = {
+    'CircuitVerse': {
+        guide: `
+            <h4>📋 Hướng dẫn sử dụng CircuitVerse</h4>
+            <p><strong>CircuitVerse</strong> là công cụ mô phỏng mạch số trực tuyến miễn phí.</p>
+            
+            <h4>🎯 Bước 1: Truy cập và đăng ký</h4>
+            <ol>
+                <li>Truy cập <a href="https://circuitverse.org/" target="_blank">circuitverse.org</a></li>
+                <li>Nhấn "Sign Up" để tạo tài khoản miễn phí</li>
+                <li>Xác nhận email và đăng nhập</li>
+            </ol>
+            
+            <h4>🎯 Bước 2: Làm quen với giao diện</h4>
+            <ul>
+                <li><strong>Thanh công cụ bên trái:</strong> Chứa các linh kiện (cổng logic, flip-flop, ALU...)</li>
+                <li><strong>Khu vực vẽ chính:</strong> Nơi thiết kế mạch</li>
+                <li><strong>Thanh công cụ trên:</strong> Các nút Run, Stop, Save, Export</li>
+            </ul>
+            
+            <h4>🎯 Bước 3: Thiết kế mạch cơ bản</h4>
+            <ol>
+                <li>Kéo thả các linh kiện từ thanh công cụ</li>
+                <li>Kết nối chúng bằng cách nhấp vào các chấm kết nối</li>
+                <li>Sử dụng công tắc (Switch) làm đầu vào</li>
+                <li>Sử dụng LED làm đầu ra</li>
+            </ol>
+            
+            <h4>🎯 Bước 4: Mô phỏng và kiểm tra</h4>
+            <ol>
+                <li>Nhấn nút <strong>"Run"</strong> để bắt đầu mô phỏng</li>
+                <li>Nhấp vào công tắc để thay đổi trạng thái đầu vào</li>
+                <li>Quan sát sự thay đổi ở LED đầu ra</li>
+                <li>Nhấn <strong>"Stop"</strong> để dừng mô phỏng</li>
+            </ol>
+            
+            <h4>💡 Mẹo hữu ích</h4>
+            <ul>
+                <li>Sử dụng phím tắt: Ctrl+S (Save), Ctrl+Z (Undo)</li>
+                <li>Đặt tên có ý nghĩa cho các nút và dây</li>
+                <li>Sử dụng tính năng "Subcircuit" cho mạch phức tạp</li>
+            </ul>
+        `,
+        practice: `
+            <h4>🔧 Bài thực hành 1: Thiết kế cổng AND cơ bản</h4>
+            <p><strong>Mục tiêu:</strong> Hiểu nguyên lý hoạt động của cổng AND</p>
+            
+            <h5>📝 Yêu cầu:</h5>
+            <ul>
+                <li>Thiết kế mạch cổng AND 2 đầu vào</li>
+                <li>Sử dụng 2 công tắc làm đầu vào A và B</li>
+                <li>Sử dụng 1 LED làm đầu ra</li>
+                <li>Kiểm tra tất cả trường hợp: 00, 01, 10, 11</li>
+            </ul>
+            
+            <h5>🛠️ Các bước thực hiện:</h5>
+            <ol>
+                <li>Kéo 2 công tắc (Switch) vào bảng vẽ</li>
+                <li>Đặt tên: A và B</li>
+                <li>Kéo 1 cổng AND từ mục "Gates"</li>
+                <li>Kéo 1 đèn LED từ mục "Output"</li>
+                <li>Kết nối: A → chân 1 của AND, B → chân 2 của AND</li>
+                <li>Kết nối: Đầu ra AND → LED</li>
+                <li>Nhấn "Run" và thử nghiệm</li>
+            </ol>
+            
+            <h5>📊 Bảng kiểm tra:</h5>
+            <table style="width:100%; border-collapse: collapse; margin: 15px 0;">
+                <tr style="background: #003366; color: white;">
+                    <th style="padding: 8px; border: 1px solid #ddd;">A</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">B</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">LED</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Đúng/Sai</th>
+                </tr>
+                <tr><td>0</td><td>0</td><td>Tắt</td><td>✅</td></tr>
+                <tr><td>0</td><td>1</td><td>Tắt</td><td>✅</td></tr>
+                <tr><td>1</td><td>0</td><td>Tắt</td><td>✅</td></tr>
+                <tr><td>1</td><td>1</td><td>Sáng</td><td>✅</td></tr>
+            </table>
+            
+            <h4>🔧 Bài thực hành 2: Mạch cộng bán phần (Half Adder)</h4>
+            <p><strong>Mục tiêu:</strong> Thiết kế mạch cộng 2 bit</p>
+            <p><strong>Yêu cầu:</strong> Tạo mạch có 2 đầu vào A, B; 2 đầu ra Sum và Carry</p>
+            
+            <a href="#" class="download-btn" onclick="downloadPractice('circuitverse')">📥 Tải file bài tập đầy đủ</a>
+        `,
+        resources: `
+            <h4>📚 Tài nguyên tham khảo</h4>
+            <ul>
+                <li><a href="https://docs.circuitverse.org/" target="_blank">📖 Tài liệu chính thức CircuitVerse</a></li>
+                <li><a href="https://learn.circuitverse.org/" target="_blank">🎓 Khóa học trực tuyến CircuitVerse</a></li>
+                <li><a href="https://github.com/CircuitVerse/CircuitVerse" target="_blank">💻 Mã nguồn mở trên GitHub</a></li>
+                <li><a href="https://circuitverse.org/simulator/embed/hello-world" target="_blank">🌍 Ví dụ mẫu "Hello World"</a></li>
+            </ul>
+            
+            <h4>📖 Sách và giáo trình</h4>
+            <ul>
+                <li>Digital Design and Computer Architecture - David Harris</li>
+                <li>Fundamentals of Digital Logic - Stephen Brown</li>
+                <li>MIPS Assembly Language Programming - Robert Britton</li>
+            </ul>
+        `,
+        videos: `
+            <h4>🎥 Video hướng dẫn</h4>
+            <div style="margin: 15px 0;">
+                <p><strong>Video 1: Giới thiệu CircuitVerse cơ bản</strong></p>
+                <div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center;">
+                    <p>📹 Video sẽ được nhúng tại đây</p>
+                    <p><a href="https://youtu.be/demo-circuitverse" target="_blank">🔗 Link YouTube: Hướng dẫn cơ bản</a></p>
+                </div>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <p><strong>Video 2: Thiết kế ALU đơn giản</strong></p>
+                <div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center;">
+                    <p>📹 Video hướng dẫn thiết kế ALU 4-bit</p>
+                    <p><a href="https://youtu.be/demo-alu" target="_blank">🔗 Link YouTube: Thiết kế ALU</a></p>
+                </div>
+            </div>
+        `
+    },
+    'MIPS Visualizer': {
+        guide: `<h4>Hướng dẫn sử dụng MIPS Visualizer</h4>
+               <p>Chi tiết hướng dẫn cho MIPS Visualizer...</p>`,
+        practice: `<h4>Bài thực hành MIPS Visualizer</h4>
+                  <p>Chi tiết bài thực hành...</p>`,
+        resources: `<h4>Tài nguyên MIPS</h4><p>Đang cập nhật...</p>`,
+        videos: `<h4>Video MIPS</h4><p>Đang cập nhật...</p>`
+    },
+    'ParaCache': {
+        guide: `<h4>Hướng dẫn sử dụng ParaCache</h4>
+               <p>Chi tiết hướng dẫn cho ParaCache...</p>`,
+        practice: `<h4>Bài thực hành ParaCache</h4>
+                  <p>Chi tiết bài thực hành...</p>`,
+        resources: `<h4>Tài nguyên Cache</h4><p>Đang cập nhật...</p>`,
+        videos: `<h4>Video Cache</h4><p>Đang cập nhật...</p>`
+    },
+    'Compiler Explorer': {
+        guide: `<h4>Hướng dẫn sử dụng Compiler Explorer</h4>
+               <p>Chi tiết hướng dẫn cho Compiler Explorer...</p>`,
+        practice: `<h4>Bài thực hành Compiler Explorer</h4>
+                  <p>Chi tiết bài thực hành...</p>`,
+        resources: `<h4>Tài nguyên Compiler</h4><p>Đang cập nhật...</p>`,
+        videos: `<h4>Video Compiler</h4><p>Đang cập nhật...</p>`
+    },
+    'JsSPIM': {
+        guide: `<h4>Hướng dẫn sử dụng JsSPIM</h4>
+               <p>Chi tiết hướng dẫn cho JsSPIM...</p>`,
+        practice: `<h4>Bài thực hành JsSPIM</h4>
+                  <p>Chi tiết bài thực hành...</p>`,
+        resources: `<h4>Tài nguyên SPIM</h4><p>Đang cập nhật...</p>`,
+        videos: `<h4>Video SPIM</h4><p>Đang cập nhật...</p>`
+    }
+};
+
+// Mở modal hướng dẫn
+function openGuideModal(toolName, toolType) {
+    currentTool = toolName;
+    currentToolType = toolType;
+    
+    // Cập nhật tiêu đề
+    document.getElementById('guideTitle').textContent = `${toolName}`;
+    
+    // Hiển thị modal
+    guideModal.style.display = 'block';
+    
+    // Tải nội dung
+    loadGuideContent(toolName, toolType);
+    
+    // Mở tab tương ứng
+    const tabId = toolType === 'guide' ? 'guideTab' : 'practiceTab';
+    openTab(null, tabId);
+}
+
+// Đóng modal
+function closeGuideModal() {
+    guideModal.style.display = 'none';
+}
+
+// Tải nội dung
+function loadGuideContent(toolName, toolType) {
+    const content = toolContents[toolName] || {
+        guide: `<p>Hướng dẫn cho ${toolName} đang được cập nhật...</p>`,
+        practice: `<p>Bài thực hành cho ${toolName} đang được cập nhật...</p>`,
+        resources: `<p>Tài nguyên cho ${toolName} đang được cập nhật...</p>`,
+        videos: `<p>Video cho ${toolName} đang được cập nhật...</p>`
+    };
+    
+    // Cập nhật nội dung các tab
+    document.getElementById('guideText').innerHTML = content.guide;
+    document.getElementById('practiceText').innerHTML = content.practice;
+    document.getElementById('resourceText').innerHTML = content.resources;
+    document.getElementById('videoText').innerHTML = content.videos;
+}
+
+// Chuyển tab
+function openTab(event, tabName) {
+    // Ẩn tất cả tab
+    tabContents.forEach(tab => tab.classList.remove('active'));
+    
+    // Bỏ active tất cả nút
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Hiển thị tab được chọn
+    document.getElementById(tabName).classList.add('active');
+    
+    // Active nút tương ứng
+    if (event) {
+        event.currentTarget.classList.add('active');
+    } else {
+        // Nếu gọi từ hàm, tìm nút có data-tab phù hợp
+        const correspondingBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+        if (correspondingBtn) {
+            correspondingBtn.classList.add('active');
+        }
+    }
+}
+
+// Gán sự kiện cho các nút tab
+tabButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const tabName = this.getAttribute('data-tab');
+        openTab(e, tabName);
+    });
+});
+
+// Gán sự kiện cho các nút Hướng dẫn và Thực hành
+document.addEventListener('DOMContentLoaded', function() {
+    // Nút Hướng dẫn
+    document.querySelectorAll('.guide-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tool = this.getAttribute('data-tool');
+            openGuideModal(tool, 'guide');
+        });
+    });
+    
+    // Nút Bài thực hành
+    document.querySelectorAll('.practice-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tool = this.getAttribute('data-tool');
+            openGuideModal(tool, 'practice');
+        });
+    });
+});
+
+// Hàm tải bài tập (mẫu)
+function downloadPractice(toolName) {
+    alert(`Đang tải bài tập cho ${toolName}...\nChức năng này có thể được mở rộng để tải file thực tế.`);
+    // Thực tế: window.location.href = `downloads/${toolName}-practice.pdf`;
+}
+
+// Đóng modal khi click ra ngoài
+window.addEventListener('click', function(event) {
+    if (event.target === readmeModal) {
+        closeModal();
+    }
+    if (event.target === guideModal) {
+        closeGuideModal();
+    }
+});
+
+// Thoát bằng phím ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+        closeGuideModal();
+    }
+});
+</script>
 
 </body>
 </html>

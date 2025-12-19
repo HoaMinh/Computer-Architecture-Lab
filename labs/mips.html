@@ -1,44 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-<head><meta charset="utf-8"><title>Hướng dẫn MIPS Visualizer</title>
-<meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto;padding:10px} header h1{color:#003366}</style></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Thực Hành MIPS - Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS đồng bộ với giao diện Guide đã chỉnh sửa */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* THANH TIỆN ÍCH TRÊN CÙNG (Nút về trang chủ riêng biệt) */
+        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
+        .btn-home { 
+            text-decoration: none; 
+            color: #d35400; 
+            font-weight: bold; 
+            font-size: 14px; 
+            border: 2px solid #d35400; 
+            padding: 6px 18px; 
+            border-radius: 20px; 
+            transition: 0.3s;
+        }
+        .btn-home:hover { background: #d35400; color: #fff; }
+
+        /* HEADER */
+        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
+        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
+        .nav-menu { 
+            background: #000080; 
+            display: flex; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .nav-item { 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none; 
+            color: #ffffff !important; /* Chữ trắng sáng */
+            padding: 18px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            font-size: 15px;
+        }
+        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } /* Chữ vàng khi rê chuột */
+        .nav-item.active { background: #3498db; }
+
+        /* NỘI DUNG CÁC BÀI LAB */
+        .lab-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 30px; border-top: 6px solid #2980b9; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; font-size: 22px; }
+        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 20px; letter-spacing: 1px; }
+        
+        .box { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db; }
+        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; }
+        
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'Consolas', monospace; }
+        
+        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+    </style>
+</head>
 <body>
-<header><h1>Hướng dẫn MIPS Visualizer</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
 
-<section>
-  <h2>Giới thiệu</h2>
-  <p>MIPS Visualizer là công cụ trực quan giúp theo dõi thanh ghi, bộ nhớ và pipeline khi thực thi lệnh MIPS. Một số phiên bản chạy hoàn toàn trên trình duyệt.</p>
-</section>
+    <div class="top-nav">
+        <div class="container">
+            <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="btn-home"><i class="fas fa-home"></i> VỀ TRANG CHỦ</a>
+        </div>
+    </div>
 
-<section>
-  <h2>Giao diện chính</h2>
-  <ul>
-    <li>Editor: nhập code MIPS.</li>
-    <li>Controls: Run, Step, Reset.</li>
-    <li>Registers/Memory view: hiển thị nội dung thanh ghi, ô nhớ.</li>
-  </ul>
-</section>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> DANH SÁCH BÀI THỰC HÀNH MIPS</h1>
+        </div>
 
-<section>
-  <h2>Hướng dẫn sử dụng cơ bản</h2>
-  <ol>
-    <li>Sao chép chương trình MIPS mẫu vào editor.</li>
-    <li>Nhấn Assemble/Run để dịch và chạy.</li>
-    <li>Dùng Step để chạy từng lệnh, quan sát thay đổi trong registers và memory.</li>
-  </ol>
-</section>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i class="fas fa-list-check"></i> Bài thực hành</a>
+            <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank" class="nav-item">
+                <i class="fas fa-play-circle"></i> Vào trình
+            </a>
+        </nav>
 
-<section>
-  <h2>Gợi ý debug</h2>
-  <ul>
-    <li>Kiểm tra sử dụng syscall (các mã, ví dụ: 1=print integer, 10=exit).</li>
-    <li>Đảm bảo segment data và text tách đúng.</li>
-  </ul>
-</section>
+        <div class="lab-card">
+            <h2>BÀI 2-1: Cài đặt và sử dụng MIPS Visualizer</h2>
+            <h3>Mục tiêu</h3>
+            <ul>
+                <li>Làm quen với giao diện mô phỏng trực quan mã MIPS.</li>
+                <li>Biết cách nhập mã, chạy (Run) và kiểm tra từng bước (Step).</li>
+            </ul>
+            <div class="box">
+                <strong>Hướng dẫn:</strong> Nhập đoạn mã <code>addi $t0, $zero, 10</code>. Nhấn Step để quan sát giá trị 10 được nạp vào thanh ghi $t0.
+            </div>
+            <div class="submit-info">Yêu cầu nộp: Ảnh chụp màn hình kết quả thanh ghi $t0 sau khi chạy.</div>
+        </div>
 
-<section>
-  <h2>Tài liệu tham khảo</h2>
-  <ul><li><a href="https://en.wikipedia.org/wiki/MIPS_architecture" target="_blank">MIPS Architecture (Wiki)</a></li></ul>
-</section>
+        <div class="lab-card">
+            <h2>BÀI 2-2: Các lệnh số học và logic cơ bản</h2>
+            <h3>Mục tiêu</h3>
+            <ul>
+                <li>Sử dụng thành thạo các lệnh: <code>add, sub, and, or, xor</code>.</li>
+                <li>Hiểu cách làm việc với các hằng số (Immediate) qua lệnh <code>addi, andi</code>.</li>
+            </ul>
+            <div class="box">
+                <strong>Bài tập mẫu:</strong> Tính biểu thức <code>f = (g + h) - (i + j)</code> với các giá trị cho trước trong các thanh ghi từ $s0 đến $s3.
+            </div>
+            <div class="submit-info">Yêu cầu nộp: Mã nguồn (.s) và ảnh chụp giá trị thanh ghi kết quả.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 2-3: Lệnh nhảy và rẽ nhánh</h2>
+            <h3>Mục tiêu</h3>
+            <ul>
+                <li>Cấu trúc hóa chương trình với <code>beq, bne</code> (rẽ nhánh có điều kiện).</li>
+                <li>Sử dụng lệnh <code>j</code> (nhảy không điều kiện) để tạo vòng lặp.</li>
+            </ul>
+            <div class="box">
+                <strong>Nội dung:</strong> Viết chương trình so sánh hai số, nếu bằng nhau thì gán $t1 = 1, ngược lại $t1 = 0.
+            </div>
+            <div class="submit-info">Yêu cầu nộp: Sơ đồ khối (Flowchart) và mã nguồn chương trình.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 2-4: Lệnh truy xuất bộ nhớ (Load/Store)</h2>
+            <h3>Mục tiêu</h3>
+            <ul>
+                <li>Sử dụng <code>lw</code> để lấy dữ liệu từ bộ nhớ vào thanh ghi.</li>
+                <li>Sử dụng <code>sw</code> để lưu dữ liệu từ thanh ghi ra bộ nhớ.</li>
+            </ul>
+            <div class="submit-info">Yêu cầu nộp: Mã nguồn thực hiện việc hoán đổi (swap) giá trị của 2 ô nhớ.</div>
+        </div>
+
+        <div class="lab-card">
+            <h2>BÀI 2-5: Viết chương trình tính tổng mảng</h2>
+            <p>Tổng hợp kiến thức để viết một chương trình hoàn chỉnh duyệt qua một mảng số nguyên và tính tổng các phần tử.</p>
+            <div class="submit-info">Yêu cầu nộp: Mã nguồn hoàn chỉnh và báo cáo kết quả thực thi trên Datapath.</div>
+        </div>
+
+        <footer>
+            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
+        </footer>
+    </div>
+
 </body>
 </html>

@@ -1,29 +1,202 @@
-<!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><title>Hướng dẫn JsSPIM</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto} header h1{color:#003366}</style></head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu về JsSpim - Lab Guide</title>
+    <link rel="stylesheet" href="lib/style.css"> <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --bg-light: #f4f7f6;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; display: flex; }
+        
+        /* Sidebar Styles */
+        .sidebar { width: 280px; background: var(--primary-color); color: white; height: 100vh; position: fixed; overflow-y: auto; padding: 20px 0; }
+        .sidebar h2 { padding: 0 20px; font-size: 1.2rem; margin-bottom: 20px; color: var(--accent-color); }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li a { display: block; padding: 12px 20px; color: #bdc3c7; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
+        .sidebar ul li a:hover, .sidebar ul li a.active { background: var(--secondary-color); color: white; border-left: 4px solid var(--accent-color); }
+
+        /* Main Content Styles */
+        .main-content { margin-left: 280px; padding: 40px; max-width: 900px; background: white; min-height: 100vh; }
+        h1 { color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; }
+        h2 { color: var(--secondary-color); margin-top: 30px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+        h3 { color: #2980b9; margin-top: 25px; }
+        
+        .info-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .step-box { background: #fff; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: var(--primary-color); color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        
+        .code-block { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; overflow-x: auto; margin: 15px 0; }
+        img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin: 15px 0; }
+        .tag { background: #eee; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-weight: bold; }
+    </style>
+</head>
 <body>
-<header><h1>Hướng dẫn JsSPIM</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
 
-<section>
-  <h2>Giới thiệu</h2>
-  <p>JsSPIM (hoặc SPIM trên web) mô phỏng môi trường SPIM cho MIPS32. Hữu dụng để chạy file .asm, quan sát registers và memory.</p>
-</section>
+    <nav class="sidebar">
+        <h2>JsSpim Guide</h2>
+        <ul>
+            <li><a href="#intro" class="active">1. Giới thiệu chung</a></li>
+            <li><a href="#interface">2. Giao diện JsSpim</a></li>
+            <li><a href="#regs">2.1. Thanh ghi (Regs)</a></li>
+            <li><a href="#text-segment">2.2. Phân đoạn lệnh</a></li>
+            <li><a href="#data-segment">2.3. Phân đoạn dữ liệu</a></li>
+            <li><a href="#output-log">2.4. Output & Log</a></li>
+            <li><a href="#stack">2.5. Ngăn xếp (Stack)</a></li>
+            <li><a href="#steps">3. Các bước sử dụng</a></li>
+            <li><a href="#advanced">4. Thực hành nâng cao</a></li>
+        </ul>
+    </nav>
 
-<section>
-  <h2>Sử dụng</h2>
-  <ol>
-    <li>Mở web JsSPIM</li>
-    <li>Paste code .asm vào editor</li>
-    <li>Run / Step / Reset</li>
-    <li>Xem registers, stack, memory</li>
-  </ol>
-</section>
+    <main class="main-content">
+        <section id="intro">
+            <h1>GIỚI THIỆU VỀ JsSpim</h1>
+            <p><strong>JsSpim</strong> là một phiên bản mô phỏng (emulator) của kiến trúc bộ lệnh <strong>MIPS</strong> (Microprocessor without Interlocked Pipeline Stages), được viết bằng JavaScript và chạy trực tiếp trên trình duyệt web[cite: 2].</p>
+            <div class="info-box">
+                <p>Nó là công cụ mô phỏng chính cho các bài thực hành lập trình Assembly MIPS, giúp trực quan hóa việc thực thi mã nguồn và quản lý tài nguyên hệ thống[cite: 3, 7].</p>
+            </div>
+            <h3>Vai trò trong môn Kiến trúc Máy tính:</h3>
+            <ul>
+                <li><strong>Học tập Lập trình:</strong> Môi trường để viết, dịch, và chạy mã Assembly MIPS RISC[cite: 5, 6].</li>
+                <li><strong>Trực quan hóa:</strong> Quan sát sự thay đổi của Thanh ghi (Registers) và Bộ nhớ (Memory) theo từng bước[cite: 7].</li>
+                <li><strong>Thực hành Syscall:</strong> Hiểu cách chương trình giao tiếp với hệ điều hành để thực hiện nhập/xuất (I/O)[cite: 8].</li>
+                <li><strong>Quản lý Stack:</strong> Mô phỏng cơ chế ngăn xếp để gọi hàm và lưu trữ biến cục bộ[cite: 9].</li>
+            </ul>
+        </section>
 
-<section>
-  <h2>Tips</h2>
-  <ul>
-    <li>Luôn khai báo .data và .text rõ ràng</li>
-    <li>Dùng syscall đúng mã</li>
-  </ul>
-</section>
+        <section id="interface">
+            <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
+            <p>Truy cập thông qua Cổng thông tin: <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" target="_blank">Hoaminh GitHub Lab</a>[cite: 12].</p>
+            
+            <h3>Giao diện JsSpim</h3>
+            <p>Giao diện gồm 6 vùng chức năng chính giúp kiểm soát việc thực thi chương trình[cite: 15]:</p>
+            
+            <div id="regs">
+                <h4>1. Regs – Thanh ghi (Registers Window)</h4>
+                <ul>
+                    <li><strong>Chức năng:</strong> Hiển thị tất cả thanh ghi CPU MIPS bao gồm GPRs ($t0-$t9, $s0-$s7,...) và thanh ghi đặc biệt (PC, HI, LO)[cite: 17, 18, 19].</li>
+                    <li><strong>Cách dùng:</strong> Giá trị cập nhật tự động khi chạy. Di chuột để xem giá trị ở dạng thập phân hoặc hexa[cite: 20, 25].</li>
+                </ul>
+            </div>
+
+            <div id="text-segment">
+                <h4>2. Text Segment – Phân đoạn lệnh</h4>
+                <ul>
+                    <li>Hiển thị mã máy (Assembly) đã nạp. Dòng lệnh đang chạy sẽ được <strong>tô sáng màu vàng</strong> theo Program Counter (PC)[cite: 29, 32, 33].</li>
+                    <li>Có thể click vào dòng lệnh để đặt <strong>breakpoint</strong>[cite: 34].</li>
+                </ul>
+                <p><em>Hỗ trợ tệp tin:</em></p>
+                <ul>
+                    <li><span class="tag">Please choose...</span>: Chọn các file mẫu có sẵn như test_core.s, fibonacci.s[cite: 41, 42].</li>
+                    <li><span class="tag">Upload your own</span> / <span class="tag">Browse</span>: Tải tệp .s hoặc .asm từ máy tính cá nhân[cite: 46, 51].</li>
+                </ul>
+            </div>
+
+            <div id="data-segment">
+                <h4>3. Data Segment – Phân đoạn dữ liệu</h4>
+                <p>Hiển thị vùng nhớ dữ liệu (.data). Cập nhật giá trị khi thực hiện các lệnh <span class="tag">lw</span>, <span class="tag">sw</span>, <span class="tag">lb</span>, <span class="tag">sb</span>[cite: 58, 62].</p>
+            </div>
+
+            <div id="output-log">
+                <h4>4. Output & Log</h4>
+                <ul>
+                    <li><strong>Output:</strong> Hiển thị kết quả của lệnh <span class="tag">syscall</span> (in số, in chuỗi)[cite: 70].</li>
+                    <li><strong>Log:</strong> Nhật ký chi tiết thứ tự lệnh và các thông báo lỗi (như lỗi canh lề bộ nhớ)[cite: 83, 86, 91].</li>
+                </ul>
+            </div>
+
+            <div id="stack">
+                <h4>5. User Stack – Ngăn xếp người dùng</h4>
+                <p>Mô phỏng vùng nhớ Stack bắt đầu từ địa chỉ cao <span class="tag">0x7ffffffc</span> và giảm dần. Dùng để lưu trữ địa chỉ trả về ($ra) và biến cục bộ khi gọi hàm[cite: 93, 98, 99].</p>
+            </div>
+        </section>
+
+        <section id="steps">
+            <h2>CÁC BƯỚC CƠ BẢN ĐỂ SỬ DỤNG</h2>
+            
+            <div class="step-box">
+                <strong>Bước 1: Nhập mã hợp ngữ</strong>
+                <p>Gõ trực tiếp hoặc dán mã vào khung soạn thảo bên trái. Đảm bảo đúng cú pháp MIPS[cite: 110, 112].</p>
+                <div class="code-block">
+                    addi $t0, $zero, 5     # Gán $t0 = 5<br>
+                    addi $t1, $zero, 10    # Gán $t1 = 10<br>
+                    add  $t2, $t0, $t1     # $t2 = $t0 + $t1
+                </div>
+            </div>
+
+            <div class="step-box">
+                <strong>Bước 2: Thực thi chương trình</strong>
+                <p>Nhấn <strong>Run ▶️</strong> để chạy toàn bộ hoặc <strong>Step</strong> để chạy từng lệnh[cite: 121, 122]. Sử dụng <strong>Speed Slider</strong> để điều chỉnh tốc độ mô phỏng[cite: 137].</p>
+            </div>
+
+            <h3>Tóm tắt nội dung cập nhật</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vùng hiển thị</th>
+                        <th>Nội dung cập nhật</th>
+                        <th>Mục đích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Regs</td>
+                        <td>Giá trị thanh ghi CPU</td>
+                        <td>Theo dõi biến & phép toán</td>
+                    </tr>
+                    <tr>
+                        <td>Text Segment</td>
+                        <td>Dòng lệnh hiện tại</td>
+                        <td>Xem thứ tự thực thi</td>
+                    </tr>
+                    <tr>
+                        <td>Data Segment</td>
+                        <td>Giá trị biến/mảng</td>
+                        <td>Theo dõi dữ liệu bộ nhớ</td>
+                    </tr>
+                    <tr>
+                        <td>Output</td>
+                        <td>Kết quả syscall</td>
+                        <td>Hiển thị kết quả ra màn hình</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="advanced">
+            <h2>GỢI Ý THỰC HÀNH NÂNG CAO</h2>
+            <ul>
+                <li>Thử nghiệm các mã <span class="tag">syscall</span> khác nhau (in/đọc số nguyên, chuỗi)[cite: 151].</li>
+                <li>Sử dụng lệnh <span class="tag">jal</span>, <span class="tag">jr</span> để phân tích sự thay đổi trong User Stack[cite: 152].</li>
+                <li>Dùng <strong>Step</strong> để gỡ lỗi các bài toán vòng lặp hoặc đệ quy (như tính factorial)[cite: 153].</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Script đơn giản để highlight mục menu khi scroll (tùy chọn)
+        window.addEventListener('scroll', () => {
+            let fromTop = window.scrollY + 50;
+            const links = document.querySelectorAll('.sidebar ul li a');
+            
+            links.forEach(link => {
+                let section = document.querySelector(link.hash);
+                if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

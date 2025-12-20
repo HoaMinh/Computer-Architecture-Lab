@@ -3,925 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng Dẫn Sử Dụng CircuitVerse - Kiến Trúc Máy Tính</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Hướng dẫn CircuitVerse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-blue: #00008b;
+            --nav-bg: #1a237e;
+            --btn-active: #5c6bc0;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
+            --text-dark: #333;
+            --bg-light: #f0f2f5;
         }
 
         body {
-            background: #ffffff;
-            color: #000000;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.6;
-            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
+        /* Header Section */
         .header {
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 3px solid #000080;
-            margin-bottom: 40px;
-            background: #ffffff;
-            border-radius: 10px;
+            padding: 25px 0;
+            background: white;
+            border-bottom: 3px solid var(--primary-blue);
         }
 
         .header h1 {
-            color: #000080;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #333333;
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Main Navigation Menu */
-        .main-nav {
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 28px;
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-            background: #000080;
-            border-radius: 10px;
-            padding: 10px;
+            align-items: center;
+            gap: 12px;
         }
 
-        .nav-tabs {
+        /* Navigation Bar */
+        .nav-container {
+            background-color: var(--nav-bg);
+            padding: 12px;
             display: flex;
-            gap: 5px;
-            width: 100%;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .nav-tab {
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 1.05rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            text-align: center;
-            flex: 1;
-            min-width: 160px;
-            max-width: 220px;
-            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: 0.2s;
         }
 
-        .nav-tab i {
-            font-size: 1.2rem;
-        }
-
-        .nav-tab:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            color: #ffffff;
-        }
-
-        .nav-tab.active {
-            background: rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        /* Nút TRỞ VỀ TRANG CHỦ có màu khác */
-        .nav-tab.home {
-            background: #006400 !important;
-        }
-
-        .nav-tab.home:hover {
-            background: #008000 !important;
-            transform: translateY(-2px);
-        }
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
 
         /* Main Content */
-        .content {
-            display: none;
-            animation: fadeIn 0.5s ease;
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
         }
 
-        .content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Guide Sections */
-        .guide-section {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border: 2px solid #000080;
-        }
-
-        .guide-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #eeeeee;
-        }
-
-        .guide-icon {
-            background: #000080;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 1.8rem;
-            flex-shrink: 0;
-            color: white;
-        }
-
-        .guide-title {
-            font-size: 2rem;
-            color: #000080;
-            margin-bottom: 5px;
-        }
-
-        .guide-subtitle {
-            color: #333333;
-            font-size: 1.1rem;
-        }
-
-        /* Guide Content */
-        .guide-content {
-            padding: 10px 0;
-        }
-
-        .content-section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #ffffff;
+        .card {
+            background: white;
             border-radius: 8px;
-            border-left: 4px solid #000080;
-            border: 1px solid #dddddd;
+            border: 1px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
         }
 
-        .section-title {
-            color: #000080;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+        .card-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eeeeee;
-        }
-
-        .section-title i {
-            font-size: 1.3rem;
-            color: #000080;
-        }
-
-        /* List Styling */
-        .guide-content ul, .guide-content ol {
-            padding-left: 25px;
-            margin-bottom: 20px;
-        }
-
-        .guide-content li {
-            margin-bottom: 12px;
-            color: #000000;
-            line-height: 1.7;
-            padding-left: 5px;
-        }
-
-        .guide-content p {
-            margin-bottom: 15px;
-            color: #000000;
-            line-height: 1.7;
-        }
-
-        /* Steps Styling */
-        .steps-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .step-item {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 10px;
-            border-left: 4px solid #000080;
-            border: 1px solid #dddddd;
-        }
-
-        .step-number {
-            display: inline-block;
-            background: #000080;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 32px;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .step-title {
-            color: #000080;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        /* Component List */
-        .component-category {
-            margin-bottom: 25px;
-        }
-
-        .category-title {
-            color: #000080;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eeeeee;
-        }
-
-        .components-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 15px;
         }
 
-        .component-item {
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #dddddd;
-        }
+        .card-header i { font-size: 28px; color: var(--primary-blue); }
+        .card-header h2 { margin: 0; color: var(--primary-blue); font-size: 20px; text-transform: uppercase; }
 
-        .component-name {
-            color: #000080;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 1.05rem;
-        }
+        .card-body { padding: 30px; }
 
-        .component-desc {
-            color: #333333;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Important Notes */
-        .important-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 8px;
-        }
-
-        .important-title {
-            color: #856404;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .info-title {
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* Simulator Container */
-        .simulator-container {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 30px;
-            margin-top: 20px;
-            border: 2px solid #000080;
-            text-align: center;
+        .step-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fcfcfc;
+            border-radius: 6px;
+            border-left: 4px solid var(--btn-active);
         }
 
-        .simulator-frame {
-            width: 100%;
-            height: 700px;
-            border: 2px solid #000080;
-            border-radius: 8px;
-            margin: 20px 0;
-            overflow: hidden;
-            background: #ffffff;
+        .step-num {
+            background: var(--primary-blue);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            font-weight: bold;
         }
 
-        /* Links */
-        a:not(.nav-tab) {
-            color: #000080;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        a:not(.nav-tab):hover {
-            color: #000060;
-            text-decoration: underline;
-        }
-
-        /* Strong text */
-        strong {
-            color: #000080;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 2px solid #eeeeee;
-            color: #666666;
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: #000080;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: #000060;
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .nav-tab {
-                min-width: 140px;
-                padding: 12px 15px;
-                font-size: 1rem;
-                max-width: 200px;
-            }
-            
-            .components-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .main-nav {
-                padding: 8px;
-            }
-            
-            .nav-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-tab {
-                width: 100%;
-                max-width: 100%;
-                min-width: auto;
-                margin-bottom: 5px;
-                padding: 12px 20px;
-            }
-            
-            .guide-section {
-                padding: 20px;
-            }
-            
-            .guide-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .guide-icon {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .components-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .simulator-frame {
-                height: 500px;
-            }
-            
-            .content-section {
-                padding: 15px;
-            }
-        }
+        footer { text-align: center; padding: 20px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1><i class="fas fa-book-open"></i> HƯỚNG DẪN SỬ DỤNG CIRCUITVERSE</h1>
-            <p>Phòng thí nghiệm Kiến trúc Máy tính - Hướng dẫn tóm tắt sử dụng công cụ mô phỏng mạch số</p>
-        </header>
 
-        <!-- Main Navigation Menu - CÓ NÚT TRỞ VỀ TRANG CHỦ -->
-        <nav class="main-nav">
-            <div class="nav-tabs">
-                <a href="#" class="nav-tab active" data-tab="guide">
-                    <i class="fas fa-book"></i> HƯỚNG DẪN
-                </a>
-                <a href="../labs/circuitverse.html" class="nav-tab">
-                    <i class="fas fa-flask"></i> BÀI THỰC HÀNH
-                </a>
-                <a href="https://circuitverse.org/simulator" class="nav-tab" data-tab="simulator">
-                    <i class="fas fa-play-circle"></i> VÀO TRÌNH
-                </a>
-                <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="nav-tab home">
-                    <i class="fas fa-home"></i> TRỞ VỀ TRANG CHỦ
-                </a>
+    <header class="header">
+        <h1><i class="fas fa-microchip"></i> HƯỚNG DẪN CIRCUITVERSE</h1>
+        <p>Phòng thí nghiệm Kiến trúc Máy tính - Thiết kế và mô phỏng mạch logic trực tuyến</p>
+    </header>
+
+    <nav class="nav-container">
+        <a href="#" class="nav-btn btn-active"><i class="fas fa-info-circle"></i> HƯỚNG DẪN</a>
+        <a href="../labs/circuit.html" class="nav-btn btn-normal"><i class="fas fa-tasks"></i> BÀI THỰC HÀNH</a>
+        <a href="https://circuitverse.org/simulator" target="_blank" class="nav-btn btn-normal">
+            <i class="fas fa-play-circle"></i> VÀO TRÌNH
+        </a>
+        <a href="../index.html" class="nav-btn btn-home"><i class="fas fa-home"></i> VỀ TRANG CHỦ</a>
+    </nav>
+
+    <div class="content-wrapper">
+        
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-project-diagram"></i>
+                <h2>TỔNG QUAN VỀ CIRCUITVERSE</h2>
             </div>
-        </nav>
+            <div class="card-body">
+                <p>CircuitVerse là một nền tảng trực tuyến cho phép thiết kế, mô phỏng và chia sẻ các mạch logic kỹ thuật số. Đây là công cụ hữu ích để thực hành các nội dung về cổng logic, mạch tổ hợp và mạch tuần tự trong môn Kiến trúc Máy tính.</p>
+                
+                <div class="info-title">Đặc điểm nổi bật:</div>
+                <ul style="padding-left: 20px;">
+                    <li>Giao diện kéo thả trực quan, dễ sử dụng.</li>
+                    <li>Thư viện linh kiện phong phú (Gates, Decoders, Flip-flops, v.v.).</li>
+                    <li>Hỗ trợ tạo các mạch con (Sub-circuits) để thiết kế hệ thống phức tạp.</li>
+                </ul>
+            </div>
+        </div>
 
-        <!-- ========== NỘI DUNG HƯỚNG DẪN ========== -->
-        <div id="guide" class="content active">
-            <div class="guide-section">
-                <div class="guide-header">
-                    <div class="guide-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div>
-                        <h2 class="guide-title">HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
-                        <p class="guide-subtitle">Hướng dẫn tóm tắt sử dụng CircuitVerse cho bài thực hành</p>
-                    </div>
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-list-ol"></i>
+                <h2>CÁC BƯỚC THỰC HIỆN CƠ BẢN</h2>
+            </div>
+            <div class="card-body">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div><strong>Lấy linh kiện:</strong> Chọn các cổng logic hoặc linh kiện từ thanh công cụ bên trái và kéo vào vùng làm việc.</div>
                 </div>
-
-                <div class="guide-content">
-                    <!-- Phần tổng quan -->
-                    <div class="content-section">
-                        <h3 class="section-title"><i class="fas fa-info-circle"></i> TỔNG QUAN</h3>
-                        <ul>
-                            <li>Nhấn tab <strong>Hướng dẫn</strong> để xem hướng dẫn tóm tắt.</li>
-                            <li>Nhấn tab <strong>Bài thực hành</strong> để xem các bài tập.</li>
-                            <li>Nhấn tab <strong>Vào trình</strong> để vào trang web CircuitVerse làm bài.</li>
-                            <li><strong>Đăng ký hoặc đăng nhập</strong> trước khi sử dụng để có thể lưu và chia sẻ dự án.</li>
-                            <li>Sau khi đăng nhập, nhấn <strong>"Launch Simulator"</strong> để bắt đầu thiết kế mạch.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Đăng ký và đăng nhập -->
-                    <div class="content-section">
-                        <h3 class="section-title"><i class="fas fa-user-check"></i> ĐĂNG KÝ VÀ ĐĂNG NHẬP</h3>
-                        <ul>
-                            <li>Nhấn vào <strong>"Sign Up"</strong> để tạo tài khoản mới.</li>
-                            <li>Điền thông tin: tên, email, mật khẩu → nhấn <strong>"Register"</strong>.</li>
-                            <li>Đăng nhập bằng email và mật khẩu đã tạo hoặc sử dụng Google/Facebook/GitHub.</li>
-                            <li>Đăng nhập giúp bạn lưu dự án, chia sẻ, và truy cập lại sau này.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Các bước cơ bản để thiết kế mạch -->
-                    <div class="content-section">
-                        <h3 class="section-title"><i class="fas fa-cogs"></i> CÁC BƯỚC CƠ BẢN ĐỂ THIẾT KẾ MẠCH</h3>
-                        
-                        <ol class="steps-list">
-                            <!-- Bước 1 -->
-                            <li class="step-item">
-                                <div class="step-title">
-                                    <span class="step-number">1</span>
-                                    TẠO DỰ ÁN MỚI
-                                </div>
-                                <ul>
-                                    <li>Nhấn vào <strong>"My Projects"</strong> → <strong>"New Project"</strong></li>
-                                    <li>Đặt tên cho dự án (ví dụ: "MIPS Datapath") và nhấn <strong>"Create"</strong></li>
-                                </ul>
-                            </li>
-
-                            <!-- Bước 2 -->
-                            <li class="step-item">
-                                <div class="step-title">
-                                    <span class="step-number">2</span>
-                                    THÊM LINH KIỆN
-                                </div>
-                                <p>Sử dụng thanh công cụ bên trái để chọn các linh kiện như:</p>
-                                
-                                <div class="component-category">
-                                    <h4 class="category-title">INPUT</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">Input</div>
-                                            <div class="component-desc">Switch cơ bản (0/1)</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Button</div>
-                                            <div class="component-desc">Nút nhấn tạm thời</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Power</div>
-                                            <div class="component-desc">Nguồn logic 1</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Ground</div>
-                                            <div class="component-desc">Mass logic 0</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Constant Value</div>
-                                            <div class="component-desc">Giá trị cố định</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Stepper</div>
-                                            <div class="component-desc">Bộ tạo xung nhịp</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">OUTPUT</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">Output</div>
-                                            <div class="component-desc">Đầu ra cơ bản</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">RGB Led</div>
-                                            <div class="component-desc">LED đổi màu</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Digital led</div>
-                                            <div class="component-desc">LED số</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Variable led</div>
-                                            <div class="component-desc">LED biến đổi</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Hex display</div>
-                                            <div class="component-desc">Hiển thị hex</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Seven segment Display</div>
-                                            <div class="component-desc">Hiển thị 7 đoạn</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Sixteen Segment Display</div>
-                                            <div class="component-desc">Hiển thị 16 đoạn</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Square RGBLed</div>
-                                            <div class="component-desc">LED RGB vuông</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">RGBLed Matrix</div>
-                                            <div class="component-desc">Ma trận LED RGB</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">GATES</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">AND</div>
-                                            <div class="component-desc">Cổng AND</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">OR</div>
-                                            <div class="component-desc">Cổng OR</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">NOT</div>
-                                            <div class="component-desc">Cổng NOT</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">XOR</div>
-                                            <div class="component-desc">Cổng XOR</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">NAND</div>
-                                            <div class="component-desc">Cổng NAND</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">NOR</div>
-                                            <div class="component-desc">Cổng NOR</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">XNOR</div>
-                                            <div class="component-desc">Cổng XNOR</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">DECODER & PLEXER</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">Multiplexer</div>
-                                            <div class="component-desc">Bộ chọn kênh</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Demultiplexer</div>
-                                            <div class="component-desc">Bộ phân kênh</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Bit Selector</div>
-                                            <div class="component-desc">Chọn bit</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Priority Encoder</div>
-                                            <div class="component-desc">Mã hóa ưu tiên</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">MSB</div>
-                                            <div class="component-desc">Most Significant Bit</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">LSB</div>
-                                            <div class="component-desc">Least Significant Bit</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Decoder</div>
-                                            <div class="component-desc">Bộ giải mã</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">SEQUENTIAL ELEMENTS</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">D flip flop</div>
-                                            <div class="component-desc">Flip flop D</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">D Latch</div>
-                                            <div class="component-desc">Latch D</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">T flip flop</div>
-                                            <div class="component-desc">Flip flop T</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">JK flip flop</div>
-                                            <div class="component-desc">Flip flop JK</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">SR flip flop</div>
-                                            <div class="component-desc">Flip flop SR</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">TTY</div>
-                                            <div class="component-desc">Thiết bị đầu cuối</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Keyboard</div>
-                                            <div class="component-desc">Bàn phím</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Clock</div>
-                                            <div class="component-desc">Tạo xung nhịp</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">RAM</div>
-                                            <div class="component-desc">Bộ nhớ truy cập ngẫu nhiên</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">ROM</div>
-                                            <div class="component-desc">Bộ nhớ chỉ đọc</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">EPROM</div>
-                                            <div class="component-desc">ROM có thể xóa</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">ANOTATION</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">Rectangle</div>
-                                            <div class="component-desc">Hình chữ nhật</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Arrow</div>
-                                            <div class="component-desc">Mũi tên</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Image Annotation</div>
-                                            <div class="component-desc">Chú thích hình ảnh</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Text</div>
-                                            <div class="component-desc">Văn bản</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="component-category">
-                                    <h4 class="category-title">MISC</h4>
-                                    <div class="components-grid">
-                                        <div class="component-item">
-                                            <div class="component-name">Two Complement</div>
-                                            <div class="component-desc">Bù 2</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Flag</div>
-                                            <div class="component-desc">Cờ hiệu</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Splitter</div>
-                                            <div class="component-desc">Bộ chia/tổng hợp bus</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Adder</div>
-                                            <div class="component-desc">Bộ cộng</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">ALU</div>
-                                            <div class="component-desc">Đơn vị logic số học</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">TriState flip flop</div>
-                                            <div class="component-desc">Flip flop 3 trạng thái</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Tunnel</div>
-                                            <div class="component-desc">Kết nối ảo</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Buffer</div>
-                                            <div class="component-desc">Bộ đệm</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Controller</div>
-                                            <div class="component-desc">Bộ điều khiển</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Inverter</div>
-                                            <div class="component-desc">Bộ đảo</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">TB input</div>
-                                            <div class="component-desc">Đầu vào testbench</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">TB output</div>
-                                            <div class="component-desc">Đầu ra testbench</div>
-                                        </div>
-                                        <div class="component-item">
-                                            <div class="component-name">Force gate</div>
-                                            <div class="component-desc">Cổng force</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!-- Bước 3 -->
-                            <li class="step-item">
-                                <div class="step-title">
-                                    <span class="step-number">3</span>
-                                    KẾT NỐI MẠCH
-                                </div>
-                                <ul>
-                                    <li>Kéo dây từ đầu ra của linh kiện này đến đầu vào của linh kiện khác.</li>
-                                    <li>Dùng <strong>"Label"</strong> để đặt tên cho các tín hiệu.</li>
-                                </ul>
-                            </li>
-
-                            <!-- Bước 4 -->
-                            <li class="step-item">
-                                <div class="step-title">
-                                    <span class="step-number">4</span>
-                                    CHẠY MÔ PHỎNG
-                                </div>
-                                <ul>
-                                    <li>Nhấn nút <strong>"Simulate"</strong> để chạy mạch.</li>
-                                    <li>Quan sát trạng thái của các tín hiệu, đèn LED, và kết quả tính toán.</li>
-                                </ul>
-                            </li>
-                        </ol>
-                    </div>
-
-                    <!-- Lưu và chia sẻ -->
-                    <div class="content-section">
-                        <h3 class="section-title"><i class="fas fa-save"></i> LƯU VÀ CHIA SẺ</h3>
-                        <ul>
-                            <li>Nhấn <strong>"Save"</strong> để lưu dự án</li>
-                            <li>Dự án sẽ được lưu trên tài khoản CircuitVerse của bạn</li>
-                            <li>Có thể chia sẻ bằng cách gửi liên kết dự án</li>
-                        </ul>
-
-                        <div class="important-box">
-                            <div class="important-title">
-                                <i class="fas fa-exclamation-circle"></i>
-                                LƯU Ý QUAN TRỌNG
-                            </div>
-                            <p>Luôn đăng nhập trước khi bắt đầu thiết kế để có thể lưu và chia sẻ dự án. Các dự án không được lưu sẽ bị mất khi đóng trình duyệt.</p>
-                        </div>
-                    </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div><strong>Kết nối dây:</strong> Nhấp giữ từ đầu ra của linh kiện này và kéo đến đầu vào của linh kiện khác để nối dây.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div><strong>Mô phỏng:</strong> Sử dụng các công tắc (Input) để thay đổi mức logic và quan sát kết quả tại các đèn Led (Output).</div>
                 </div>
             </div>
         </div>
 
-        <!-- ========== TRÌNH MÔ PHỎNG ========== -->
-        <div id="simulator" class="content">
-            <div class="simulator-container">
-                <h2 class="guide-title"><i class="fas fa-play-circle"></i> VÀO TRÌNH MÔ PHỎNG CIRCUITVERSE</h2>
-                <p class="guide-subtitle">Truy cập trực tiếp trang CircuitVerse để bắt đầu thiết kế mạch</p>
-                
-                <div class="important-box">
-                    <div class="important-title">
-                        <i class="fas fa-info-circle"></i>
-                        HƯỚNG DẪN TRUY CẬP
-                    </div>
-                    <p>Dưới đây là trình mô phỏng CircuitVerse trực tiếp. Nhấn nút "Launch Simulator" để bắt đầu thiết kế. Để lưu và chia sẻ dự án, bạn cần đăng nhập vào CircuitVerse.</p>
-                </div>
-                
-                <div class="simulator-frame">
-                    <iframe 
-                        src="https://circuitverse.org/simulator" 
-                        width="100%" 
-                        height="100%"
-                        style="border:none;"
-                        title="CircuitVerse Simulator">
-                    </iframe>
-                </div>
-                
-                <div style="margin-top: 25px; color: #333333; font-size: 0.95rem;">
-                    <p><i class="fas fa-link" style="color: #000080;"></i> <strong>Liên kết trực tiếp:</strong> 
-                    <a href="https://circuitverse.org" target="_blank">https://circuitverse.org</a> | 
-                    <a href="https://circuitverse.org/simulator" target="_blank">https://circuitverse.org/simulator</a></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Phòng thí nghiệm Kiến trúc Máy tính • 
-               <a href="https://hoaminh.github.io/Computer-Architecture-Lab/">
-                   hoaminh.github.io/Computer-Architecture-Lab
-               </a>
-            </p>
-            <p>© 2024 - Hướng dẫn sử dụng CircuitVerse | Tài liệu giáo dục môn Kiến trúc Máy tính</p>
+        <footer>
+            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
         </footer>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainTabs = document.querySelectorAll('.nav-tab[data-tab]');
-            const contents = document.querySelectorAll('.content');
-            
-            function hideAllContents() {
-                contents.forEach(content => {
-                    content.classList.remove('active');
-                });
-            }
-            
-            function deactivateAllMainTabs() {
-                mainTabs.forEach(tab => {
-                    tab.classList.remove('active');
-                });
-            }
-            
-            mainTabs.forEach(tab => {
-                tab.addEventListener('click', function(e) {
-                    if(this.href && !this.getAttribute('data-tab')) {
-                        return; // Cho phép link mở bình thường
-                    }
-                    
-                    e.preventDefault();
-                    
-                    const tabType = this.getAttribute('data-tab');
-                    
-                    deactivateAllMainTabs();
-                    
-                    this.classList.add('active');
-                    
-                    hideAllContents();
-                    
-                    document.getElementById(tabType).classList.add('active');
-                });
-            });
-            
-            console.log("CircuitVerse Guide Page với nút TRỞ VỀ TRANG CHỦ đã sẵn sàng!");
-        });
-    </script>
 </body>
 </html>

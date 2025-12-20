@@ -1,26 +1,254 @@
-<!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><title>Bài thực hành JsSPIM</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;max-width:900px;margin:20px auto}</style></head>
+v<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thực hành JsSpim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #00008b;
+            --nav-bg: #1a237e;
+            --btn-active: #5c6bc0;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
+            --text-dark: #333;
+            --bg-light: #f0f2f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 25px 0;
+            background: white;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .header h1 {
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Navigation Bar */
+        .nav-container {
+            background-color: var(--nav-bg);
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
+
+        /* Main Content */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: #fff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header i { font-size: 28px; color: var(--primary-blue); }
+
+        .card-header h2 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-body { padding: 25px; }
+
+        .objective {
+            background: #e3f2fd;
+            padding: 12px;
+            border-left: 4px solid var(--btn-active);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .lab-title {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Code Block */
+        .code-box {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            margin: 15px 0;
+            white-space: pre;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .comment { color: #75715e; }
+    </style>
+</head>
 <body>
-<header><h1>Bài thực hành JsSPIM</h1><p><a href="/Computer-Architecture-Lab/index.html">Về trang chủ</a></p></header>
 
-<section>
-  <h2>Mục tiêu</h2>
-  <p>Luyện kỹ năng viết chương trình Assembly MIPS nhỏ: IO, vòng lặp, thao tác mảng và gọi hàm.</p>
-</section>
+    <header class="header">
+        <h1><i class="fas fa-flask"></i> BÀI THỰC HÀNH JSSPIM</h1>
+        <p>Phòng thí nghiệm Kiến trúc Máy tính - Nội dung thực hành lập trình MIPS</p>
+    </header>
 
-<section>
-  <h2>Bài 1: In dãy Fibonacci n số</h2>
-  <p>Viết chương trình in n số Fibonacci (n ≤ 20). Input n đặt sẵn trong .data hoặc dùng syscall để nhập.</p>
-</section>
+    <nav class="nav-container">
+        <a href="../guide/sspim.html" class="nav-btn btn-normal"><i class="fas fa-info-circle"></i> HƯỚNG DẪN</a>
+        <a href="#" class="nav-btn btn-active"><i class="fas fa-tasks"></i> BÀI THỰC HÀNH</a>
+        <a href="https://shawnzhong.github.io/JsSpim/" target="_blank" class="nav-btn btn-normal"><i class="fas fa-play-circle"></i> VÀO TRÌNH</a>
+        <a href="../index.html" class="nav-btn btn-home"><i class="fas fa-home"></i> TRANG CHỦ</a>
+    </nav>
 
-<section>
-  <h2>Bài 2: Sắp xếp mảng</h2>
-  <p>Viết chương trình sắp xếp mảng (bubble sort) và in kết quả.</p>
-</section>
+    <div class="content-wrapper">
 
-<section>
-  <h2>Nộp bài</h2>
-  <p>Nộp file .asm và màn hình chạy (screenshot). Ghi chú thời gian thực thi (nếu cần) và phân tích ngắn về registers dùng.</p>
-</section>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-terminal"></i><h2>BÀI 4.1 – LÀM QUEN VÀ SYSCALL CƠ BẢN</h2></div>
+            <div class="card-body">
+                <div class="objective"><strong>Mục tiêu:</strong> Hiểu giao diện và sử dụng các lệnh syscall in số, in chuỗi và nhập dữ liệu.</div>
+                <div class="code-box">.data
+msg: .asciiz "Nhap mot so: "
+.text
+main:
+    li $v0, 4
+    la $a0, msg
+    syscall          <span class="comment"># in chuỗi</span>
+    li $v0, 5
+    syscall          <span class="comment"># nhập số → $v0</span>
+    move $t0, $v0
+    li $v0, 1
+    move $a0, $t0
+    syscall          <span class="comment"># in số</span>
+    li $v0, 10
+    syscall</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-code-branch"></i><h2>BÀI 4.2 – CẤU TRÚC RẼ NHÁNH IF-ELSE</h2></div>
+            <div class="card-body">
+                <div class="objective"><strong>Mục tiêu:</strong> Sử dụng lệnh nhảy điều kiện (bgt) và nhảy không điều kiện (j).</div>
+                <div class="code-box">.data
+msg1: .asciiz "A > B"
+msg2: .asciiz "A <= B"
+.text
+main:
+    li $t0, 15       <span class="comment"># A</span>
+    li $t1, 10       <span class="comment"># B</span>
+    bgt $t0, $t1, L1 <span class="comment"># Nếu t0 > t1 nhảy đến L1</span>
+    li $v0, 4
+    la $a0, msg2
+    syscall
+    j end
+L1:
+    li $v0, 4
+    la $a0, msg1
+    syscall
+end:
+    li $v0, 10
+    syscall</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-redo"></i><h2>BÀI 4.3 – VÒNG LẶP FOR VÀ TÍNH TỔNG</h2></div>
+            <div class="card-body">
+                <div class="objective"><strong>Mục tiêu:</strong> Viết vòng lặp for trong MIPS để tính tổng từ 1 đến N.</div>
+                
+                <div class="code-box">.data
+n: .word 5
+.text
+main:
+    lw $t0, n        <span class="comment"># N</span>
+    li $t1, 0        <span class="comment"># sum</span>
+    li $t2, 1        <span class="comment"># i</span>
+loop:
+    add $t1, $t1, $t2
+    addi $t2, $t2, 1
+    ble $t2, $t0, loop <span class="comment"># Nếu i <= N quay lại loop</span>
+    li $v0, 1
+    move $a0, $t1
+    syscall
+    li $v0, 10
+    syscall</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-layer-group"></i><h2>BÀI 4.4 – QUẢN LÝ NGĂN XẾP (STACK) VÀ GỌI HÀM</h2></div>
+            <div class="card-body">
+                <div class="objective"><strong>Mục tiêu:</strong> Hiểu cách sử dụng $sp (stack pointer) và $ra (return address) khi gọi hàm.</div>
+                <div class="code-box">.text
+main:
+    li $a0, 10
+    jal square       <span class="comment"># Gọi hàm square</span>
+    move $s0, $v0    <span class="comment"># Kết quả trả về</span>
+    li $v0, 10
+    syscall
+
+square:
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)   <span class="comment"># Lưu địa chỉ trả về vào stack</span>
+    mul $v0, $a0, $a0
+    lw $ra, 0($sp)   <span class="comment"># Phục hồi địa chỉ trả về</span>
+    addi $sp, $sp, 4
+    jr $ra           <span class="comment"># Quay về main</span></div>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

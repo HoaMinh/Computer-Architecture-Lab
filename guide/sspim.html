@@ -181,7 +181,7 @@
             <i class="fas fa-tasks"></i> BÀI THỰC HÀNH
         </a>
         
-        <a href="https://spimsimulator.sourceforge.net/jsSpim.html" target="_blank" class="nav-btn btn-normal">
+        <a href="https://shawnzhong.github.io/JsSpim/" target="_blank" class="nav-btn btn-normal">
             <i class="fas fa-play-circle"></i> VÀO TRÌNH
         </a>
         
@@ -196,57 +196,55 @@
                 <i class="fas fa-chalkboard-teacher"></i>
                 <div>
                     <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
-                    <p style="margin:2px 0; color:#888; font-size:13px;">Dựa trên tài liệu hướng dẫn JsSpim v1.0</p>
+                    <p style="margin:2px 0; color:#888; font-size:13px;">Nội dung dựa trên hướng dẫn JsSpim v1.0</p>
                 </div>
             </div>
 
             <div class="card-body">
-                <div class="info-title">I. JSSPIM LÀ GÌ?</div>
-                <p><strong>JsSpim</strong> là trình mô phỏng kiến trúc bộ lệnh MIPS32, được viết bằng JavaScript để chạy trực tiếp trên trình duyệt web mà không cần cài đặt. Đây là công cụ đắc lực để học tập các nguyên tắc cơ bản của kiến trúc máy tính thông qua lập trình Assembly RISC.</p>
+                <div class="info-title">I. TỔNG QUAN</div>
+                <p><strong>JsSpim</strong> là một trình mô phỏng (emulator) của kiến trúc bộ lệnh MIPS, được viết bằng JavaScript. Đây là công cụ quan trọng giúp sinh viên học lập trình Assembly MIPS và trực quan hóa các hoạt động bên trong CPU.</p>
 
-                <div class="info-title" style="margin-top:25px;">II. CÁC VÙNG GIAO DIỆN QUAN TRỌNG</div>
+                <div class="info-title" style="margin-top:25px;">II. GIAO DIỆN CHỨC NĂNG</div>
                 <table>
                     <thead>
                         <tr>
-                            <th>Vùng hiển thị</th>
-                            <th>Chức năng quan sát</th>
+                            <th>Vùng chức năng</th>
+                            <th>Mục đích</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Regs</strong></td>
-                            <td>Giá trị các thanh ghi GPRs ($t, $s,...) và thanh ghi đặc biệt (PC, HI, LO).</td>
+                            <td><strong>Regs Window</strong></td>
+                            <td>Hiển thị giá trị các thanh ghi GPRs và thanh ghi đặc biệt (PC, HI, LO).</td>
                         </tr>
                         <tr>
                             <td><strong>Text Segment</strong></td>
-                            <td>Mã lệnh Assembly. Dòng đang thực thi được tô sáng màu vàng.</td>
+                            <td>Hiển thị mã máy Assembly. Dòng đang thực thi được tô màu vàng.</td>
                         </tr>
                         <tr>
                             <td><strong>Data Segment</strong></td>
-                            <td>Bộ nhớ dữ liệu nơi lưu trữ các biến toàn cục và mảng.</td>
+                            <td>Quan sát các biến toàn cục và mảng được lưu trong bộ nhớ.</td>
                         </tr>
                         <tr>
-                            <td><strong>User Stack</strong></td>
-                            <td>Quản lý ngăn xếp cho các lời gọi hàm (địa chỉ trả về $ra).</td>
+                            <td><strong>Console / Output</strong></td>
+                            <td>Hiển thị kết quả in ra màn hình từ các lệnh syscall.</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <div class="info-title" style="margin-top:25px;">III. QUY TRÌNH THỰC HIỆN</div>
+                <div class="info-title" style="margin-top:25px;">III. CÁC THAO TÁC CƠ BẢN</div>
                 <ul class="step-list">
-                    <li><strong>Nạp mã:</strong> Nhập trực tiếp mã vào vùng Text hoặc dùng nút <span style="color:var(--primary-blue); font-weight:bold;">Browse</span> để tải file .s.</li>
-                    <li><strong>Thực thi:</strong> Nhấn <span style="color:var(--btn-green); font-weight:bold;">Run</span> để chạy nhanh hoặc <span style="color:var(--btn-active); font-weight:bold;">Step</span> để chạy từng lệnh.</li>
-                    <li><strong>Điều chỉnh:</strong> Sử dụng thanh trượt <strong>Speed</strong> để kiểm soát tốc độ chạy lệnh (nên giảm tốc độ khi debug).</li>
-                    <li><strong>Kết quả:</strong> Theo dõi vùng <strong>Output</strong> cho các lệnh in và vùng <strong>Log</strong> để xem thông báo lỗi hệ thống.</li>
+                    <li><strong>Nhập mã:</strong> Gõ mã trực tiếp hoặc tải file lên từ nút <span style="font-weight:bold;">Browse</span>.</li>
+                    <li><strong>Thực thi:</strong> Dùng nút <span style="color:var(--btn-green); font-weight:bold;">Run</span> để chạy hết chương trình hoặc <span style="color:var(--btn-active); font-weight:bold;">Step</span> để xem từng bước.</li>
+                    <li><strong>Tốc độ:</strong> Điều chỉnh thanh trượt <span style="font-weight:bold;">Speed</span> để làm chậm quá trình mô phỏng giúp dễ quan sát.</li>
+                    <li><strong>Gỡ lỗi:</strong> Nếu có lỗi phát sinh, hãy kiểm tra thông báo chi tiết trong thẻ <span style="font-weight:bold;">Log</span>.</li>
                 </ul>
 
                 <div class="code-box">
-# Ví dụ nạp giá trị vào thanh ghi
-addi $t0, $zero, 5     # $t0 = 5
-addi $t1, $zero, 10    # $t1 = 10
-add  $t2, $t0, $t1     # $t2 = 15</div>
-
-                <p class="footer-note">* Lưu ý: Đảm bảo mã nguồn của bạn tuân thủ đúng cú pháp MIPS32 để tránh lỗi "Invalid instruction".</p>
+# Ví dụ nạp và tính toán
+addi $t0, $zero, 15    # Gán t0 = 15
+addi $t1, $zero, 25    # Gán t1 = 25
+add  $s0, $t0, $t1     # s0 = 15 + 25 = 40</div>
             </div>
         </div>
     </div>

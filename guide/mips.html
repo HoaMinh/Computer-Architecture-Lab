@@ -28,7 +28,7 @@
         /* Header Section */
         .header {
             text-align: center;
-            padding: 25px 0;
+            padding: 30px 0;
             background: white;
             border-bottom: 3px solid var(--primary-blue);
         }
@@ -41,13 +41,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
-        }
-
-        .header p {
-            color: #666;
-            margin-top: 8px;
-            font-size: 14px;
+            gap: 15px;
         }
 
         /* Navigation Bar */
@@ -70,7 +64,6 @@
             gap: 8px;
             font-size: 14px;
             transition: 0.2s;
-            border: none;
         }
 
         .btn-active { background-color: var(--btn-active); }
@@ -95,7 +88,7 @@
         }
 
         .card-header {
-            background: #fff;
+            background: #f8f9fa;
             padding: 20px;
             border-bottom: 1px solid #eee;
             display: flex;
@@ -103,21 +96,10 @@
             gap: 15px;
         }
 
-        .card-header i {
-            font-size: 30px;
-            color: var(--primary-blue);
-        }
+        .card-header i { font-size: 28px; color: var(--primary-blue); }
+        .card-header h2 { margin: 0; color: var(--primary-blue); font-size: 20px; text-transform: uppercase; }
 
-        .card-header h2 {
-            margin: 0;
-            color: var(--primary-blue);
-            font-size: 22px;
-            text-transform: uppercase;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
+        .card-body { padding: 30px; }
 
         .info-title {
             color: var(--primary-blue);
@@ -129,56 +111,41 @@
             gap: 10px;
         }
 
-        /* List Styles */
-        .step-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .step-list li {
-            margin-bottom: 15px;
-            padding-left: 35px;
-            position: relative;
+        /* Step Styles */
+        .step-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fcfcfc;
+            border-radius: 6px;
+            border-left: 4px solid var(--btn-active);
         }
 
         .step-num {
-            position: absolute;
-            left: 0;
-            top: 0;
             background: var(--primary-blue);
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+            flex-shrink: 0;
             font-weight: bold;
         }
 
-        .bullet-list {
-            padding-left: 20px;
-        }
+        .bullet-list { padding-left: 20px; }
+        .bullet-list li { margin-bottom: 10px; }
 
-        .bullet-list li {
-            margin-bottom: 10px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-            font-size: 13px;
-        }
+        footer { text-align: center; padding: 20px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
 
     <header class="header">
         <h1><i class="fas fa-eye"></i> HƯỚNG DẪN MIPS VISUALIZER</h1>
-        <p>Phòng thí nghiệm Kiến trúc Máy tính - Trực quan hóa luồng dữ liệu Datapath</p>
+        <p>Phòng thí nghiệm Kiến trúc Máy tính - Công cụ trực quan hóa sơ đồ Datapath</p>
     </header>
 
     <nav class="nav-container">
@@ -201,57 +168,62 @@
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-project-diagram"></i>
-                <h2>TỔNG QUAN VỀ MIPS VISUALIZER</h2>
+                <h2>TỔNG QUAN & ỨNG DỤNG</h2>
             </div>
             <div class="card-body">
-                <p>MIPS Visualizer là công cụ trực quan mạnh mẽ giúp sinh viên hiểu rõ cách dữ liệu di chuyển bên trong CPU thông qua sơ đồ Datapath. Công cụ này hỗ trợ phân tích luồng dữ liệu của các lệnh như <code>add</code>, <code>sub</code>, <code>lw</code>, <code>sw</code>, <code>beq</code>.</p>
+                <p><strong>MIPS Visualizer</strong> là công cụ trực quan hóa luồng dữ liệu (Datapath) của CPU MIPS đơn chu kỳ. Sinh viên có thể theo dõi cách các tín hiệu điều khiển hoạt động cho từng loại lệnh cụ thể.</p>
                 
-                <div class="info-title"><i class="fas fa-lightbulb"></i> Ứng dụng chính</div>
+                
+
+                <div class="info-title" style="margin-top:20px;">Lợi ích học tập:</div>
                 <ul class="bullet-list">
-                    <li>Hiểu rõ cách hoạt động của ALU, thanh ghi, và bộ nhớ.</li>
-                    <li>Phân tích chi tiết các thành phần trong sơ đồ đơn chu kỳ (Single Cycle).</li>
-                    <li>Thực hành viết và kiểm tra mã hợp ngữ MIPS trực tiếp trên trình duyệt.</li>
+                    <li>Hiểu rõ vai trò của <strong>ALU</strong>, các thanh ghi và bộ nhớ.</li>
+                    <li>Phân tích luồng dữ liệu của các lệnh: <code>add</code>, <code>sub</code>, <code>lw</code>, <code>sw</code>, <code>beq</code>.</li>
+                    <li>Trực quan hóa các thành phần điều khiển (Control Unit).</li>
                 </ul>
             </div>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-list-ol"></i>
-                <h2>CÁC BƯỚC SỬ DỤNG CƠ BẢN</h2>
+                <i class="fas fa-cogs"></i>
+                <h2>CÁC BƯỚC THỰC HIỆN</h2>
             </div>
             <div class="card-body">
-                <ul class="step-list">
-                    <li>
-                        <span class="step-num">1</span>
-                        <strong>Nhập mã hợp ngữ:</strong> Gõ mã MIPS vào khung soạn thảo bên trái (Ví dụ: <code>add $t0, $t1, $t2</code>).
-                    </li>
-                    <li>
-                        <span class="step-num">2</span>
-                        <strong>Chạy mô phỏng:</strong> Nhấn nút <strong>"Run"</strong> để thực thi mã hoặc <strong>"Step"</strong> để thực hiện từng lệnh một.
-                    </li>
-                    <li>
-                        <span class="step-num">3</span>
-                        <strong>Xem sơ đồ Datapath:</strong> Phần bên phải hiển thị sơ đồ datapath tương ứng với lệnh đang chạy, giúp theo dõi luồng dữ liệu và trạng thái từng bước.
-                    </li>
-                    <li>
-                        <span class="step-num">4</span>
-                        <strong>Quan sát kết quả:</strong> Theo dõi sự thay đổi trong bảng thanh ghi (Registers) và bộ nhớ (Memory).
-                    </li>
-                </ul>
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div>
+                        <strong>Nhập mã:</strong> Soạn thảo các lệnh MIPS vào khung bên trái. 
+                        <br><em>Ví dụ:</em> <code>addi $t0, $zero, 5</code>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div>
+                        <strong>Mô phỏng:</strong> Nhấn nút <strong>Run</strong> để thực hiện toàn bộ hoặc <strong>Step</strong> để xem từng bước dữ liệu di chuyển qua các khối chức năng.
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div>
+                        <strong>Quan sát:</strong> Theo dõi các đường dẫn (màu sắc thay đổi) trên sơ đồ Datapath và giá trị cập nhật trong bảng thanh ghi bên phải.
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-exclamation-triangle"></i>
+                <i class="fas fa-lightbulb"></i>
                 <h2>LƯU Ý QUAN TRỌNG</h2>
             </div>
             <div class="card-body">
                 <ul class="bullet-list">
-                    <li>Công cụ không hỗ trợ lưu trữ trực tuyến, hãy <strong>Copy</strong> mã nguồn lưu vào file <code>.txt</code> sau khi hoàn thành.</li>
-                    <li>Dùng ký hiệu <code>#</code> để viết chú thích trong mã nguồn.</li>
-                    <li>Kiểm tra kỹ các giá trị trong bảng <strong>Registers</strong> để xác nhận kết quả tính toán cuối cùng.</li>
+                    <li>Sử dụng ký hiệu <code>#</code> để viết chú thích cho mã nguồn.</li>
+                    <li>MIPS Visualizer không lưu trữ trực tuyến, vui lòng <strong>Copy</strong> mã nguồn ra file <code>.txt</code> sau khi làm bài.</li>
+                    <li>Bảng <strong>Registers</strong> bên phải là nơi kiểm tra kết quả tính toán cuối cùng chính xác nhất.</li>
                 </ul>
             </div>
         </div>

@@ -3,177 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành ParaCache - Hệ Thống Lab</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bài thực hành ParaCache</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* CSS đồng bộ với hệ thống Lab */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-        /* THANH TIỆN ÍCH TRÊN CÙNG */
-        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
-        .btn-home { 
-            text-decoration: none; 
-            color: #d35400; 
-            font-weight: bold; 
-            font-size: 14px; 
-            border: 2px solid #d35400; 
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            transition: 0.3s;
+        :root {
+            --primary-blue: #00008b;
+            --nav-bg: #1a237e;
+            --btn-active: #5c6bc0;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
+            --text-dark: #333;
+            --bg-light: #f0f2f5;
+            --accent-blue: #e3f2fd;
         }
-        .btn-home:hover { background: #d35400; color: #fff; }
 
-        /* HEADER */
-        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
-        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
-        .nav-menu { 
-            background: #000080; 
-            display: flex; 
-            justify-content: center; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .nav-item { 
-            flex: 1; 
-            text-align: center; 
-            text-decoration: none; 
-            color: #ffffff !important; 
-            padding: 18px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            font-size: 15px;
-        }
-        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
-        .nav-item.active { background: #3498db; }
 
-        /* NỘI DUNG CÁC BÀI LAB */
-        .lab-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 30px; border-top: 6px solid #2980b9; }
-        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.3em; }
-        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 20px; letter-spacing: 1px; }
-        
-        .box { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db; }
-        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; }
-        
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: white; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; font-size: 0.9em; }
-        th { background: #f2f2f2; color: #333; }
+        /* Header & Nav */
+        .header { text-align: center; padding: 25px 0; background: white; border-bottom: 3px solid var(--primary-blue); }
+        .header h1 { color: var(--primary-blue); text-transform: uppercase; margin: 0; font-size: 28px; display: flex; justify-content: center; align-items: center; gap: 12px; }
+        .nav-container { background-color: var(--nav-bg); padding: 12px; display: flex; justify-content: center; gap: 12px; }
+        .nav-btn { padding: 10px 20px; border-radius: 4px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; font-size: 14px; transition: 0.2s; }
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
 
-        ul, ol { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'Consolas', monospace; }
-        
-        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+        /* Layout */
+        .content-wrapper { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 8px; border: 1px solid var(--primary-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 40px; }
+        .card-header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px; }
+        .card-header i { font-size: 24px; color: var(--primary-blue); }
+        .card-header h2 { margin: 0; color: var(--primary-blue); font-size: 20px; text-transform: uppercase; }
+        .card-body { padding: 30px; }
+
+        /* Section Styles */
+        .section-box { margin-bottom: 25px; }
+        .section-title { font-weight: bold; color: var(--primary-blue); border-bottom: 2px solid var(--accent-blue); display: inline-block; margin-bottom: 10px; }
+        .objective-list { background: var(--accent-blue); padding: 15px 20px; border-left: 5px solid var(--btn-active); border-radius: 4px; list-style-type: square; }
+        .instruction-steps { padding-left: 20px; }
+        .instruction-steps li { margin-bottom: 8px; }
+
+        /* Boxes for Data and Config */
+        .config-box { background: #f1f8e9; padding: 15px; border-radius: 4px; border: 1px dashed #2e7d32; margin: 15px 0; }
+        .config-box strong { color: #1b5e20; }
+        .code-box { background: #272822; color: #f8f8f2; padding: 20px; border-radius: 6px; font-family: 'Consolas', monospace; margin: 15px 0; white-space: pre; overflow-x: auto; font-size: 14px; }
+        .submit-box { background: #e8f5e9; padding: 15px; border-radius: 4px; border-left: 5px solid var(--btn-green); margin: 15px 0; font-weight: 500; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <div class="container">
-            <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="btn-home"><i class="fas fa-home"></i> VỀ TRANG CHỦ</a>
+    <header class="header">
+        <h1><i class="fas fa-flask"></i> BÀI THỰC HÀNH PARACACHE</h1>
+        <p>Thực hành mô phỏng bộ nhớ Cache và phân cấp bộ nhớ</p>
+    </header>
+
+    <nav class="nav-container">
+        <a href="../guide/paracache.html" class="nav-btn btn-normal"><i class="fas fa-info-circle"></i> HƯỚNG DẪN</a>
+        <a href="#" class="nav-btn btn-active"><i class="fas fa-tasks"></i> BÀI THỰC HÀNH</a>
+        <a href="https://pcrisv.github.io/ParaCache/" target="_blank" class="nav-btn btn-normal"><i class="fas fa-play-circle"></i> VÀO TRÌNH</a>
+        <a href="../index.html" class="nav-btn btn-home"><i class="fas fa-home"></i> TRANG CHỦ</a>
+    </nav>
+
+    <div class="content-wrapper">
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-th-large"></i><h2>BÀI 5.1: BỘ NHỚ CACHE ÁNH XẠ TRỰC TIẾP (DIRECT MAPPED)</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Hiểu cấu trúc và cơ chế ánh xạ của Direct Mapped Cache.</li>
+                        <li>Phân tích Instruction Breakdown (Tag, Index, Offset).</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Cấu hình thực hành</div>
+                    <div class="config-box">
+                        <strong>Cache Size:</strong> 64 Bytes | 
+                        <strong>Memory Size:</strong> 512 Bytes | 
+                        <strong>Offset Bits:</strong> 3 (Block size = 8 Bytes)
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <ol class="instruction-steps">
+                        <li>Chọn <strong>Direct Mapped Cache</strong> trên thanh Menu.</li>
+                        <li>Thiết lập chiến lược ghi: <strong>Write Back</strong> và <strong>Write On Allocate</strong>.</li>
+                        <li>Nhấn Submit và nhập lần lượt các địa chỉ (Hex): <code>4, A, 2C</code>.</li>
+                        <li>Quan sát sự thay đổi của các cột Valid, Tag, Data trong bảng Cache.</li>
+                    </ol>
+                </div>
+                <div class="submit-box"><i class="fas fa-clipboard-check"></i> Yêu cầu: Ghi lại số bit cho Tag, Index, Offset dựa trên mục Instruction Breakdown.</div>
+            </div>
         </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-layer-group"></i><h2>BÀI 5.2: CACHE TẬP HỢP PHỐI HỢP (N-WAY ASSOCIATIVE)</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Tìm hiểu ưu điểm của tập hợp phối hợp trong việc giảm xung đột (Conflict Miss).</li>
+                        <li>Quan sát các chiến thuật thay thế khối (Replacement Policy).</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Cấu hình thực hành</div>
+                    <div class="config-box">
+                        <strong>Associativity:</strong> 2-way hoặc 4-way | 
+                        <strong>Replacement:</strong> LRU (Least Recently Used)
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <ol class="instruction-steps">
+                        <li>Chuyển sang chế độ <strong>N-way Set Associative</strong>.</li>
+                        <li>Thực hiện chuỗi truy cập địa chỉ lặp lại để quan sát cơ chế giữ lại khối dữ liệu hay dùng nhất.</li>
+                        <li>Theo dõi bộ đếm <strong>Hit Rate</strong> tăng lên như thế nào so với Bài 5.1.</li>
+                    </ol>
+                </div>
+                <div class="submit-box"><i class="fas fa-clipboard-check"></i> Yêu cầu: So sánh tỷ lệ Hit/Miss giữa Direct Mapped và 2-way với cùng một chuỗi địa chỉ.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-sitemap"></i><h2>BÀI 5.3: MÔ PHỎNG BỘ NHỚ ẢO (VIRTUAL MEMORY)</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Hiểu cách ánh xạ từ địa chỉ ảo (Virtual Address) sang địa chỉ vật lý (Physical Address).</li>
+                        <li>Vai trò của Page Table và TLB.</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <ol class="instruction-steps">
+                        <li>Chọn Tab <strong>Virtual Memory</strong> trong ứng dụng.</li>
+                        <li>Nhập địa chỉ và quan sát quá trình tra cứu trong Page Table.</li>
+                        <li>Xác định trường hợp nào xảy ra <strong>Page Fault</strong> (khi trang không có trong bộ nhớ vật lý).</li>
+                    </ol>
+                </div>
+                <div class="submit-box"><i class="fas fa-clipboard-check"></i> Yêu cầu: Giải thích quy trình khi CPU truy cập một địa chỉ ảo không có trong TLB.</div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-microchip"></i> THỰC HÀNH KIẾN TRÚC MÁY TÍNH - PARACACHE</h1>
-        </div>
-
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active"><i class="fas fa-list-check"></i> Bài thực hành</a>
-            <a href="https://cse.iitkgp.ac.in/~goutam/paracache/ParaCache/ParaCache.html" target="_blank" class="nav-item">
-                <i class="fas fa-play-circle"></i> Vào trình
-            </a>
-        </nav>
-
-        <div class="lab-card">
-            <h2>BÀI 5.1: Mô phỏng Cache ánh xạ trực tiếp (Direct Mapped)</h2>
-            <div class="box">
-                <strong>Cấu hình:</strong> Cache Size = 64B, Memory Size = 512B, Offset Bits = 3[cite: 3, 4, 5, 12, 13, 14].
-                <br><strong>Địa chỉ:</strong> LOAD 4H, AH, 2CH[cite: 6].
-            </div>
-            <p>1. Chọn <code>Direct Mapped Cache</code>, <code>Write Back</code> và <code>Write On Allocate</code>[cite: 8, 9, 10].</p>
-            <p>2. Phân tích 9 bit địa chỉ: 3 bit <strong>TAG</strong>, 3 bit <strong>INDEX</strong>, 3 bit <strong>OFFSET</strong>[cite: 16].</p>
-            <p>3. Nhấn <code>Next</code> để theo dõi quá trình nạp dữ liệu từ Memory Block (64 khối) lên Cache Table (8 khối)[cite: 17, 18, 23].</p>
-            <div class="submit-info">Yêu cầu: Nhận xét sự thay đổi của Valid bit, Tag và dữ liệu sau lệnh LOAD(2C)[cite: 18, 24].</div>
-        </div>
-
-        <div class="lab-card">
-            <h2>BÀI 5.2 - 5.4: Cache phối hợp & Chính sách thay thế</h2>
-            <p>Thực hiện mô phỏng tương tự bài 5.1 với các kiểu tổ chức Cache khác nhau để so sánh hiệu quả của các chính sách thay thế <strong>FIFO</strong> và <strong>LRU</strong>[cite: 25, 26, 27].</p>
-            <ul>
-                <li><strong>Bài 5.2:</strong> Fully Associative Cache (Hoàn toàn phối hợp)[cite: 25].</li>
-                <li><strong>Bài 5.3:</strong> 2-Way Set Associative Cache (Phối hợp tập hợp 2 chiều)[cite: 26].</li>
-                <li><strong>Bài 5.4:</strong> 4-Way Set Associative Cache (Phối hợp tập hợp 4 chiều)[cite: 27].</li>
-            </ul>
-            <div class="submit-info">Yêu cầu: Cho nhận xét về ưu điểm/nhược điểm của FIFO so với LRU trong từng cấu hình.</div>
-        </div>
-
-        <div class="lab-card">
-            <h2>BÀI 5.5: So sánh hiệu năng giữa các loại Cache</h2>
-            <p>Sử dụng tab <code>Cache Type Analysis</code> để đánh giá tỉ lệ Hit/Miss của 4 loại Cache cùng lúc[cite: 28, 30, 31].</p>
-            <div class="box">
-                <strong>Thiết lập:</strong> Trace file <code>trace_mix.trc</code>, Cache Size = 8KB, Block = 64B, LRU, Write-Through[cite: 34, 35, 36, 37, 38].
-                <br><strong>Các loại chọn:</strong> Direct-Mapped, 2-Way, 4-Way, Fully Associative[cite: 39, 40, 41, 42, 43].
-            </div>
-            <p>Nhấn <code>Gen 88 Random Instruction</code> và thực hiện bằng <code>Fast Forward</code> để xem kết quả thống kê[cite: 45, 46, 47].</p>
-            <div class="submit-info">Yêu cầu: Nộp ảnh chụp kết quả và nhận xét tại sao Direct-Mapped thường có nhiều Conflict Miss hơn[cite: 51, 55, 56].</div>
-        </div>
-
-        <div class="lab-card">
-            <h2>BÀI 5.6: Ảnh hưởng của kích thước khối (Block Size)</h2>
-            <p>Đánh giá sự thay đổi hiệu năng khi thay đổi kích thước Block (8B, 16B, 32B) trong khi giữ nguyên tổng dung lượng Cache 64B[cite: 60, 62, 70, 74].</p>
-            <div class="box">
-                <strong>Cấu hình cố định:</strong> Memory 2048B, LRU, Write-Back/Write-Allocate[cite: 65, 66, 67].
-            </div>
-            <table>
-                <tr>
-                    <th>Block Size (Offset)</th>
-                    <th>Direct (Hit%)</th>
-                    <th>2-way (Hit%)</th>
-                    <th>4-way (Hit%)</th>
-                    <th>Fully (Hit%)</th>
-                </tr>
-                <tr>
-                    <td>8 B (Offset=3) [cite: 68]</td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr>
-                    <td>16 B (Offset=4) [cite: 74]</td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr>
-                    <td>32 B (Offset=5) [cite: 74]</td><td></td><td></td><td></td><td></td>
-                </tr>
-            </table>
-            <div class="submit-info">Yêu cầu: Giải thích tại sao tăng Block size không phải lúc nào cũng cải thiện hiệu năng[cite: 75, 81].</div>
-        </div>
-
-        <div class="lab-card">
-            <h2>BÀI 5.7: Mô phỏng bộ nhớ ảo (Virtual Memory)</h2>
-            <p>Minh họa cách địa chỉ ảo được ánh xạ sang địa chỉ vật lý qua <strong>TLB</strong> và <strong>Page Table</strong>[cite: 84, 86, 96, 97].</p>
-            <div class="box">
-                <strong>Cấu hình mặc định:</strong> 
-                <br>- Physical Page: 128B, Offset: 2 bits (4B/Trang)[cite: 89, 90].
-                <br>- Virtual Memory: 2048B (Địa chỉ 11 bits)[cite: 91, 95].
-                <br>- TLB: 10 entries[cite: 92, 93, 104].
-            </div>
-            <p>Thực hiện <code>Gen. Random</code> 10 lệnh LOAD đầu tiên[cite: 101, 105]. Quan sát <strong>Hit Rate</strong> (thường là 0% ở lần đầu) và giải thích hiện tượng <strong>Page Fault</strong>[cite: 109, 110].</p>
-            <div class="submit-info">Yêu cầu: Tiếp tục chạy thêm 10-20 lệnh và mô tả diễn biến khi TLB bắt đầu được lấp đầy dữ liệu[cite: 111, 112].</div>
-        </div>
-
-        <footer>
-            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
-        </footer>
-    </div>
+    <footer>
+        <p style="text-align: center; color: #777; font-size: 13px; padding-bottom: 20px;">© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
+    </footer>
 
 </body>
 </html>

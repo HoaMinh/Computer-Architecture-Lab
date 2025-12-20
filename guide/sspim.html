@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn sử dụng JsSpim</title>
+    <title>Giới thiệu về JsSpim</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -69,12 +69,14 @@
             gap: 8px;
             font-size: 14px;
             transition: 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-active { background-color: var(--btn-active); }
         .btn-normal { background-color: var(--btn-dark); }
         .btn-home { background-color: var(--btn-green); }
-        .nav-btn:hover { opacity: 0.9; }
+        .nav-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
         /* Main Content */
         .content-wrapper {
@@ -180,7 +182,7 @@
         </a>
         
         <a href="https://spimsimulator.sourceforge.net/jsSpim.html" target="_blank" class="nav-btn btn-normal">
-            <i class="fas fa-external-link-alt"></i> VÀO TRÌNH
+            <i class="fas fa-play-circle"></i> VÀO TRÌNH
         </a>
         
         <a href="../index.html" class="nav-btn btn-home">
@@ -194,57 +196,57 @@
                 <i class="fas fa-chalkboard-teacher"></i>
                 <div>
                     <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
-                    <p style="margin:2px 0; color:#888; font-size:13px;">Chi tiết các bước thao tác trên trình mô phỏng JsSpim</p>
+                    <p style="margin:2px 0; color:#888; font-size:13px;">Dựa trên tài liệu hướng dẫn JsSpim v1.0</p>
                 </div>
             </div>
 
             <div class="card-body">
-                <div class="info-title">I. GIỚI THIỆU CHUNG</div>
-                <p>JsSpim là phiên bản mô phỏng kiến trúc MIPS32 chạy trên nền web. Công cụ này cho phép thực thi mã Assembly và quan sát trạng thái hệ thống theo thời gian thực.</p>
+                <div class="info-title">I. JSSPIM LÀ GÌ?</div>
+                <p><strong>JsSpim</strong> là trình mô phỏng kiến trúc bộ lệnh MIPS32, được viết bằng JavaScript để chạy trực tiếp trên trình duyệt web mà không cần cài đặt. Đây là công cụ đắc lực để học tập các nguyên tắc cơ bản của kiến trúc máy tính thông qua lập trình Assembly RISC.</p>
 
-                <div class="info-title" style="margin-top:25px;">II. CÁC VÙNG CHỨC NĂNG CHÍNH</div>
+                <div class="info-title" style="margin-top:25px;">II. CÁC VÙNG GIAO DIỆN QUAN TRỌNG</div>
                 <table>
                     <thead>
                         <tr>
                             <th>Vùng hiển thị</th>
-                            <th>Mô tả chức năng</th>
+                            <th>Chức năng quan sát</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Regs (Registers)</strong></td>
-                            <td>Hiển thị giá trị các thanh ghi $t0-$t9, $s0-$s7, PC...</td>
+                            <td><strong>Regs</strong></td>
+                            <td>Giá trị các thanh ghi GPRs ($t, $s,...) và thanh ghi đặc biệt (PC, HI, LO).</td>
                         </tr>
                         <tr>
                             <td><strong>Text Segment</strong></td>
-                            <td>Hiển thị mã máy và lệnh Assembly đang thực thi.</td>
+                            <td>Mã lệnh Assembly. Dòng đang thực thi được tô sáng màu vàng.</td>
                         </tr>
                         <tr>
                             <td><strong>Data Segment</strong></td>
-                            <td>Hiển thị nội dung bộ nhớ dữ liệu (biến, mảng).</td>
+                            <td>Bộ nhớ dữ liệu nơi lưu trữ các biến toàn cục và mảng.</td>
                         </tr>
                         <tr>
-                            <td><strong>Output & Log</strong></td>
-                            <td>Nơi hiển thị kết quả syscall và nhật ký lỗi hệ thống.</td>
+                            <td><strong>User Stack</strong></td>
+                            <td>Quản lý ngăn xếp cho các lời gọi hàm (địa chỉ trả về $ra).</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <div class="info-title" style="margin-top:25px;">III. QUY TRÌNH SỬ DỤNG</div>
+                <div class="info-title" style="margin-top:25px;">III. QUY TRÌNH THỰC HIỆN</div>
                 <ul class="step-list">
-                    <li><strong>Bước 1:</strong> Soạn thảo mã nguồn .s vào khung Text Segment hoặc tải tệp lên.</li>
-                    <li><strong>Bước 2:</strong> Nhấn nút <strong>Run</strong> để thực thi hoặc <strong>Step</strong> để chạy từng dòng lệnh.</li>
-                    <li><strong>Bước 3:</strong> Quan sát giá trị thanh ghi thay đổi tại vùng <strong>Regs</strong> để kiểm tra tính đúng đắn.</li>
-                    <li><strong>Bước 4:</strong> Xem kết quả cuối cùng tại thẻ <strong>Console/Output</strong>.</li>
+                    <li><strong>Nạp mã:</strong> Nhập trực tiếp mã vào vùng Text hoặc dùng nút <span style="color:var(--primary-blue); font-weight:bold;">Browse</span> để tải file .s.</li>
+                    <li><strong>Thực thi:</strong> Nhấn <span style="color:var(--btn-green); font-weight:bold;">Run</span> để chạy nhanh hoặc <span style="color:var(--btn-active); font-weight:bold;">Step</span> để chạy từng lệnh.</li>
+                    <li><strong>Điều chỉnh:</strong> Sử dụng thanh trượt <strong>Speed</strong> để kiểm soát tốc độ chạy lệnh (nên giảm tốc độ khi debug).</li>
+                    <li><strong>Kết quả:</strong> Theo dõi vùng <strong>Output</strong> cho các lệnh in và vùng <strong>Log</strong> để xem thông báo lỗi hệ thống.</li>
                 </ul>
 
                 <div class="code-box">
-# Ví dụ lệnh nạp dữ liệu cơ bản
-addi $t0, $zero, 100   # Gán giá trị 100 vào thanh ghi $t0
-sw $t0, 0($gp)         # Lưu giá trị $t0 vào bộ nhớ dữ liệu
-                </div>
+# Ví dụ nạp giá trị vào thanh ghi
+addi $t0, $zero, 5     # $t0 = 5
+addi $t1, $zero, 10    # $t1 = 10
+add  $t2, $t0, $t1     # $t2 = 15</div>
 
-                <p class="footer-note">* Lưu ý: Sử dụng thanh trượt Speed để giảm tốc độ mô phỏng khi cần theo dõi luồng dữ liệu chi tiết.</p>
+                <p class="footer-note">* Lưu ý: Đảm bảo mã nguồn của bạn tuân thủ đúng cú pháp MIPS32 để tránh lỗi "Invalid instruction".</p>
             </div>
         </div>
     </div>

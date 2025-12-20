@@ -3,123 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng Dẫn MIPS Visualizer - Hệ Thống Lab</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Hướng dẫn MIPS Visualizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-        /* THANH TIỆN ÍCH TRÊN CÙNG (Nút về trang chủ riêng biệt) */
-        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
-        .btn-home { 
-            text-decoration: none; 
-            color: #d35400; 
-            font-weight: bold; 
-            font-size: 14px; 
-            border: 2px solid #d35400; 
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            transition: 0.3s;
+        :root {
+            --primary-blue: #00008b;
+            --nav-bg: #1a237e;
+            --btn-active: #5c6bc0;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
+            --text-dark: #333;
+            --bg-light: #f0f2f5;
         }
-        .btn-home:hover { background: #d35400; color: #fff; }
 
-        /* HEADER */
-        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
-        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-        /* THANH MENU CHÍNH */
-        .nav-menu { 
-            background: #000080; /* Xanh đậm */
-            display: flex; 
-            justify-content: center; 
-            border-radius: 10px; 
-            overflow: hidden; 
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 25px 0;
+            background: white;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .header h1 {
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header p {
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        /* Navigation Bar */
+        .nav-container {
+            background-color: var(--nav-bg);
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+            border: none;
+        }
+
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
+        .nav-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Main Content */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .nav-item { 
-            flex: 1; 
-            text-align: center; 
-            text-decoration: none; 
-            color: #ffffff !important; /* CHỮ TRẮNG SÁNG */
-            padding: 18px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            font-size: 15px;
-        }
-        /* Hiệu ứng khi rê chuột: Chữ chuyển sang MÀU VÀNG */
-        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
-        .nav-item.active { background: #3498db; }
 
-        /* NỘI DUNG */
-        .card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 5px solid #3498db; }
-        h2 { color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 20px; }
-        h3 { color: #16a085; margin: 20px 0 10px; font-size: 18px; }
-        
-        .step-item { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3498db; }
-        .step-num { background: #3498db; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
-        
-        .datapath-info { text-align: center; margin: 20px 0; font-style: italic; color: #7f8c8d; }
-        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
-        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .card-header {
+            background: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header i {
+            font-size: 30px;
+            color: var(--primary-blue);
+        }
+
+        .card-header h2 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .info-title {
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* List Styles */
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .step-num {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .bullet-list {
+            padding-left: 20px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <div class="container">
-            <a href="../index.html" class="btn-home"><i class="fas fa-arrow-left"></i> VỀ TRANG CHỦ</a>
-        </div>
-    </div>
+    <header class="header">
+        <h1><i class="fas fa-eye"></i> HƯỚNG DẪN MIPS VISUALIZER</h1>
+        <p>Phòng thí nghiệm Kiến trúc Máy tính - Trực quan hóa luồng dữ liệu Datapath</p>
+    </header>
 
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-desktop"></i> Hướng Dẫn MIPS Visualizer</h1>
-        </div>
+    <nav class="nav-container">
+        <a href="#" class="nav-btn btn-active">
+            <i class="fas fa-info-circle"></i> HƯỚNG DẪN
+        </a>
+        <a href="../labs/mips.html" class="nav-btn btn-normal">
+            <i class="fas fa-tasks"></i> BÀI THỰC HÀNH
+        </a>
+        <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank" class="nav-btn btn-normal">
+            <i class="fas fa-play-circle"></i> VÀO TRÌNH
+        </a>
+        <a href="../index.html" class="nav-btn btn-home">
+            <i class="fas fa-home"></i> TRANG CHỦ
+        </a>
+    </nav>
 
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active"><i class="fas fa-book-open"></i> Hướng dẫn</a>
-            <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank" class="nav-item">
-                <i class="fas fa-external-link-alt"></i> Vào trình
-            </a>
-        </nav>
-
-        <div class="card">
-            <h2><i class="fas fa-info-circle"></i> Giới thiệu công cụ</h2>
-            <p>MIPS Visualizer là công cụ hỗ trợ trực quan hóa đường đi của dữ liệu (Datapath) trong kiến trúc MIPS đơn chu kỳ. Công cụ này giúp bạn hiểu rõ cách các lệnh như <code>add</code>, <code>lw</code>, <code>sw</code>... tác động lên ALU, bộ nhớ và các thanh ghi.</p>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-tasks"></i> Các bước thực hiện</h2>
-            
-            <div class="step-item">
-                <span class="step-num">1</span> <strong>Nhập mã:</strong> Soạn thảo các lệnh MIPS vào khung bên trái (ví dụ: <code>addi $t0, $zero, 5</code>).
-            </div>
-
-            <div class="step-item">
-                <span class="step-num">2</span> <strong>Mô phỏng:</strong> Nhấn nút <strong>Run</strong> để thực hiện toàn bộ hoặc <strong>Step</strong> để xem từng bước dữ liệu di chuyển qua các khối chức năng.
-            </div>
-
-            <div class="step-item">
-                <span class="step-num">3</span> <strong>Quan sát:</strong> Theo dõi các đường dẫn màu sắc trên sơ đồ Datapath và giá trị thay đổi trong bảng thanh ghi bên phải.
-            </div>
-        </div>
-
+    <div class="content-wrapper">
         
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-project-diagram"></i>
+                <h2>TỔNG QUAN VỀ MIPS VISUALIZER</h2>
+            </div>
+            <div class="card-body">
+                <p>MIPS Visualizer là công cụ trực quan mạnh mẽ giúp sinh viên hiểu rõ cách dữ liệu di chuyển bên trong CPU thông qua sơ đồ Datapath. Công cụ này hỗ trợ phân tích luồng dữ liệu của các lệnh như <code>add</code>, <code>sub</code>, <code>lw</code>, <code>sw</code>, <code>beq</code>.</p>
+                
+                <div class="info-title"><i class="fas fa-lightbulb"></i> Ứng dụng chính</div>
+                <ul class="bullet-list">
+                    <li>Hiểu rõ cách hoạt động của ALU, thanh ghi, và bộ nhớ.</li>
+                    <li>Phân tích chi tiết các thành phần trong sơ đồ đơn chu kỳ (Single Cycle).</li>
+                    <li>Thực hành viết và kiểm tra mã hợp ngữ MIPS trực tiếp trên trình duyệt.</li>
+                </ul>
+            </div>
+        </div>
 
         <div class="card">
-            <h2><i class="fas fa-lightbulb"></i> Lưu ý quan trọng</h2>
-            <ul>
-                <li>Công cụ không có tính năng lưu trữ trực tuyến, bạn nên <strong>Copy</strong> mã nguồn ra file <code>.txt</code> sau khi hoàn thành.</li>
-                <li>Dùng <code>#</code> để viết chú thích trong mã nguồn.</li>
-                <li>Kiểm tra kỹ các giá trị trong bảng <strong>Registers</strong> để xác nhận kết quả tính toán.</li>
-            </ul>
+            <div class="card-header">
+                <i class="fas fa-list-ol"></i>
+                <h2>CÁC BƯỚC SỬ DỤNG CƠ BẢN</h2>
+            </div>
+            <div class="card-body">
+                <ul class="step-list">
+                    <li>
+                        <span class="step-num">1</span>
+                        <strong>Nhập mã hợp ngữ:</strong> Gõ mã MIPS vào khung soạn thảo bên trái (Ví dụ: <code>add $t0, $t1, $t2</code>).
+                    </li>
+                    <li>
+                        <span class="step-num">2</span>
+                        <strong>Chạy mô phỏng:</strong> Nhấn nút <strong>"Run"</strong> để thực thi mã hoặc <strong>"Step"</strong> để thực hiện từng lệnh một.
+                    </li>
+                    <li>
+                        <span class="step-num">3</span>
+                        <strong>Xem sơ đồ Datapath:</strong> Phần bên phải hiển thị sơ đồ datapath tương ứng với lệnh đang chạy, giúp theo dõi luồng dữ liệu và trạng thái từng bước.
+                    </li>
+                    <li>
+                        <span class="step-num">4</span>
+                        <strong>Quan sát kết quả:</strong> Theo dõi sự thay đổi trong bảng thanh ghi (Registers) và bộ nhớ (Memory).
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2>LƯU Ý QUAN TRỌNG</h2>
+            </div>
+            <div class="card-body">
+                <ul class="bullet-list">
+                    <li>Công cụ không hỗ trợ lưu trữ trực tuyến, hãy <strong>Copy</strong> mã nguồn lưu vào file <code>.txt</code> sau khi hoàn thành.</li>
+                    <li>Dùng ký hiệu <code>#</code> để viết chú thích trong mã nguồn.</li>
+                    <li>Kiểm tra kỹ các giá trị trong bảng <strong>Registers</strong> để xác nhận kết quả tính toán cuối cùng.</li>
+                </ul>
+            </div>
         </div>
 
         <footer>

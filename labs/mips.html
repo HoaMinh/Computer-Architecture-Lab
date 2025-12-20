@@ -3,180 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành MIPS - Hệ thống Lab</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bài thực hành MIPS Visualizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Thiết lập chung đồng bộ với Guide */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f0f2f5; color: #2d3436; line-height: 1.7; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-        /* THANH TIỆN ÍCH TRÊN CÙNG */
-        .top-nav { background: #ffffff; padding: 10px 0; border-bottom: 1px solid #dfe6e9; text-align: right; }
-        .btn-home { 
-            text-decoration: none; 
-            color: #d35400; 
-            font-weight: bold; 
-            font-size: 14px; 
-            border: 2px solid #d35400; 
-            padding: 6px 18px; 
-            border-radius: 20px; 
-            transition: 0.3s;
+        :root {
+            --primary-blue: #00008b;
+            --nav-bg: #1a237e;
+            --btn-active: #5c6bc0;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
+            --text-dark: #333;
+            --bg-light: #f0f2f5;
+            --accent-blue: #e3f2fd;
         }
-        .btn-home:hover { background: #d35400; color: #fff; }
 
-        /* HEADER */
-        .header { background: #ffffff; padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; text-align: center; }
-        .header h1 { color: #000080; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* THANH MENU CHÍNH - CHỮ TRẮNG SÁNG / HOVER VÀNG */
-        .nav-menu { 
-            background: #000080; 
-            display: flex; 
-            justify-content: center; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .nav-item { 
-            flex: 1; 
-            text-align: center; 
-            text-decoration: none; 
-            color: #ffffff !important; 
-            padding: 18px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            font-size: 15px;
-        }
-        .nav-item:hover { background: #0000cd; color: #f1c40f !important; } 
-        .nav-item.active { background: #3498db; }
 
-        /* NỘI DUNG BÀI THỰC HÀNH */
-        .lab-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); margin-bottom: 30px; border-top: 6px solid #2980b9; }
-        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; font-size: 20px; }
-        h3 { color: #16a085; text-transform: uppercase; font-size: 0.9em; margin-top: 20px; letter-spacing: 1px; }
-        
-        .section-box { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db; }
-        .submit-info { background: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; }
-        .review-questions { background: #f0f4f8; padding: 15px; border-radius: 8px; margin-top: 15px; font-style: italic; font-size: 0.95em; }
-        
-        ul, ol { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        code { background: #dfe6e9; color: #d63031; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'Consolas', monospace; }
-        
-        footer { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+        /* Header & Nav */
+        .header { text-align: center; padding: 25px 0; background: white; border-bottom: 3px solid var(--primary-blue); }
+        .header h1 { color: var(--primary-blue); text-transform: uppercase; margin: 0; font-size: 28px; display: flex; justify-content: center; align-items: center; gap: 12px; }
+        .nav-container { background-color: var(--nav-bg); padding: 12px; display: flex; justify-content: center; gap: 12px; }
+        .nav-btn { padding: 10px 20px; border-radius: 4px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; font-size: 14px; transition: 0.2s; }
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
+
+        /* Layout */
+        .content-wrapper { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 8px; border: 1px solid var(--primary-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 40px; }
+        .card-header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px; }
+        .card-header i { font-size: 24px; color: var(--primary-blue); }
+        .card-header h2 { margin: 0; color: var(--primary-blue); font-size: 20px; text-transform: uppercase; }
+        .card-body { padding: 30px; }
+
+        /* Section Styles */
+        .section-box { margin-bottom: 25px; }
+        .section-title { font-weight: bold; color: var(--primary-blue); border-bottom: 2px solid var(--accent-blue); display: inline-block; margin-bottom: 10px; }
+        .objective-list { background: var(--accent-blue); padding: 15px 20px; border-left: 5px solid var(--btn-active); border-radius: 4px; list-style-type: square; }
+        .instruction-steps { padding-left: 20px; }
+        .instruction-steps li { margin-bottom: 8px; }
+
+        /* Boxes for Code and Info */
+        .code-box { background: #272822; color: #f8f8f2; padding: 20px; border-radius: 6px; font-family: 'Consolas', monospace; margin: 15px 0; white-space: pre; overflow-x: auto; font-size: 14px; }
+        .submit-box { background: #e8f5e9; padding: 15px; border-radius: 4px; border-left: 5px solid var(--btn-green); margin: 15px 0; font-weight: 500; }
+        .quiz-box { background: #fff3e0; padding: 15px 20px; border-left: 5px solid #ff9800; border-radius: 4px; margin-top: 20px; }
+        .quiz-box strong { color: #e65100; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <div class="container">
-            <a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="btn-home"><i class="fas fa-home"></i> VỀ TRANG CHỦ</a>
+    <header class="header">
+        <h1><i class="fas fa-flask"></i> BÀI THỰC HÀNH MIPS VISUALIZER</h1>
+        <p>Thực hành trực quan hóa Datapath và kiến trúc tập lệnh MIPS</p>
+    </header>
+
+    <nav class="nav-container">
+        <a href="../guide/mips.html" class="nav-btn btn-normal"><i class="fas fa-info-circle"></i> HƯỚNG DẪN</a>
+        <a href="#" class="nav-btn btn-active"><i class="fas fa-tasks"></i> BÀI THỰC HÀNH</a>
+        <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank" class="nav-btn btn-normal"><i class="fas fa-play-circle"></i> VÀO TRÌNH</a>
+        <a href="../index.html" class="nav-btn btn-home"><i class="fas fa-home"></i> TRANG CHỦ</a>
+    </nav>
+
+    <div class="content-wrapper">
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-calculator"></i><h2>Bài 2-1: NHẬP MÔN KIẾN TRÚC MIPS & THANH GHI</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Thực thi các lệnh cơ bản: ADD, SUB, AND, OR, SLT.</li>
+                        <li>Quan sát sự thay đổi giá trị trong các thanh ghi và sơ đồ Datapath.</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <p>Thực thi lần lượt đoạn mã sau:</p>
+                    <div class="code-box">li $t1, 5
+li $t2, 3
+add $t3, $t1, $t2
+sub $t4, $t1, $t2
+and $t5, $t1, $t2
+or $t6, $t1, $t2
+slt $t7, $t2, $t1</div>
+                    <ol class="instruction-steps">
+                        <li>Ghi nhận giá trị các thanh ghi $t1..$t7 sau mỗi dòng lệnh.</li>
+                        <li>Giải thích tại sao lệnh <code>slt</code> lại cho kết quả $t7 = 1.</li>
+                    </ol>
+                </div>
+
+                <div class="submit-box"><i class="fas fa-check-circle"></i> Yêu cầu nộp: Bảng giá trị thanh ghi và ảnh minh họa Datapath của lệnh ADD.</div>
+
+                <div class="quiz-box">
+                    <strong>Câu hỏi ôn tập:</strong> Sự khác biệt giữa lệnh số học (ADD/SUB) và lệnh logic (AND/OR) khi di chuyển qua ALU là gì?
+                </div>
+            </div>
         </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-project-diagram"></i><h2>Bài 2-2: DATA PATH – TRUY XUẤT BỘ NHỚ</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Hiểu cơ chế hoạt động của lệnh Load Word (LW) và Store Word (SW).</li>
+                        <li>Xác định các thành phần Datapath tham gia vào quá trình đọc/ghi bộ nhớ.</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <div class="code-box">li $s0, 100
+sw $s0, 0($zero)   # Ghi 100 vào địa chỉ 0
+lw $s1, 0($zero)   # Đọc từ địa chỉ 0 vào $s1</div>
+                    <p>Nhấn <strong>Step</strong> và quan sát kỹ các đường tín hiệu màu đậm khi lệnh <code>sw</code> và <code>lw</code> thực thi.</p>
+                </div>
+                
+                
+
+                <div class="submit-box"><i class="fas fa-check-circle"></i> Yêu cầu nộp: Mô tả luồng dữ liệu của lệnh LW: Dữ liệu đi từ Memory qua thành phần nào để về Register File?</div>
+
+                <div class="quiz-box">
+                    <strong>Câu hỏi ôn tập:</strong> Trong lệnh <code>sw</code>, tín hiệu <code>MemWrite</code> sẽ có giá trị là bao nhiêu (0 hay 1)?
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-stream"></i><h2>Bài 2-3: KIẾN TRÚC PIPELINE & XUNG ĐỘT DỮ LIỆU</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Nhận diện xung đột dữ liệu (Data Hazard) trong kiến trúc Pipeline.</li>
+                        <li>Hiểu vai trò của lệnh NOP (No Operation) hoặc kỹ thuật Forwarding.</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <p>Chạy đoạn mã gây xung đột sau:</p>
+                    <div class="code-box">add $t1, $t2, $t3
+sub $t4, $t1, $t5   # Lệnh sub dùng $t1 ngay sau add</div>
+                    <p>Nếu công cụ báo lỗi hoặc kết quả sai, hãy thử thêm các lệnh <code>nop</code> ở giữa.</p>
+                </div>
+
+                <div class="quiz-box">
+                    <strong>Câu hỏi ôn tập:</strong> Tại sao Pipeline lại cần 5 giai đoạn (IF, ID, EX, MEM, WB)? Lệnh NOP giúp giải quyết xung đột như thế nào?
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-code-branch"></i><h2>Bài 2-4: NHÁNH & DỰ ĐOÁN NHÁNH</h2></div>
+            <div class="card-body">
+                <div class="section-box">
+                    <div class="section-title">Mục tiêu</div>
+                    <ul class="objective-list">
+                        <li>Quan sát xung đột điều khiển (Control Hazard) với BEQ/BNE.</li>
+                        <li>Thực hành tạo vòng lặp và tối ưu thứ tự lệnh.</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">Hướng dẫn thực hiện</div>
+                    <div class="code-box">li $t0, 10      # N = 10
+li $t1, 0       # sum = 0
+li $t2, 1       # i = 1
+loop:
+    add $t1, $t1, $t2
+    addi $t2, $t2, 1
+    ble $t2, $t0, loop</div>
+                </div>
+
+                <div class="submit-box"><i class="fas fa-check-circle"></i> Yêu cầu nộp: Mã nguồn vòng lặp và thống kê tổng số chu kỳ thực hiện bài toán.</div>
+
+                <div class="quiz-box">
+                    <strong>Câu hỏi ôn tập:</strong> Tại sao các lệnh rẽ nhánh lại gây ra độ trễ (penalty) trong kiến trúc Pipeline?
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-microchip"></i> DANH SÁCH BÀI THỰC HÀNH MIPS</h1>
-        </div>
-
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active"><i class="fas fa-list-check"></i> Bài thực hành</a>
-            <a href="https://aleksa-sukovic.github.io/mips-visualiser/" target="_blank" class="nav-item">
-                <i class="fas fa-play-circle"></i> Vào trình
-            </a>
-        </nav>
-
-        <div class="lab-card">
-            <h2>Bài 2-1: NHẬP MÔN KIẾN TRÚC MIPS & THANH GHI [cite: 5]</h2>
-            <h3>Mục tiêu</h3>
-            <ul>
-                <li>Chạy các lệnh ADD/SUB/AND/OR/SLT[cite: 7].</li>
-                <li>Quan sát sự thay đổi thanh ghi và đường dẫn dữ liệu (datapath)[cite: 8].</li>
-            </ul>
-            <h3>Hướng dẫn thực hiện</h3>
-            <div class="section-box">
-                <p>Thực thi lần lượt chuỗi lệnh sau[cite: 10, 11, 12]:</p>
-                <code>li $t1,5; li $t2,3; add $t3,$t1,$t2; sub $t4,$t1,$t2; and $t5,$t1,$t2; or $t6,$t1,$t2; slt $t7,$t2,$t1;</code>
-                <p style="margin-top: 10px;">Ghi lại bảng giá trị các thanh ghi từ <code>$t0</code> đến <code>$t6</code> sau mỗi lệnh[cite: 13].</p>
-            </div>
-            <div class="submit-info">Yêu cầu nộp: Bảng giá trị và ảnh chụp minh họa[cite: 14, 15].</div>
-            <div class="review-questions">
-                <strong>Câu hỏi ôn tập:</strong> Khác biệt chính giữa lệnh logic và lệnh số học là gì? [cite: 16, 17] Giải thích tại sao lệnh <code>slt</code> cho kết quả <code>$t7=1</code> (với 3 < 5)[cite: 13].
-            </div>
-        </div>
-
-        <div class="lab-card">
-            <h2>Bài 2-2: DATA PATH – LW/SW VỚI MẢNG WORD-ALIGNED [cite: 18]</h2>
-            <h3>Mục tiêu</h3>
-            <ul>
-                <li>Mô phỏng cơ chế nạp (load) và lưu (store) với lệnh LW/SW[cite: 20].</li>
-                <li>Theo dõi các thành phần PC, IR, Register và Memory[cite: 21].</li>
-            </ul>
-            <h3>Hướng dẫn thực hiện</h3>
-            <div class="section-box">
-                <ol>
-                    <li>Khai báo mảng 4 word tại địa chỉ chia hết cho 4 (word-aligned)[cite: 25].</li>
-                    <li>Viết vòng lặp đọc từng phần tử bằng lệnh <code>lw</code>, cộng dồn vào thanh ghi <code>$s0</code>[cite: 26].</li>
-                    <li>Sử dụng <code>sw</code> để lưu giá trị <code>$s0</code> về nhãn <code>sum</code> trong bộ nhớ[cite: 26].</li>
-                </ol>
-            </div>
-                        <div class="submit-info">Yêu cầu nộp: Mã nguồn MIPS và ảnh chụp Datapath tại thời điểm thực hiện LW/SW[cite: 28, 29].</div>
-            <div class="review-questions">
-                <strong>Câu hỏi ôn tập:</strong> Tại sao cần phải đảm bảo địa chỉ là word-aligned (chia hết cho 4) cho các lệnh LW/SW? [cite: 30, 31]
-            </div>
-        </div>
-
-        <div class="lab-card">
-            <h2>Bài 2-3: PIPELINE 5 GIAI ĐOẠN & RAW HAZARD [cite: 32]</h2>
-            <h3>Mục tiêu</h3>
-            <ul>
-                <li>Quan sát 5 giai đoạn: IF, ID, EX, MEM, WB[cite: 34].</li>
-                <li>Phân tích xung đột dữ liệu (RAW Hazard) và thử nghiệm giải pháp NOP hoặc Forwarding[cite: 35].</li>
-            </ul>
-            <h3>Hướng dẫn thực hiện</h3>
-            <div class="section-box">
-                <p>Nhập chuỗi lệnh gây xung đột RAW[cite: 39]:</p>
-                <code>lw $t0,0($s0); add $t1,$t0,$t2; sub $t3,$t1,$t0;</code>
-                <p style="margin-top: 10px;">Quan sát sơ đồ Pipeline timeline, đếm tổng số chu kỳ hoàn thành và thử chèn 1-2 lệnh <code>nop</code> để so sánh[cite: 40, 41].</p>
-            </div>
-                        <div class="submit-info">Yêu cầu nộp: Ảnh chụp Pipeline timeline và bảng so sánh số chu kỳ trước/sau khi xử lý xung đột[cite: 42, 43].</div>
-            <div class="review-questions">
-                <strong>Câu hỏi ôn tập:</strong> Cơ chế Forwarding xử lý xung đột RAW như thế nào để giảm thiểu số chu kỳ chờ? [cite: 44, 45]
-            </div>
-        </div>
-
-        <div class="lab-card">
-            <h2>Bài 2-4: NHÁNH & DỰ ĐOÁN NHÁNH [cite: 46]</h2>
-            <h3>Mục tiêu</h3>
-            <ul>
-                <li>Quan sát xung đột điều khiển (Control Hazard) với các lệnh BEQ/BNE/J[cite: 48].</li>
-                <li>Tìm cách giảm thiểu mức phạt (penalty) bằng cách sắp xếp lại lệnh[cite: 49].</li>
-            </ul>
-            <h3>Hướng dẫn thực hiện</h3>
-            <div class="section-box">
-                <ul>
-                    <li>Tạo vòng lặp cộng dồn từ 1 đến N (N=10) sử dụng lệnh <code>addi</code> và <code>beq</code> hoặc <code>bne</code>[cite: 53].</li>
-                    <li>Ghi nhận số lần flush bộ đệm khi dự đoán nhánh sai (nếu công cụ có hỗ trợ báo cáo)[cite: 54].</li>
-                    <li>Sắp xếp lại thứ tự lệnh để cố gắng giảm số lần flush và so sánh hiệu năng[cite: 55].</li>
-                </ul>
-            </div>
-            <div class="submit-info">Yêu cầu nộp: Mã nguồn và thống kê số lần flush/tổng số chu kỳ thực hiện[cite: 56, 57].</div>
-            <div class="review-questions">
-                <strong>Câu hỏi ôn tập:</strong> Tại sao các lệnh rẽ nhánh lại gây ra penalty trong kiến trúc Pipeline? Nêu một biện pháp để giảm thiểu tình trạng này[cite: 58, 59].
-            </div>
-        </div>
-
-        <footer>
-            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
-        </footer>
-    </div>
-
 </body>
 </html>

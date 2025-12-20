@@ -10,13 +10,14 @@
             --primary-blue: #00008b;
             --nav-bg: #1a237e;
             --btn-active: #5c6bc0;
-            --btn-green: #008000;
+            --btn-dark: #283593;
+            --btn-green: #2e7d32;
             --text-dark: #333;
-            --bg-light: #f5f5f5;
+            --bg-light: #f0f2f5;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-light);
@@ -26,39 +27,40 @@
         /* Header Section */
         .header {
             text-align: center;
-            padding: 20px 0;
+            padding: 25px 0;
             background: white;
-            border-bottom: 2px solid var(--primary-blue);
+            border-bottom: 3px solid var(--primary-blue);
         }
 
         .header h1 {
             color: var(--primary-blue);
             text-transform: uppercase;
-            margin: 10px 0;
+            margin: 0;
             font-size: 28px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .header p {
             color: #666;
+            margin-top: 8px;
             font-size: 14px;
         }
 
         /* Navigation Bar */
         .nav-container {
             background-color: var(--nav-bg);
-            padding: 15px;
+            padding: 12px;
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nav-btn {
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             color: white;
             font-weight: bold;
@@ -66,26 +68,31 @@
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            min-width: 150px;
-            justify-content: center;
+            transition: 0.2s;
         }
 
-        .btn-blue { background-color: var(--btn-active); }
-        .btn-dark { background-color: #283593; }
-        .btn-green { background-color: var(--btn-green); }
+        .btn-active { background-color: var(--btn-active); }
+        .btn-normal { background-color: var(--btn-dark); }
+        .btn-home { background-color: var(--btn-green); }
+        .nav-btn:hover { opacity: 0.9; }
 
         /* Main Content */
-        .content-card {
+        .content-wrapper {
             max-width: 1000px;
-            margin: 20px auto;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .card {
             background: white;
-            border-radius: 15px;
+            border-radius: 8px;
             border: 1px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .card-header {
+            background: #fff;
             padding: 20px;
             border-bottom: 1px solid #eee;
             display: flex;
@@ -94,57 +101,32 @@
         }
 
         .card-header i {
-            font-size: 40px;
+            font-size: 35px;
             color: var(--primary-blue);
         }
 
         .card-header h2 {
             margin: 0;
             color: var(--primary-blue);
+            font-size: 22px;
             text-transform: uppercase;
         }
 
-        .section-body {
+        .card-body {
             padding: 30px;
         }
 
         .info-title {
             color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            gap: 10px;
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .step-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .step-list li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .step-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: black;
-            font-weight: bold;
-        }
-
-        .code-example {
-            background: #f8f9fa;
-            border-left: 4px solid var(--primary-blue);
-            padding: 15px;
-            font-family: monospace;
-            margin: 15px 0;
-        }
-
+        /* Tables & Lists */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -153,93 +135,116 @@
 
         th, td {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
 
-        th { background-color: #f2f2f2; color: var(--primary-blue); }
+        th { background: #f5f5f5; color: var(--primary-blue); }
+
+        .step-list {
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        .code-box {
+            background: #2d2d2d;
+            color: #ccc;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 20px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <h1><i class="fas fa-book-open"></i> HƯỚNG DẪN SỬ DỤNG JSSPIM</h1>
+        <h1><i class="fas fa-microchip"></i> GIỚI THIỆU VỀ JSSPIM</h1>
         <p>Phòng thí nghiệm Kiến trúc Máy tính - Hướng dẫn tóm tắt sử dụng công cụ mô phỏng MIPS</p>
     </header>
 
     <nav class="nav-container">
-        <a href="#guide" class="nav-btn btn-blue"><i class="fas fa-file-alt"></i> HƯỚNG DẪN</a>
-        <a href="#practice" class="nav-btn btn-dark"><i class="fas fa-flask"></i> BÀI THỰC HÀNH</a>
-        <a href="https://spimsimulator.sourceforge.net/jsSpim.html" target="_blank" class="nav-btn btn-dark"><i class="fas fa-play-circle"></i> VÀO TRÌNH</a>
-        <a href="../index.html" class="nav-btn btn-green"><i class="fas fa-home"></i> TRỞ VỀ TRANG CHỦ</a>
+        <a href="#" class="nav-btn btn-active">
+            <i class="fas fa-info-circle"></i> HƯỚNG DẪN
+        </a>
+        
+        <a href="../labs/sspim.html" class="nav-btn btn-normal">
+            <i class="fas fa-tasks"></i> BÀI THỰC HÀNH
+        </a>
+        
+        <a href="https://spimsimulator.sourceforge.net/jsSpim.html" target="_blank" class="nav-btn btn-normal">
+            <i class="fas fa-external-link-alt"></i> VÀO TRÌNH
+        </a>
+        
+        <a href="../index.html" class="nav-btn btn-home">
+            <i class="fas fa-home"></i> TRANG CHỦ
+        </a>
     </nav>
 
-    <div class="content-card">
-        <div class="card-header">
-            <i class="fas fa-book"></i>
-            <div>
-                <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
-                <p style="margin: 5px 0 0; color: #666;">Hướng dẫn tóm tắt sử dụng JsSpim cho bài thực hành</p>
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <div>
+                    <h2>HƯỚNG DẪN THỰC HIỆN TRONG ỨNG DỤNG</h2>
+                    <p style="margin:2px 0; color:#888; font-size:13px;">Chi tiết các bước thao tác trên trình mô phỏng JsSpim</p>
+                </div>
             </div>
-        </div>
 
-        <div class="section-body">
-            <div class="info-title">
-                <i class="fas fa-info-circle"></i> TỔNG QUAN VỀ JSSPIM
-            </div>
-            <ul class="step-list">
-                [cite_start]<li><strong>JsSpim</strong> là trình mô phỏng kiến trúc MIPS32 chạy trực tiếp trên trình duyệt web[cite: 2].</li>
-                [cite_start]<li>Công cụ giúp sinh viên viết, dịch và chạy mã <strong>Assembly MIPS</strong> một cách trực quan[cite: 5].</li>
-                [cite_start]<li>Hỗ trợ quan sát thay đổi của <strong>Thanh ghi (Registers)</strong> và <strong>Bộ nhớ (Memory)</strong> theo từng bước[cite: 7, 15].</li>
-            </ul>
+            <div class="card-body">
+                <div class="info-title">I. GIỚI THIỆU CHUNG</div>
+                <p>JsSpim là phiên bản mô phỏng kiến trúc MIPS32 chạy trên nền web. Công cụ này cho phép thực thi mã Assembly và quan sát trạng thái hệ thống theo thời gian thực.</p>
 
-            <div class="info-title" style="margin-top: 30px;">
-                <i class="fas fa-desktop"></i> CÁC VÙNG CHỨC NĂNG CHÍNH
-            </div>
-            <table>
-                <tr>
-                    <th>Vùng hiển thị</th>
-                    [cite_start]<th>Nội dung cập nhật [cite: 129]</th>
-                    [cite_start]<th>Mục đích quan sát [cite: 129]</th>
-                </tr>
-                <tr>
-                    <td><strong>Regs</strong></td>
-                    <td>Giá trị của các thanh ghi CPU</td>
-                    <td>Theo dõi biến và phép toán</td>
-                </tr>
-                <tr>
-                    <td><strong>Text Segment</strong></td>
-                    <td>Dòng lệnh hiện tại</td>
-                    <td>Xem thứ tự thực thi mã máy</td>
-                </tr>
-                <tr>
-                    <td><strong>Data Segment</strong></td>
-                    <td>Giá trị biến/mảng .data</td>
-                    <td>Theo dõi dữ liệu bộ nhớ</td>
-                </tr>
-                <tr>
-                    <td><strong>Output</strong></td>
-                    <td>Kết quả lệnh syscall</td>
-                    <td>Hiển thị chuỗi/số in ra màn hình</td>
-                </tr>
-            </table>
+                <div class="info-title" style="margin-top:25px;">II. CÁC VÙNG CHỨC NĂNG CHÍNH</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vùng hiển thị</th>
+                            <th>Mô tả chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Regs (Registers)</strong></td>
+                            <td>Hiển thị giá trị các thanh ghi $t0-$t9, $s0-$s7, PC...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Text Segment</strong></td>
+                            <td>Hiển thị mã máy và lệnh Assembly đang thực thi.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Segment</strong></td>
+                            <td>Hiển thị nội dung bộ nhớ dữ liệu (biến, mảng).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Output & Log</strong></td>
+                            <td>Nơi hiển thị kết quả syscall và nhật ký lỗi hệ thống.</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <div class="info-title" style="margin-top: 30px;">
-                [cite_start]<i class="fas fa-list-ol"></i> QUY TRÌNH THỰC HIỆN CƠ BẢN [cite: 106, 107]
-            </div>
-            <ul class="step-list">
-                [cite_start]<li><strong>Bước 1:</strong> Nhập mã hợp ngữ vào khung soạn thảo (vùng Text Segment)[cite: 108, 110].</li>
-                [cite_start]<li><strong>Bước 2:</strong> Nhấn nút <strong>Run</strong> để chạy toàn bộ hoặc <strong>Step</strong> để chạy từng lệnh[cite: 121, 122].</li>
-                [cite_start]<li><strong>Bước 3:</strong> Quan sát sự thay đổi dữ liệu trong vùng Regs và Output[cite: 126, 127].</li>
-                [cite_start]<li><strong>Bước 4:</strong> Điều chỉnh <strong>Speed Slider</strong> để kiểm soát tốc độ thực thi[cite: 137].</li>
-                [cite_start]<li><strong>Bước 5:</strong> Kiểm tra lỗi trong vùng <strong>Log</strong> nếu chương trình dừng đột ngột[cite: 142, 143].</li>
-            </ul>
+                <div class="info-title" style="margin-top:25px;">III. QUY TRÌNH SỬ DỤNG</div>
+                <ul class="step-list">
+                    <li><strong>Bước 1:</strong> Soạn thảo mã nguồn .s vào khung Text Segment hoặc tải tệp lên.</li>
+                    <li><strong>Bước 2:</strong> Nhấn nút <strong>Run</strong> để thực thi hoặc <strong>Step</strong> để chạy từng dòng lệnh.</li>
+                    <li><strong>Bước 3:</strong> Quan sát giá trị thanh ghi thay đổi tại vùng <strong>Regs</strong> để kiểm tra tính đúng đắn.</li>
+                    <li><strong>Bước 4:</strong> Xem kết quả cuối cùng tại thẻ <strong>Console/Output</strong>.</li>
+                </ul>
 
-            <div class="code-example">
-                # [cite_start]Ví dụ chương trình cộng hai số [cite: 113]<br>
-                [cite_start]addi $t0, $zero, 5     # Gán $t0 = 5 [cite: 114]<br>
-                [cite_start]addi $t1, $zero, 10    # Gán $t1 = 10 [cite: 115]<br>
-                [cite_start]add  $t2, $t0, $t1     # $t2 = $t0 + $t1 [cite: 116]
+                <div class="code-box">
+# Ví dụ lệnh nạp dữ liệu cơ bản
+addi $t0, $zero, 100   # Gán giá trị 100 vào thanh ghi $t0
+sw $t0, 0($gp)         # Lưu giá trị $t0 vào bộ nhớ dữ liệu
+                </div>
+
+                <p class="footer-note">* Lưu ý: Sử dụng thanh trượt Speed để giảm tốc độ mô phỏng khi cần theo dõi luồng dữ liệu chi tiết.</p>
             </div>
         </div>
     </div>

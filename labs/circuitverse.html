@@ -1,168 +1,953 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Thực Hành CircuitVerse - Kiến Trúc Máy Tính</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-blue: #000080;
-            --nav-bg: #1a237e;
-            --btn-active: #5c6bc0;
-            --btn-dark: #283593;
-            --btn-green: #2e7d32;
-            --text-dark: #333;
-            --bg-light: #f0f2f5;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+<meta charset="UTF-8">
 
-        /* Header */
-        .header { text-align: center; padding: 30px 0; border-bottom: 3px solid var(--primary-blue); margin-bottom: 20px; background: #fff; border-radius: 10px; }
-        .header h1 { color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px; text-transform: uppercase; }
+<meta name="viewport" content="width=device-width,
+initial-scale=1.0">
 
-        /* Navigation */
-        .main-nav { background: var(--nav-bg); padding: 10px 0; border-radius: 8px; margin-bottom: 20px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .nav-tab {
-            padding: 12px 25px; border-radius: 5px; text-decoration: none; color: white;
-            font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s;
-        }
-        .nav-tab.active { background: var(--btn-active); }
-        .nav-tab.home { background: var(--btn-green); }
+<title>Bài Thực Hành CircuitVerse - Kiến Trúc Máy Tính</title>
 
-        /* Sub-navigation for Labs */
-        .labs-subnav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .subtab {
-            padding: 8px 15px; background: #e0e0e0; border: none; border-radius: 20px;
-            cursor: pointer; font-weight: 600; transition: 0.3s;
-        }
-        .subtab.active { background: var(--primary-blue); color: white; }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Content Area */
-        .content-section { background: white; padding: 35px; border-radius: 12px; border: 1px solid var(--primary-blue); box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; }
-        .content-section.active { display: block; }
+<style>
 
-        .lab-title { color: var(--primary-blue); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-        .objective { background: #e3f2fd; padding: 20px; border-left: 5px solid var(--btn-active); border-radius: 5px; margin-bottom: 25px; }
-        
-        .step-box { margin-bottom: 25px; }
-        .step-box h3 { color: var(--nav-bg); margin-bottom: 15px; }
-        .step-list { padding-left: 20px; }
-        .step-list li { margin-bottom: 12px; }
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        footer { text-align: center; padding: 30px; color: #666; font-size: 0.9rem; }
-    </style>
+body {
+background: #ffffff;
+color: #000000;
+line-height: 1.6;
+min-height: 100vh;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+
+/* Header */
+.header {
+text-align: center;
+padding: 30px 0;
+border-bottom: 3px solid #000080;
+margin-bottom: 40px;
+background: #ffffff;
+border-radius: 10px;
+}
+
+.header h1 {
+color: #000080;
+font-size: 2.5rem;
+margin-bottom: 10px;
+}
+
+.header p {
+color: #333333;
+font-size: 1.1rem;
+max-width: 800px;
+margin: 0 auto;
+}
+
+/* Main Navigation Menu */
+.main-nav {
+display: flex;
+justify-content: center;
+margin-bottom: 40px;
+background: #000080;
+border-radius: 10px;
+padding: 10px;
+}
+
+.nav-tabs {
+display: flex;
+gap: 5px;
+width: 100%;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.nav-tab {
+padding: 14px 28px;
+background: rgba(255, 255, 255, 0.15);
+border: none;
+border-radius: 8px;
+color: #ffffff;
+font-size: 1.05rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 10px;
+text-decoration: none;
+text-align: center;
+flex: 1;
+min-width: 180px;
+max-width: 220px;
+justify-content: center;
+}
+
+.nav-tab i {
+font-size: 1.2rem;
+}
+
+.nav-tab:hover {
+background: rgba(255, 255, 255, 0.25);
+transform: translateY(-2px);
+color: #ffffff;
+}
+
+.nav-tab.active {
+background: rgba(255, 255, 255, 0.3);
+color: #ffffff;
+font-weight: 700;
+}
+
+/* Nút TRỞ VỀ TRANG CHỦ có màu khác */
+.nav-tab.home {
+background: #006400;
+}
+
+.nav-tab.home:hover {
+background: #008000;
+transform: translateY(-2px);
+}
+
+.nav-tab.home.active {
+background: #009900;
+}
+
+/* Sub Navigation */
+.sub-nav {
+display: flex;
+justify-content: center;
+margin-bottom: 30px;
+gap: 8px;
+flex-wrap: wrap;
+padding: 15px;
+background: #ffffff;
+border-radius: 8px;
+border: 2px solid #000080;
+}
+
+.sub-tab {
+padding: 10px 20px;
+background: #ffffff;
+border: 1px solid #cccccc;
+border-radius: 6px;
+color: #000000;
+font-size: 0.9rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+gap: 8px;
+min-width: 150px;
+justify-content: center;
+}
+
+.sub-tab:hover {
+background: #f0f8ff;
+border-color: #000080;
+color: #000080;
+}
+
+.sub-tab.active {
+background: #000080;
+border-color: #000080;
+color: #ffffff;
+font-weight: 600;
+}
+
+/* Main Content */
+.content {
+display: none;
+animation: fadeIn 0.5s ease;
+}
+
+.content.active {
+display: block;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Lab Sections */
+.lab-section {
+background: #ffffff;
+border-radius: 10px;
+padding: 30px;
+margin-bottom: 30px;
+border: 2px solid #000080;
+}
+
+.lab-header {
+display: flex;
+align-items: center;
+margin-bottom: 25px;
+padding-bottom: 20px;
+border-bottom: 2px solid #eeeeee;
+}
+
+.lab-icon {
+background: #000080;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 20px;
+font-size: 1.8rem;
+flex-shrink: 0;
+color: white;
+}
+
+.lab-title-container {
+flex-grow: 1;
+}
+
+.lab-title {
+font-size: 2rem;
+color: #000080;
+margin-bottom: 5px;
+}
+
+.lab-subtitle {
+color: #333333;
+font-size: 1.1rem;
+}
+
+.difficulty {
+display: inline-block;
+background: #fff3cd;
+color: #856404;
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 0.9rem;
+font-weight: 600;
+margin-top: 5px;
+}
+
+/* Lab Content Sections */
+.lab-content {
+padding: 10px 0;
+}
+
+.content-section {
+margin-bottom: 30px;
+padding: 25px;
+background: #ffffff;
+border-radius: 8px;
+border-left: 4px solid #000080;
+border: 1px solid #dddddd;
+}
+
+.content-section.objective {
+border-left-color: #000080;
+}
+
+.content-section.tools {
+border-left-color: #000080;
+}
+
+.content-section.instructions {
+border-left-color: #000080;
+}
+
+.content-section.requirements {
+border-left-color: #000080;
+}
+
+.content-section.questions {
+border-left-color: #000080;
+}
+
+.content-section.simulation {
+border-left-color: #000080;
+}
+
+.content-title {
+color: #000080;
+font-size: 1.4rem;
+margin-bottom: 15px;
+display: flex;
+align-items: center;
+gap: 12px;
+padding-bottom: 10px;
+border-bottom: 2px solid #eeeeee;
+}
+
+.content-title i {
+font-size: 1.6rem;
+color: #000080;
+}
+
+.content-title .section-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.2rem;
+color: white;
+background: #000080;
+}
+
+.lab-content ul, .lab-content ol {
+padding-left: 25px;
+margin-bottom: 15px;
+}
+
+.lab-content li {
+margin-bottom: 12px;
+color: #000000;
+line-height: 1.7;
+padding-left: 5px;
+}
+
+.lab-content p {
+margin-bottom: 15px;
+color: #000000;
+line-height: 1.7;
+}
+
+.important-note {
+background: #fff3cd;
+border-left: 4px solid #ffc107;
+padding: 15px 20px;
+margin: 20px 0;
+border-radius: 8px;
+}
+
+.important-note i {
+color: #856404;
+margin-right: 10px;
+}
+
+/* Circuit Frames - Đã xóa phần này */
+
+/* Tables */
+.table-container {
+overflow-x: auto;
+margin: 20px 0;
+border-radius: 8px;
+border: 1px solid #dddddd;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+background: #ffffff;
+}
+
+th {
+background: #000080;
+color: white;
+padding: 16px;
+text-align: left;
+font-weight: 600;
+border-bottom: 2px solid #000060;
+}
+
+td {
+padding: 14px 16px;
+border-bottom: 1px solid #eeeeee;
+color: #000000;
+}
+
+tr:hover {
+background: #f8f9fa;
+}
+
+/* Practice Content */
+.practice-content {
+text-align: center;
+padding: 40px 20px;
+}
+
+.simulator-container {
+background: #ffffff;
+border-radius: 10px;
+padding: 30px;
+margin-top: 20px;
+border: 2px solid #000080;
+}
+
+.simulator-frame {
+width: 100%;
+height: 700px;
+border: 2px solid #000080;
+border-radius: 8px;
+margin: 20px 0;
+overflow: hidden;
+background: #ffffff;
+}
+
+/* Links */
+a:not(.nav-tab):not(.sub-tab) {
+color: #000080;
+text-decoration: none;
+font-weight: 500;
+}
+
+a:not(.nav-tab):not(.sub-tab):hover {
+color: #000060;
+text-decoration: underline;
+}
+
+/* Strong text */
+strong {
+color: #000080;
+}
+
+/* Footer */
+.footer {
+text-align: center;
+padding: 30px 0;
+margin-top: 50px;
+border-top: 2px solid #eeeeee;
+color: #666666;
+font-size: 0.9rem;
+}
+
+.footer a {
+color: #000080;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+.footer a:hover {
+color: #000060;
+text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+.nav-tab {
+min-width: 160px;
+padding: 12px 20px;
+font-size: 1rem;
+max-width: 200px;
+}
+
+.sub-tab {
+min-width: 130px;
+padding: 8px 15px;
+font-size: 0.85rem;
+}
+
+}
+
+@media (max-width: 768px) {
+.header h1 {
+font-size: 2rem;
+}
+
+.main-nav {
+padding: 8px;
+}
+
+.nav-tabs {
+flex-direction: column;
+align-items: center;
+}
+
+.nav-tab {
+width: 100%;
+max-width: 100%;
+min-width: auto;
+margin-bottom: 5px;
+}
+
+.sub-nav {
+flex-direction: column;
+align-items: center;
+}
+
+.sub-tab {
+width: 100%;
+max-width: 300px;
+justify-content: center;
+}
+
+.lab-section {
+padding: 20px;
+}
+
+.lab-header {
+flex-direction: column;
+text-align: center;
+}
+
+.lab-icon {
+margin-right: 0;
+margin-bottom: 15px;
+}
+
+.content-section {
+padding: 15px;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="container">
-        <header class="header">
-            <h1><i class="fas fa-flask"></i> BÀI THỰC HÀNH CIRCUITVERSE</h1>
-            <p>Thực hành thiết kế và kiểm chứng các mạch logic kỹ thuật số</p>
-        </header>
+<div class="container">
 
-        <nav class="main-nav">
-            <div class="nav-tabs">
-                <a href="../guide/circuit.html" class="nav-tab">
-                    <i class="fas fa-book"></i> HƯỚNG DẪN
-                </a>
-                <a href="#" class="nav-tab active">
-                    <i class="fas fa-flask"></i> BÀI THỰC HÀNH
-                </a>
-                <a href="https://circuitverse.org/simulator" target="_blank" class="nav-tab">
-                    <i class="fas fa-play-circle"></i> VÀO TRÌNH
-                </a>
-                <a href="../index.html" class="nav-tab home">
-                    <i class="fas fa-home"></i> TRỜ VỀ TRANG CHỦ
-                </a>
-            </div>
-        </nav>
+<!-- Header -->
+<header class="header">
+<h1><i class="fas fa-microchip"></i> BÀI THỰC HÀNH CIRCUITVERSE</h1>
+<p>Phòng thí nghiệm Kiến trúc Máy tính - Mô phỏng và thiết kế mạch số</p>
+</header>
 
-        <div class="labs-subnav">
-            <button class="subtab active" onclick="showLab('lab1')">Bài 1: Cổng Logic</button>
-            <button class="subtab" onclick="showLab('lab2')">Bài 2: Mạch Tổ Hợp</button>
-            <button class="subtab" onclick="showLab('lab3')">Bài 3: Mạch Tuần Tự</button>
-        </div>
+<!-- Main Navigation Menu - CÓ NÚT TRỞ VỀ TRANG CHỦ -->
+<nav class="main-nav">
+<div class="nav-tabs">
+<a href="../guide/circuitverse.html" class="nav-tab">
+<i class="fas fa-book"></i> HƯỚNG DẪN
+</a>
+<a href="#" class="nav-tab active" data-tab="labs">
+<i class="fas fa-flask"></i> BÀI THỰC HÀNH
+</a>
+<a href="https://circuitverse.org/simulator" class="nav-tab" data-tab="simulator" target="_blank">
+<i class="fas fa-play-circle"></i> VÀO TRÌNH
+</a>
+<a href="https://hoaminh.github.io/Computer-Architecture-Lab/" class="nav-tab home" target="_blank">
+<i class="fas fa-home"></i> TRỞ VỀ TRANG CHỦ
+</a>
+</div>
+</nav>
 
-        <div id="lab1" class="content-section active">
-            <div class="lab-title">
-                <i class="fas fa-microchip fa-2x"></i>
-                <h2>BÀI 1: CÁC CỔNG LOGIC CƠ BẢN VÀ BẢNG CHÂN TRỊ</h2>
-            </div>
-            <div class="objective">
-                <strong>Mục tiêu:</strong> Làm quen với giao diện CircuitVerse, cách lấy linh kiện và kiểm chứng bảng chân trị của các cổng AND, OR, NOT, XOR.
-            </div>
-            
-            <div class="step-box">
-                <h3>Các bước thực hiện:</h3>
-                <ul class="step-list">
-                    <li>Nhấn nút <strong>VÀO TRÌNH</strong> trên thanh menu để mở trình mô phỏng CircuitVerse ở tab mới.</li>
-                    <li>Trong bảng điều khiển bên trái, tìm mục <strong>Gates</strong>.</li>
-                    <li>Kéo cổng AND và OR vào vùng làm việc.</li>
-                    <li>Thêm các linh kiện <strong>Input</strong> và <strong>LED (Output)</strong> để kiểm tra.</li>
-                    <li>Thực hiện thay đổi trạng thái Input (0/1) và hoàn thành bảng chân trị vào báo cáo.</li>
-                </ul>
-            </div>
-        </div>
+<!-- Sub Navigation - Các bài thực hành con -->
+<div id="labs-subnav" class="sub-nav">
+<button class="sub-tab active" data-subtab="lab1">
+<i class="fas fa-project-diagram"></i> Bài 1: Cổng Logic
+</button>
+<button class="sub-tab" data-subtab="lab2">
+<i class="fas fa-calculator"></i> Bài 2: Bộ Cộng/Trừ
+</button>
+<button class="sub-tab" data-subtab="lab3">
+<i class="fas fa-memory"></i> Bài 3: Mạch Tuần Tự
+</button>
+<button class="sub-tab" data-subtab="lab4">
+<i class="fas fa-brain"></i> Bài 4: ALU Đơn Giản
+</button>
+<button class="sub-tab" data-subtab="lab5">
+<i class="fas fa-cogs"></i> Bài 5: CPU Mini
+</button>
+</div>
 
-        <div id="lab2" class="content-section">
-            <div class="lab-title">
-                <i class="fas fa-project-diagram fa-2x"></i>
-                <h2>BÀI 2: THIẾT KẾ MẠCH TỔ HỢP (HALF ADDER)</h2>
-            </div>
-            <div class="objective">
-                <strong>Mục tiêu:</strong> Sử dụng các cổng logic cơ bản để thiết kế mạch cộng nửa bán phần (Half Adder).
-            </div>
-            
-            <div class="step-box">
-                <h3>Hướng dẫn:</h3>
-                <ul class="step-list">
-                    <li>Sử dụng 1 cổng XOR để tính Tổng (Sum) và 1 cổng AND để tính Số dư (Carry).</li>
-                    <li>Kết nối các đầu vào A, B vào cả hai cổng.</li>
-                    <li>Kiểm chứng mạch chạy đúng với lý thuyết cộng nhị phân: 1+1 = 10 (S=0, C=1).</li>
-                </ul>
-            </div>
-        </div>
+<!-- ========== BÀI 1: CỔNG LOGIC ========== -->
+<div id="lab1" class="content active">
+<div class="lab-section">
+<div class="lab-header">
+<div class="lab-icon">
+<i class="fas fa-project-diagram"></i>
+</div>
+<div class="lab-title-container">
+<h2 class="lab-title">BÀI 1: THIẾT KẾ VÀ MÔ PHỎNG CỔNG LOGIC CƠ BẢN</h2>
+<p class="lab-subtitle">Nền tảng của mạch số • Hiểu bản chất của các cổng logic</p>
+<span class="difficulty">★☆☆☆☆ Dễ • Thời gian: 2 giờ</span>
+</div>
+</div>
 
-        <div id="lab3" class="content-section">
-            <div class="lab-title">
-                <i class="fas fa-history fa-2x"></i>
-                <h2>BÀI 3: MẠCH TUẦN TỰ (S-R LATCH)</h2>
-            </div>
-            <div class="objective">
-                <strong>Mục tiêu:</strong> Tìm hiểu về phần tử nhớ cơ bản thông qua mạch chốt S-R.
-            </div>
-            
-            <div class="step-box">
-                <h3>Hướng dẫn:</h3>
-                <ul class="step-list">
-                    <li>Sử dụng 2 cổng NOR kết nối chéo đầu ra vào đầu vào của nhau.</li>
-                    <li>Thêm các nút bấm (Input) cho chân Set (S) và Reset (R).</li>
-                    <li>Quan sát hiện tượng nhớ trạng thái của mạch khi các đầu vào trở về 0.</li>
-                </ul>
-            </div>
-        </div>
+<div class="lab-content">
 
-        <footer>
-            <p>© 2025 - Hệ thống thực hành Kiến trúc máy tính | Trường Đại học Nam Cần Thơ</p>
-        </footer>
-    </div>
+<!-- Mục tiêu -->
+<div class="content-section objective">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-bullseye"></i></span>
+MỤC TIÊU
+</h3>
+<p>Sau khi hoàn thành bài thực hành này, sinh viên có khả năng:</p>
+<ul>
+<li>Hiểu rõ nguyên lý hoạt động của các cổng logic cơ bản: AND, OR, NOT, NAND, NOR, XOR, XNOR</li>
+<li>Sử dụng thành thạo phần mềm CircuitVerse để thiết kế mạch số</li>
+<li>Kiểm tra và xác minh bảng chân trị của các cổng logic</li>
+<li>Thiết kế mạch kết hợp đơn giản từ các cổng cơ bản</li>
+<li>Phân tích mạch logic từ biểu thức Boolean</li>
+</ul>
+</div>
 
-    <script>
-        function showLab(labId) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('.subtab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(labId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
-</body>
-</html>
+<!-- Công cụ và chuẩn bị -->
+<div class="content-section tools">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-tools"></i></span>
+CÔNG CỤ VÀ CHUẨN BỊ
+</h3>
+<ul>
+<li><strong>Phần mềm:</strong> CircuitVerse (trực tuyến hoặc offline)</li>
+<li><strong>Tài liệu tham khảo:</strong> Slide bài giảng chương 2 - Đại số Boolean</li>
+<li><strong>Linh kiện cần dùng:</strong> Cổng AND, OR, NOT, NAND, NOR, XOR, XNOR</li>
+<li><strong>Công cụ hỗ trợ:</strong> Input switches, output LEDs, wire connections</li>
+<li><strong>Kiến thức nền:</strong> Hệ nhị phân, bảng chân trị, biểu thức Boolean</li>
+</ul>
+</div>
+
+<!-- Hướng dẫn thực hiện -->
+<div class="content-section instructions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-book-open"></i></span>
+HƯỚNG DẪN THỰC HIỆN
+</h3>
+<p><strong>Bước 1:</strong> Truy cập CircuitVerse và tạo workspace mới</p>
+<p><strong>Bước 2:</strong> Kéo thả các cổng logic từ thư viện (tìm trong mục "Gates")</p>
+<p><strong>Bước 3:</strong> Thêm input switches (Input/Output → Input)</p>
+<p><strong>Bước 4:</strong> Thêm output LEDs để quan sát kết quả</p>
+<p><strong>Bước 5:</strong> Kết nối các thành phần bằng dây dẫn (click và kéo)</p>
+<p><strong>Bước 6:</strong> Nhấn nút "Simulate" để chạy mô phỏng</p>
+<p><strong>Bước 7:</strong> Thay đổi trạng thái input và quan sát output</p>
+<div class="important-note">
+<i class="fas fa-lightbulb"></i>
+<strong>Lưu ý quan trọng:</strong> Ghi lại bảng chân trị cho từng cổng và so sánh với lý thuyết.
+</div>
+</div>
+
+<!-- ĐÃ XÓA MỤC MÔ PHỎNG TRỰC TUYẾN -->
+
+<!-- Yêu cầu nộp -->
+<div class="content-section requirements">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-file-export"></i></span>
+YÊU CẦU NỘP
+</h3>
+<ul>
+<li>File CircuitVerse (.cv) chứa đầy đủ 7 loại cổng logic</li>
+<li>Bảng chân trị đã kiểm chứng cho từng cổng</li>
+<li>Mạch thiết kế thực hiện hàm: F = AB + C'D</li>
+<li>Báo cáo ngắn (PDF) giải thích hoạt động mạch</li>
+<li>Link chia sẻ công khai từ CircuitVerse</li>
+<li><strong>Hạn nộp:</strong> 1 tuần sau buổi thực hành</li>
+</ul>
+</div>
+
+<!-- Câu hỏi ôn tập -->
+<div class="content-section questions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-question-circle"></i></span>
+CÂU HỎI ÔN TẬP
+</h3>
+<ol>
+<li>Sự khác nhau giữa cổng NAND và AND là gì? Ứng dụng của cổng NAND?</li>
+<li>Tại sao cổng NAND được gọi là "universal gate"? Chứng minh bằng cách dùng NAND để tạo ra NOT, AND, OR.</li>
+<li>Thiết kế mạch kiểm tra parity chẵn cho 3 bit input dùng cổng XOR.</li>
+<li>Cho hàm F(A,B,C) = Σ(0,2,4,6). Thiết kế mạch thực hiện hàm này.</li>
+<li>Phân biệt cổng XOR và XNOR. Ứng dụng thực tế của mỗi loại?</li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ========== BÀI 2: BỘ CỘNG/TRỪ ========== -->
+<div id="lab2" class="content">
+<div class="lab-section">
+<div class="lab-header">
+<div class="lab-icon">
+<i class="fas fa-calculator"></i>
+</div>
+<div class="lab-title-container">
+<h2 class="lab-title">BÀI 2: THIẾT KẾ BỘ CỘNG VÀ BỘ TRỪ NHỊ PHÂN</h2>
+<p class="lab-subtitle">Nền tảng số học máy tính • Thiết kế mạch số học cơ bản</p>
+<span class="difficulty">★★☆☆☆ Trung bình • Thời gian: 3 giờ</span>
+</div>
+</div>
+
+<div class="lab-content">
+
+<!-- Mục tiêu -->
+<div class="content-section objective">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-bullseye"></i></span>
+MỤC TIÊU
+</h3>
+<ul>
+<li>Hiểu nguyên lý hoạt động của bộ cộng bán phần (Half Adder) và bộ cộng toàn phần (Full Adder)</li>
+<li>Thiết kế bộ cộng 4-bit bằng cách kết nối nhiều bộ cộng toàn phần</li>
+<li>Thiết kế bộ trừ nhị phân sử dụng phương pháp bù 2 (Two's Complement)</li>
+<li>Mô phỏng và kiểm tra bộ cộng/trừ với các giá trị nhị phân khác nhau</li>
+<li>Thiết kế bộ cộng/trừ kết hợp có chân chọn chức năng (Add/Sub)</li>
+</ul>
+</div>
+
+<!-- Công cụ và chuẩn bị -->
+<div class="content-section tools">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-tools"></i></span>
+CÔNG CỤ VÀ CHUẨN BỊ
+</h3>
+<ul>
+<li><strong>Phần mềm:</strong> CircuitVerse với thư viện đầy đủ</li>
+<li><strong>Tài liệu:</strong> Slide chương 3 - Mạch số học</li>
+<li><strong>Linh kiện:</strong> Cổng XOR, AND, OR, NOT; Multiplexer 2:1</li>
+<li><strong>Hiển thị:</strong> 7-segment display, output pins</li>
+<li><strong>Kiến thức:</strong> Phép toán nhị phân, bù 1, bù 2, cờ nhớ (Carry Flag)</li>
+</ul>
+</div>
+
+<!-- Hướng dẫn thực hiện -->
+<div class="content-section instructions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-book-open"></i></span>
+HƯỚNG DẪN THỰC HIỆN
+</h3>
+<p><strong>Phần A: Bộ cộng bán phần (Half Adder)</strong></p>
+<ol>
+<li>Thiết kế mạch có 2 input A, B</li>
+<li>Output Sum = A ⊕ B (XOR)</li>
+<li>Output Carry = A • B (AND)</li>
+<li>Kiểm tra với tất cả tổ hợp input</li>
+</ol>
+<p><strong>Phần B: Bộ cộng toàn phần (Full Adder)</strong></p>
+<ol>
+<li>Thiết kế từ 2 half adder và 1 cổng OR</li>
+<li>Có 3 input: A, B, Carry-in</li>
+<li>Output: Sum, Carry-out</li>
+<li>Kiểm tra bảng chân trị đầy đủ</li>
+</ol>
+<p><strong>Phần C: Bộ cộng 4-bit</strong></p>
+<ol>
+<li>Kết nối 4 full adder nối tiếp</li>
+<li>Carry-out của bit trước là Carry-in của bit sau</li>
+<li>Thêm input/output 4-bit cho A, B, Result</li>
+</ol>
+</div>
+
+<!-- ĐÃ XÓA MỤC MÔ PHỎNG TRỰC TUYẾN -->
+
+<!-- Yêu cầu nộp -->
+<div class="content-section requirements">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-file-export"></i></span>
+YÊU CẦU NỘP
+</h3>
+<ul>
+<li>File CircuitVerse chứa: Half Adder, Full Adder, 4-bit Adder</li>
+<li>Bộ cộng/trừ 4-bit có chân chọn Add/Sub</li>
+<li>Test cases: 7+5, 12+3, 15-8 (số không dấu)</li>
+<li>Phát hiện overflow và hiển thị cờ Carry</li>
+<li>Báo cáo giải thích thiết kế và kết quả test</li>
+<li><strong>Hạn nộp:</strong> 1 tuần sau buổi thực hành</li>
+</ul>
+</div>
+
+<!-- Câu hỏi ôn tập -->
+<div class="content-section questions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-question-circle"></i></span>
+CÂU HỎI ÔN TẬP
+</h3>
+<ol>
+<li>Tại sao cần Full Adder thay vì chỉ dùng Half Adder?</li>
+<li>Giải thích phương pháp bù 2 trong phép trừ nhị phân.</li>
+<li>Thiết kế bộ cộng 8-bit từ các module 4-bit.</li>
+<li>Làm thế nào phát hiện overflow trong phép cộng số có dấu?</li>
+<li>Cải tiến bộ cộng để hỗ trợ số BCD (Binary Coded Decimal).</li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ========== BÀI 3: MẠCH TUẦN TỰ ========== -->
+<div id="lab3" class="content">
+<div class="lab-section">
+<div class="lab-header">
+<div class="lab-icon">
+<i class="fas fa-memory"></i>
+</div>
+<div class="lab-title-container">
+<h2 class="lab-title">BÀI 3: THIẾT KẾ MẠCH TUẦN TỰ VÀ FLIP-FLOP</h2>
+<p class="lab-subtitle">Bộ nhớ số • Trạng thái và xung clock trong mạch số</p>
+<span class="difficulty">★★★☆☆ Khó • Thời gian: 4 giờ</span>
+</div>
+</div>
+
+<div class="lab-content">
+
+<!-- Mục tiêu -->
+<div class="content-section objective">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-bullseye"></i></span>
+MỤC TIÊU
+</h3>
+<ul>
+<li>Hiểu nguyên lý hoạt động của các loại Flip-Flop: SR, D, JK, T</li>
+<li>Phân biệt flip-flop và latch, trigger theo cạnh lên/xuống</li>
+<li>Thiết kế thanh ghi dịch (Shift Register) sử dụng D Flip-Flop</li>
+<li>Thiết kế bộ đếm (Counter) đồng bộ và không đồng bộ</li>
+<li>Mô phỏng hoạt động của mạch tuần tự với tín hiệu xung clock</li>
+<li>Ứng dụng mạch tuần tự trong thiết kế FSM đơn giản</li>
+</ul>
+</div>
+
+<!-- Công cụ và chuẩn bị -->
+<div class="content-section tools">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-tools"></i></span>
+CÔNG CỤ VÀ CHUẨN BỊ
+</h3>
+<ul>
+<li><strong>Phần mềm:</strong> CircuitVerse với module Sequential</li>
+<li><strong>Tài liệu:</strong> Slide chương 4 - Mạch tuần tự</li>
+<li><strong>Linh kiện:</strong> Các loại flip-flop, clock generator</li>
+<li><strong>Hiển thị:</strong> 7-segment, output probes, binary display</li>
+<li><strong>Kiến thức:</strong> State diagram, timing diagram, setup/hold time</li>
+</ul>
+</div>
+
+<!-- Hướng dẫn thực hiện -->
+<div class="content-section instructions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-book-open"></i></span>
+HƯỚNG DẪN THỰC HIỆN
+</h3>
+<p><strong>Phần A: Các loại Flip-Flop cơ bản</strong></p>
+<ol>
+<li>Tạo SR Flip-Flop từ cổng NAND</li>
+<li>Thiết kế D Flip-Flop từ SR Flip-Flop</li>
+<li>Chuyển đổi D Flip-Flop thành JK Flip-Flop</li>
+<li>Tạo T Flip-Flop từ JK Flip-Flop</li>
+<li>So sánh hoạt động với các loại trigger khác nhau</li>
+</ol>
+<p><strong>Phần B: Thanh ghi dịch (Shift Register)</strong></p>
+<ol>
+<li>Thiết kế thanh ghi dịch 4-bit SISO (Serial In Serial Out)</li>
+<li>Phát triển thành thanh ghi SIPO (Serial In Parallel Out)</li>
+<li>Thêm chức năng shift left/shift right</li>
+<li>Kiểm tra với các pattern dữ liệu khác nhau</li>
+</ol>
+<p><strong>Phần C: Bộ đếm (Counter)</strong></p>
+<ol>
+<li>Thiết kế bộ đếm 4-bit không đồng bộ (ripple counter)</li>
+<li>Thiết kế bộ đếm 4-bit đồng bộ</li>
+<li>Thêm chức năng đếm lên/đếm xuống</li>
+<li>Thiết kế bộ đếm module-N (đếm 0-9)</li>
+</ol>
+</div>
+
+<!-- ĐÃ XÓA MỤC MÔ PHỎNG TRỰC TUYẾN -->
+
+<!-- Yêu cầu nộp -->
+<div class="content-section requirements">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-file-export"></i></span>
+YÊU CẦU NỘP
+</h3>
+<ul>
+<li>File CircuitVerse chứa đủ 4 loại flip-flop cơ bản</li>
+<li>Thanh ghi dịch 4-bit với chức năng shift left/right</li>
+<li>Bộ đếm đồng bộ 4-bit đếm lên/xuống</li>
+<li>Bộ đếm module-10 hiển thị trên 7-segment</li>
+<li>Timing diagram cho các mạch trên</li>
+<li>Báo cáo phân tích hoạt động và ứng dụng</li>
+<li><strong>Hạn nộp:</strong> 2 tuần sau buổi thực hành</li>
+</ul>
+</div>
+
+<!-- Câu hỏi ôn tập -->
+<div class="content-section questions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-question-circle"></i></span>
+CÂU HỎI ÔN TẬP
+</h3>
+<ol>
+<li>Phân biệt flip-flop và latch. Ưu nhược điểm của mỗi loại?</li>
+<li>Tại sao cần setup time và hold time trong flip-flop?</li>
+<li>Thiết kế bộ đếm 0-99 dùng 2 bộ đếm decade nối tiếp.</li>
+<li>Ứng dụng của shift register trong truyền thông nối tiếp?</li>
+<li>Thiết kế FSM đơn giản cho máy bán hàng tự động.</li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ========== BÀI 4: ALU ĐƠN GIẢN ========== -->
+<div id="lab4" class="content">
+<div class="lab-section">
+<div class="lab-header">
+<div class="lab-icon">
+<i class="fas fa-brain"></i>
+</div>
+<div class="lab-title-container">
+<h2 class="lab-title">BÀI 4: THIẾT KẾ ĐƠN VỊ XỬ LÝ SỐ HỌC VÀ LOGIC (ALU)</h2>
+<p class="lab-subtitle">Trái tim của CPU • Kết hợp mạch số học và logic</p>
+<span class="difficulty">★★★★☆ Rất khó • Thời gian: 5 giờ</span>
+</div>
+</div>
+
+<div class="lab-content">
+
+<!-- Mục tiêu -->
+<div class="content-section objective">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-bullseye"></i></span>
+MỤC TIÊU
+</h3>
+<ul>
+<li>Hiểu kiến trúc và nguyên lý hoạt động của ALU cơ bản</li>
+<li>Thiết kế ALU 4-bit thực hiện các phép toán: AND, OR, XOR, ADD, SUBTRACT</li>
+<li>Tích hợp bộ cộng/trừ đã thiết kế ở bài trước vào ALU</li>
+<li>Thiết kế bộ chọn chức năng (Function Selector) cho ALU</li>
+<li>Thiết kế cờ trạng thái (Status Flags): Zero, Carry, Overflow, Sign</li>
+<li>Kiểm tra ALU với các phép toán trên số có dấu và không dấu</li>
+</ul>
+</div>
+
+<!-- Công cụ và chuẩn bị -->
+<div class="content-section tools">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-tools"></i></span>
+CÔNG CỤ VÀ CHUẨN BỊ
+</h3>
+<ul>
+<li><strong>Phần mềm:</strong> CircuitVerse với module Arithmetic</li>
+<li><strong>Tài liệu:</strong> Slide chương 5 - Kiến trúc CPU cơ bản</li>
+<li><strong>Module có sẵn:</strong> Bộ cộng/trừ 4-bit từ Bài 2</li>
+<li><strong>Linh kiện:</strong> Multiplexer 4:1, 8:1; comparators</li>
+<li><strong>Kiến thức:</strong> ALU design, status flags, function codes</li>
+</ul>
+</div>
+
+<!-- Hướng dẫn thực hiện -->
+<div class="content-section instructions">
+<h3 class="content-title">
+<span class="section-icon"><i class="fas fa-book-open"></i></span>
+HƯỚNG DẪN THỰC HIỆN
+</h3>
+<p><strong>Phần A: Thiết kế khối xử lý logic</strong></p>
+<ol>
+<li>Tạo khối thực hiện AND, OR, XOR cho 2 input 4-bit</li>
+<li>Thiết kế khối thực hiện NOT, NAND, NOR</li>
+<li>Thêm khối shift left/shift right logic</li>
+<li>Dùng multiplexer để chọn chức năng</li>
+</ol>
+<p><strong>Phần B: Tích hợp khối số học</strong></p>
+<ol>
+<li>Import bộ cộng/trừ 4-bit từ Bài 2</li>
+<li>Thêm chức năng increment (+1), decrement (-1)</li>
+<li>Thiết kế khối so sánh (comparator
